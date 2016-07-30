@@ -15,7 +15,7 @@
 <meta property="og:description" content="闲的蛋疼的我又开始折腾了，这次是通过Hexo来搭建个人博客，需要提前了解一些包括github、nodejs的基本使用，怎么搭建的过程就不多说了，网上有很多教程，这里推荐两个教程1、教程2，里面很详细的介绍了整个过程。   
 这里主要记录下我在搭建过程中遇到的问题和解决方案。   
 1、 SSH key和使用多个github账号上面的两个教程里有说怎么在本地新建一个ssh key，并添加到githu">
-<meta property="og:updated_time" content="2016-07-30T15:35:38.000Z">
+<meta property="og:updated_time" content="2016-07-30T16:01:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello Hexo">
 <meta name="twitter:description" content="闲的蛋疼的我又开始折腾了，这次是通过Hexo来搭建个人博客，需要提前了解一些包括github、nodejs的基本使用，怎么搭建的过程就不多说了，网上有很多教程，这里推荐两个教程1、教程2，里面很详细的介绍了整个过程。   
@@ -109,18 +109,19 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@defaultgit</div><div class="line">Hi yourname1! You have successfully ...</div><div class="line"></div><div class="line">$ ssh -T git@secondgit</div><div class="line">Hi yourname2! You have successfully ...</div></pre></td></tr></table></figure>
 <p>如果出现上面的提示，说明配置成功。以后用到那个账号，就使用哪个账号Host对应的名称，例如</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> git@defaultgit:xxx/yyy.git</div><div class="line">git <span class="built_in">clone</span> git@secondgit:xxx/yyy.git</div></pre></td></tr></table></figure>
-<p>上面克隆了同一个仓库，但使用的是不同的SSH连接。也可以只在目录下配置区别于全局的设置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config user.name <span class="string">"new name"</span></div><div class="line">git config user.email <span class="string">"new email"</span></div></pre></td></tr></table></figure>
-<p>用户名的邮箱就是注册github账号使用的用户名和邮箱。</p>
+<p>上面克隆了同一个仓库，但使用的是不同的SSH连接。也可以只在项目下配置区别于全局的设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git config --global --unset user.name</div><div class="line">git config --global --unset user.email</div><div class="line"></div><div class="line">git config user.name <span class="string">"new name"</span></div><div class="line">git config user.email <span class="string">"new email"</span></div></pre></td></tr></table></figure>
+<p>用户名的邮箱就是注册github账号使用的用户名和邮箱，这样在每个目录下提交就可以自动识别github账号了。</p>
 <h3 id="2、部署Hexo"><a href="#2、部署Hexo" class="headerlink" title="2、部署Hexo"></a>2、部署Hexo</h3><p>配置Hexo的部署部分，repo的配置特别注意，需要github网址URL+用户名+repo名，如下在deploy节点</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">    type:</span> git</div><div class="line"><span class="attr">    repo:</span> https://github.com/user-name/repo-name</div><div class="line"><span class="attr">    branch:</span> master</div></pre></td></tr></table></figure>
 <p>这里的user-name和repo-name是github账户的用户名和仓库名，一般格式为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/ngbyte/ngbyte.github.com</div></pre></td></tr></table></figure>
+<p>还有就是部署时候如果提示找不到仓库，多半就是deploy节点的repo没有配置好，按照上面格式来填写就可以了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/30/Hello-Hexo/" data-id="cir9cg2uj00007ae13w43aw2u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/30/Hello-Hexo/" data-id="cir9d8w6b00008ke1k6jsx012" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
