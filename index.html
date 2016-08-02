@@ -1,74 +1,92 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
-  <title>ngbyte</title>
+  <title>王乐心的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="ngbyte">
+<meta property="og:title" content="王乐心的博客">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="ngbyte">
+<meta property="og:site_name" content="王乐心的博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ngbyte">
+<meta name="twitter:title" content="王乐心的博客">
   
-    <link rel="alternate" href="/atom.xml" title="ngbyte" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="王乐心的博客" type="application/atom+xml">
   
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
   
 
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
+<div id="container">
+  <div id="wrap">
+    <header id="header">
   <div id="banner"></div>
   <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">ngbyte</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/myname"></a>
+        
       </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">王乐心的博客</a>
+        </h1>
+      
     </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">feeling</li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">Home</a>
+      
+        <a class="main-nav-link" href="/archives">Archives</a>
+      
+        <a class="main-nav-link" href="/about">About</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
   </div>
 </header>
-      <div class="outer">
-        <section id="main">
+
+    <div class="outer">
+      <section id="main">
   
     <article id="post-Hello-Hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/07/30/Hello-Hexo/" class="article-date">
+    <h3 href="/2016/07/30/Hello-Hexo/" class="article-date">
   <time datetime="2016-07-30T13:53:26.000Z" itemprop="datePublished">2016-07-30</time>
-</a>
+</h3>
     
   </div>
   <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
     
     
       <header class="article-header">
@@ -83,6 +101,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        
         <p>闲的蛋疼的我又开始折腾了，这次是通过Hexo来搭建个人博客，需要提前了解一些包括github、nodejs的基本使用，怎么搭建的过程就不多说了，网上有很多教程，这里推荐两个<a href="http://beiyuu.com/github-pages" target="_blank" rel="external">教程1</a>、<a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">教程2</a>，里面很详细的介绍了整个过程。   </p>
 <p>这里主要记录下我在搭建过程中遇到的问题和解决方案。   </p>
 <h3 id="1、-SSH-key和使用多个github账号"><a href="#1、-SSH-key和使用多个github账号" class="headerlink" title="1、 SSH key和使用多个github账号"></a>1、 SSH key和使用多个github账号</h3><p>上面的两个教程里有说怎么在本地新建一个ssh key，并添加到github的过程，如果要使用第二个账号时，有些不同的地方。首先进入保存ssh key的目录</p>
@@ -113,58 +132,31 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/30/Hello-Hexo/" data-id="cir9d8w6b00008ke1k6jsx012" class="article-share-link">Share</a>
-      
-      
+      <div class="article-footer-content">
+        
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
 
+        <a data-url="http://yoursite.com/2016/07/30/Hello-Hexo/" data-id="circv07he0000gne1o868je9h" class="article-share-link">Share</a>
+        
+      </div>
     </footer>
+  </div>
+  </div>
   </div>
   
 </article>
 
 
-  
 
+  
+  
 </section>
-        
-          <aside id="sidebar">
-  
-    
-
+      
+      <aside id="sidebar">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
         
@@ -177,29 +169,66 @@
   </div>
 
   
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
 </aside>
-        
-      </div>
-      <footer id="footer">
+      
+    </div>
+    <footer id="footer">
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 ngbyte<br>
+      &copy; 2016 王乐心的博客<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
     </div>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
+  </div>
+  <nav id="mobile-nav">
   
     <a href="/" class="mobile-nav-link">Home</a>
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
 </nav>
-    
+  
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
@@ -208,6 +237,6 @@
 
 <script src="/js/script.js"></script>
 
-  </div>
+</div>
 </body>
 </html>
