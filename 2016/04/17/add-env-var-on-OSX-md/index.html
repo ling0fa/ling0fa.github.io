@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+  <title>在OS X上添加环境变量 | 王乐心的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在 Windows 上添加环境变量的操作都很熟悉了。但是在 OSX 上还是很生疏，上次在 OSX 上添加环境变量，还是在刚买笔记本，添加 Java 环境变量，当时添加完了，起作用后就没管了，今天又要添加 Scala 环境变量时，基本忘了怎么弄，现在把整个过程记下来。   
+OSX 上添加环境变量的第一个地方：1$ /etc/profile
+这是全局公有配置，不管哪个用户登录，都会读取该文件。所以不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在OS X上添加环境变量">
+<meta property="og:url" content="http://yoursite.com/2016/04/17/add-env-var-on-OSX-md/index.html">
+<meta property="og:site_name" content="王乐心的博客">
+<meta property="og:description" content="在 Windows 上添加环境变量的操作都很熟悉了。但是在 OSX 上还是很生疏，上次在 OSX 上添加环境变量，还是在刚买笔记本，添加 Java 环境变量，当时添加完了，起作用后就没管了，今天又要添加 Scala 环境变量时，基本忘了怎么弄，现在把整个过程记下来。   
+OSX 上添加环境变量的第一个地方：1$ /etc/profile
+这是全局公有配置，不管哪个用户登录，都会读取该文件。所以不">
+<meta property="og:updated_time" content="2016-08-02T06:14:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在OS X上添加环境变量">
+<meta name="twitter:description" content="在 Windows 上添加环境变量的操作都很熟悉了。但是在 OSX 上还是很生疏，上次在 OSX 上添加环境变量，还是在刚买笔记本，添加 Java 环境变量，当时添加完了，起作用后就没管了，今天又要添加 Scala 环境变量时，基本忘了怎么弄，现在把整个过程记下来。   
+OSX 上添加环境变量的第一个地方：1$ /etc/profile
+这是全局公有配置，不管哪个用户登录，都会读取该文件。所以不">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
+        
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/ngbyte"></a>
+        
+      </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">王乐心的博客</a>
+        </h1>
+      
+    </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">feeling</li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">Home</a>
+      
+        <a class="main-nav-link" href="/archives">Archives</a>
+      
+        <a class="main-nav-link" href="/about">About</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
+  </div>
+</header>
+
+    <div class="outer">
+      <section id="main"><article id="post-add-env-var-on-OSX-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2016/04/17/add-env-var-on-OSX-md/" class="article-date">
+  <time datetime="2016-04-17T06:09:16.000Z" itemprop="datePublished">2016-04-17</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在OS X上添加环境变量
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <p>在 Windows 上添加环境变量的操作都很熟悉了。但是在 OSX 上还是很生疏，上次在 OSX 上添加环境变量，还是在刚买笔记本，添加 Java 环境变量，当时添加完了，起作用后就没管了，今天又要添加 Scala 环境变量时，基本忘了怎么弄，现在把整个过程记下来。   </p>
+<p>OSX 上添加环境变量的第一个地方：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/profile</div></pre></td></tr></table></figure></p>
+<p>这是全局公有配置，不管哪个用户登录，都会读取该文件。所以不建议在这个文件里添加。</p>
+<p>第二个地方：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/bashrc</div></pre></td></tr></table></figure></p>
+<p>也是全局公有配置，一般在里面添加系统级环境变量，执行 bash shell 时，会读取该文件。</p>
+<p>第三个地方，bash_profile：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ~/.bash_profile</div></pre></td></tr></table></figure></p>
+<p>如果该文件不存在，创建该文件即可，然后往里面写入环境变量值。当看到 bash_profile 这个文件时，突然想起当初配 Java 环境变量好像已经建好了这个文件，输入下面命令打开一看果然有 Java 的环境变量配置。配置过程如下。<br>输入如下命令后，按下 <kbd>i</kbd> 键，进入编辑模式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim ~/.bash_profile</div></pre></td></tr></table></figure></p>
+<p>添加环境变量对应的路径，例如，需要添加 Scala 环境变量路径，在文件最后写入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=&quot;$PATH:/usr/local/scala-path/bin&quot;</div></pre></td></tr></table></figure></p>
+<p>其中，scala-path 是从官网下载下来的解压后的文件夹，放在 /usr/local/目录下。完成后按 <kbd>esc</kbd> 键，进入普通模式，输入如下命令保存并退出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:wq</div></pre></td></tr></table></figure>
+<p>此时重启终端，输入 Scala，就进入了 Scala 的命令模式。此时会输出类似如下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Welcome to Scala 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0).</div><div class="line">Type in expressions for evaluation. Or try :help.</div></pre></td></tr></table></figure></p>
+<p>如果要退出 Scala 命令模式，输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:q  或者  :quit</div></pre></td></tr></table></figure></p>
+<p>整个过程还是很简单的。:)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境变量/">环境变量</a></li></ul>
+
+        <a data-url="http://yoursite.com/2016/04/17/add-env-var-on-OSX-md/" data-id="cird2e5tn000czke1g9tgveea" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/02/program-with-OOP-md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          面向对象编程的一些体会
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/10/a-simple-python-spider-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一个简单的Python爬虫</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS-X/">OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-spider/">python spider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 王乐心的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
+</nav>
+  
+
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>

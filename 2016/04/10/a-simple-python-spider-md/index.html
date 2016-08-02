@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+  <title>一个简单的Python爬虫 | 王乐心的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。
+除了需要 Python 环境外，还需要安装 requests、BeautifulSoup4等。获取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个简单的Python爬虫">
+<meta property="og:url" content="http://yoursite.com/2016/04/10/a-simple-python-spider-md/index.html">
+<meta property="og:site_name" content="王乐心的博客">
+<meta property="og:description" content="由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。
+除了需要 Python 环境外，还需要安装 requests、BeautifulSoup4等。获取">
+<meta property="og:updated_time" content="2016-08-02T06:07:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个简单的Python爬虫">
+<meta name="twitter:description" content="由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。
+除了需要 Python 环境外，还需要安装 requests、BeautifulSoup4等。获取">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
+        
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/ngbyte"></a>
+        
+      </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">王乐心的博客</a>
+        </h1>
+      
+    </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">feeling</li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">Home</a>
+      
+        <a class="main-nav-link" href="/archives">Archives</a>
+      
+        <a class="main-nav-link" href="/about">About</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
+  </div>
+</header>
+
+    <div class="outer">
+      <section id="main"><article id="post-a-simple-python-spider-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2016/04/10/a-simple-python-spider-md/" class="article-date">
+  <time datetime="2016-04-10T06:01:39.000Z" itemprop="datePublished">2016-04-10</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一个简单的Python爬虫
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <p>由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。</p>
+<p>除了需要 Python 环境外，还需要安装 requests、BeautifulSoup4等。获取微博页面内容时使用cookie的方式，这样不需要用户名和密码就可以请求到微博。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install requests BeautifulSoup4</div></pre></td></tr></table></figure></p>
+<p>好了，准备工作基本OK。这个爬虫是从新浪微博上爬取某个博主的所有图片，在观察了新浪微博里图片URL的规律后，发现链接主要有3部分构成，如下。img-key 部分我估计是存取图片的唯一ID值，part2 取不同的值，会得到不同尺寸的图片，最大尺寸时，part2取值 ‘large’，有了这个规律就好办了，将页面所有图片满足3段式的链接中间那部分替换成’large’，再下载图片即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://ww2.sinaimg.cn/part2/img-key.jpg</div></pre></td></tr></table></figure>
+<p>另外，由于使用的是 <em>weibo.cn</em> 域名，从浏览器里得到是一张图片和一个<strong>更多</strong>作为链接，点了链接才看得到所有图片，所以爬每个页面有个二次请求，将更多的图片下载下来。为了避免重复下载导致图片难以维护，保存图片时，将微博的发布日期和图片链接的MD5值组合成图片名称，这样下载到本地后，图片会以在微博上发布的日期排序，同时，再次运行爬虫时，将图片名称后半截的MD5值提取出来，在下载时候对比该图片的链接MD5值是否已经存在，避免重复下载。</p>
+<p>下面是下载一个页面里所有图片的函数代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_one_page</span><span class="params">(soup, user_id, exists)</span>:</span></div><div class="line"><span class="string">"""</span></div><div class="line">download all pictures on the website</div><div class="line">:param soup: web page soup</div><div class="line">:param user_id: the weibo user id</div><div class="line">:param exists exists pic names</div><div class="line">:return: find weibo divs, return True, else False</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="comment"># ten weibo div in every page</span></div><div class="line">divs = soup.find_all(div_filter_func)</div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> divs:</div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">    spans = div.find_all(<span class="string">'span'</span>)</div><div class="line">    wb_post_time = get_weibo_post_time(spans[<span class="number">1</span>].text)</div><div class="line"></div><div class="line">    <span class="comment"># abstract a link</span></div><div class="line">    all_img = div.find_all(<span class="string">'img'</span>)</div><div class="line">    img_link = filter(<span class="keyword">lambda</span> x: x.endswith(<span class="string">'.jpg'</span>), [all_img[<span class="number">0</span>].get(<span class="string">'src'</span>)] <span class="keyword">if</span> all_img <span class="keyword">else</span> [])</div><div class="line"></div><div class="line">    <span class="comment"># abstract more links</span></div><div class="line">    more_links = [link[<span class="string">'href'</span>] <span class="keyword">for</span> link <span class="keyword">in</span> div.find_all(<span class="string">'a'</span>) <span class="keyword">if</span> link.get(<span class="string">'href'</span>) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>]</div><div class="line">    more_links_real = [x <span class="keyword">for</span> x <span class="keyword">in</span> more_links <span class="keyword">if</span> <span class="string">'picAll'</span> <span class="keyword">in</span> x]</div><div class="line">    <span class="keyword">if</span> more_links_real:</div><div class="line">        more_content = requests.get(more_links_real[<span class="number">0</span>], cookies = get_cookie())</div><div class="line">        more_soup = BeautifulSoup(more_content.content, <span class="string">'html.parser'</span>)</div><div class="line">        more_soup_urls = get_more_page_image_url(more_soup)</div><div class="line">        img_link = more_soup_urls <span class="keyword">if</span> more_soup_urls <span class="keyword">else</span> img_link</div><div class="line"></div><div class="line">    <span class="comment"># download</span></div><div class="line">    <span class="keyword">for</span> idx, link <span class="keyword">in</span> enumerate(img_link):</div><div class="line">        md5 = calculate_md5(link)</div><div class="line">        <span class="keyword">if</span> md5 <span class="keyword">not</span> <span class="keyword">in</span> exists:</div><div class="line">            large_link = replace_part2_in_link(link)</div><div class="line">            image_content = requests.get(large_link, cookies = get_cookie())</div><div class="line"></div><div class="line">            image_name = <span class="string">"&#123;&#125;&gt;&#123;&#125;_&#123;&#125;"</span>.format(wb_post_time, str(idx), md5)</div><div class="line">            <span class="keyword">with</span> open(<span class="string">'./downloads/&#123;&#125;/&#123;&#125;.jpg'</span>.format(user_id, image_name), <span class="string">'wb'</span>) <span class="keyword">as</span> jpg:</div><div class="line">                jpg.write(image_content.content)</div><div class="line"></div><div class="line">                exists.add(image_name)</div><div class="line">                print(<span class="string">'download'</span>, large_link, image_name, datetime.datetime.now())</div><div class="line">                time.sleep(random.random())</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            print(<span class="string">'jump over:'</span>, link)</div><div class="line"></div><div class="line">sleep = <span class="number">8</span> * random.random()</div><div class="line">print(<span class="string">'sleep'</span>, sleep, <span class="string">'seconds'</span>)</div><div class="line">time.sleep(sleep)</div><div class="line"><span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<p>在某次打算爬取大量某个博主的图片时，出现了请求失败，查了资料发现是网站有反爬虫功能，于是使用了一些简单的策略，比如请求加上头消息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">header = &#123;</div><div class="line">      <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'</span>,</div><div class="line">      <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,</div><div class="line">      <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,en;q=0.6'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除此之外，对请求的cookie也在末尾添加随机数，每次用不同的cookie去请求，并且，每爬取完一个页面的内容，随机休眠0-8秒，这样做虽然抓取速度慢了点，但至少能保证每次抓取不会半途报错。</p>
+<p>完整的代码示例<a href="https://github.com/hsqs/spiders/blob/master/weibo/weibo_miner.py" target="_blank" rel="external">点这里</a>。    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-spider/">python spider</a></li></ul>
+
+        <a data-url="http://yoursite.com/2016/04/10/a-simple-python-spider-md/" data-id="cird24czs0001zke17otr4zpn" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/17/add-env-var-on-OSX-md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          在OS X上添加环境变量
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/27/use-virtualenv-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在OS X上使用virtualenv</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS-X/">OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-spider/">python spider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 王乐心的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
+</nav>
+  
+
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+  <title>Mybatis使用经验总结 | 王乐心的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
+1、foreach-in在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis使用经验总结">
+<meta property="og:url" content="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/index.html">
+<meta property="og:site_name" content="王乐心的博客">
+<meta property="og:description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
+1、foreach-in在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下">
+<meta property="og:updated_time" content="2016-08-02T05:50:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mybatis使用经验总结">
+<meta name="twitter:description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
+1、foreach-in在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
+        
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/ngbyte"></a>
+        
+      </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">王乐心的博客</a>
+        </h1>
+      
+    </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">feeling</li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">Home</a>
+      
+        <a class="main-nav-link" href="/archives">Archives</a>
+      
+        <a class="main-nav-link" href="/about">About</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
+  </div>
+</header>
+
+    <div class="outer">
+      <section id="main"><article id="post-some-usage-of-mybatis-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2015/12/27/some-usage-of-mybatis-md/" class="article-date">
+  <time datetime="2015-12-27T05:36:04.000Z" itemprop="datePublished">2015-12-27</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mybatis使用经验总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <p>这是<a href="http://mybatis.org/mybatis-3/zh/" target="_blank" rel="external">mybatis 的中文官方文档</a>，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。</p>
+<h3 id="1、foreach-in"><a href="#1、foreach-in" class="headerlink" title="1、foreach-in"></a>1、foreach-in</h3><p>在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">    #&#123;m&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>foreach 的各项参数就不用多解释了，这里，open 和 close 都显示的写到了foreach标签里。同理，当构建插入多条数据的语句时，同样的语法，不过稍有点变化：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></div><div class="line">    (#&#123;m.id&#125;, #&#123;m.name&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意，foreach 里的语句是带了圆括号，去掉了 open 和 close 属性，分隔符依旧是,，这是其中一种对 values 后面 SQL 的一种分解方式，或者用下面这种：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">"),("</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">    #&#123;m.id&#125;, #&#123;m.name&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里唯一注意的是 separator 的变化，这两种插入数据时的写法，效果都是一致的。想到这里，separator 可以是多个字符，那可不可以是 AND、OR 这样的分隔符呢？答案是肯定的，如此一来，foreach 可以构造多个重复条件的方法就灵活的多了。</p>
+<h3 id="2、SQL-注解"><a href="#2、SQL-注解" class="headerlink" title="2、SQL 注解"></a>2、SQL 注解</h3><p>在mapper文件里写 SQL 时，每个 SQL 的 id 都要对应一个DAO中的接口名称，保证他们可以找到彼此，其实，对于比较简单的一两行的 SQL，可以不用在 mapper 文件里写配置，直接在Java代码里添加注解的方式来实现。这样做的好处是在调试的时候，可以不用再去找 xml 文件里的 SQL 代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"SELECT name FROM user WHERE province_id = #&#123;address&#125; AND gender = #&#123;gender&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>Integer address, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gender)</span>;</div></pre></td></tr></table></figure>
+<p>除了@Select 注解，还有@Insert、@Update、@Delete，使用方法同上。这样SQL和Java代码放在一起，<br>查看起来非常的方便。这四个注解还有其他属性，不过我也没用过，就不作介绍了。</p>
+<h3 id="3、注解参数"><a href="#3、注解参数" class="headerlink" title="3、注解参数"></a>3、注解参数</h3><p>在传入多个参数到 Mybatis 的时候，如果是构建像上面的 IN 语句或插入多条数据，可以用 List 来达到目的。如果是多个不同类型的参数，有的是 String，有的是 List 的话，一般会用 Map<string, object="">，把 Key 作为参数名称，真正的参数放到 Value 中，在 mapper 文件里通过#{Key}的方式可以取到参数。这种方法虽然是极好的，但每次都要构造一个Map，然后把参数再一个个 put 进去，确实麻烦。这里就可以使用注解，省去这一堆步骤。同时，不用硬编码 SQL 里变量的引用和代码里的 key 值保持一致，这样调用接口传参数就可以了，调用者不用关心 SQL 里参数用的是哪个名字。</string,></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>List&lt;Integer&gt; addrs, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gds)</span>;</div></pre></td></tr></table></figure>
+<p>调用的时候，只需要把相应的参数传进去即可，在mapper文件里，用 @Param 里的注解名称来取参数，例如这里的address和gender，和Map的取用方式一样，#{address} 就可以拿到参数了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li></ul>
+
+        <a data-url="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/" data-id="cird17h4k0000s4e1gjqeuojx" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/27/use-virtualenv-md/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          在OS X上使用virtualenv
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS-X/">OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-spider/">python spider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 王乐心的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
+</nav>
+  
+
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>

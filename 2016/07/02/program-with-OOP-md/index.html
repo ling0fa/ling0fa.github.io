@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+  <title>面向对象编程的一些体会 | 王乐心的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1 初识最早接触面向对象概念是在大一学习C++，课上，老师用了一学期时间，在讲解C++这门课知识的同时，想尽了各种比喻隐喻暗喻让我们理解面向对象。人的自然状态下更容易接受直观的东西，像蝉在叫车在跑，云是白色土是黑色，这些都很直观。当时学习理解面向对象很慢，只知道类、class、封装、继承、多态这些概念，这些概念听起来就抽象，理解起来当然是费劲。后续除了数据结构选修，再也没了软件方面的课程。到了大四">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象编程的一些体会">
+<meta property="og:url" content="http://yoursite.com/2016/07/02/program-with-OOP-md/index.html">
+<meta property="og:site_name" content="王乐心的博客">
+<meta property="og:description" content="1 初识最早接触面向对象概念是在大一学习C++，课上，老师用了一学期时间，在讲解C++这门课知识的同时，想尽了各种比喻隐喻暗喻让我们理解面向对象。人的自然状态下更容易接受直观的东西，像蝉在叫车在跑，云是白色土是黑色，这些都很直观。当时学习理解面向对象很慢，只知道类、class、封装、继承、多态这些概念，这些概念听起来就抽象，理解起来当然是费劲。后续除了数据结构选修，再也没了软件方面的课程。到了大四">
+<meta property="og:updated_time" content="2016-08-02T06:21:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向对象编程的一些体会">
+<meta name="twitter:description" content="1 初识最早接触面向对象概念是在大一学习C++，课上，老师用了一学期时间，在讲解C++这门课知识的同时，想尽了各种比喻隐喻暗喻让我们理解面向对象。人的自然状态下更容易接受直观的东西，像蝉在叫车在跑，云是白色土是黑色，这些都很直观。当时学习理解面向对象很慢，只知道类、class、封装、继承、多态这些概念，这些概念听起来就抽象，理解起来当然是费劲。后续除了数据结构选修，再也没了软件方面的课程。到了大四">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
+        
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/ngbyte"></a>
+        
+      </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">王乐心的博客</a>
+        </h1>
+      
+    </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">feeling</li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">Home</a>
+      
+        <a class="main-nav-link" href="/archives">Archives</a>
+      
+        <a class="main-nav-link" href="/about">About</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
+  </div>
+</header>
+
+    <div class="outer">
+      <section id="main"><article id="post-program-with-OOP-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2016/07/02/program-with-OOP-md/" class="article-date">
+  <time datetime="2016-07-02T06:15:20.000Z" itemprop="datePublished">2016-07-02</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      面向对象编程的一些体会
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h3 id="1-初识"><a href="#1-初识" class="headerlink" title="1 初识"></a>1 初识</h3><p>最早接触面向对象概念是在大一学习C++，课上，老师用了一学期时间，在讲解C++这门课知识的同时，想尽了各种比喻隐喻暗喻让我们理解面向对象。人的自然状态下更容易接受直观的东西，像蝉在叫车在跑，云是白色土是黑色，这些都很直观。当时学习理解面向对象很慢，只知道类、class、封装、继承、多态这些概念，这些概念听起来就抽象，理解起来当然是费劲。后续除了数据结构选修，再也没了软件方面的课程。<br>到了大四开始找工作，学长送了我一本《程序员面试指南》开始临时抱佛脚，基本上把这本书过了一遍，收获还是挺大的，一次京东的笔试有个题问怎么理解面向对象的多态，我只写了一句话记得是：运行时父类可以指向子类的特性。现在看好像也没什么不对。</p>
+<h3 id="2-再接触"><a href="#2-再接触" class="headerlink" title="2 再接触"></a>2 再接触</h3><p>毕业去了第一家公司，做Java Web的项目，带我的老员工给了我一本《Java 编程思想》也没看懂多少就开始写代码。刚开始那段时间，当时写过的一个函数，记得大概是这样的： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">doSomeThing</span><span class="params">(List&lt;T extends BaseModel&gt; list)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// ... ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>项目里，BaseModel是父类，它有三个子类，我这里写了一个公共的方法，可以接收对应三个子类的列表参数，做一些公共的处理后返回。这个写法也是从网上搜来的，用起来也没什么问题，但其实并没有完全理解。这里可以看出来用到了继承和多态的知识，任何继承了BaseModel的类的列表都可以作为方法的合法参数。</p>
+<h3 id="3-最近一次使用"><a href="#3-最近一次使用" class="headerlink" title="3 最近一次使用"></a>3 最近一次使用</h3><p>最近做一个项目，用JQuery的Datatable来展示表格，由于要把List结果转换成用字符串表示的二维数组形式，再返回给Ajax请求，这样js代码里做少量处理就可以展示出表格。由于我中途接手这个项目，把直接用+拼接十来个属性的代码提取出来，把Model类都添加一个form()方法，把拼接属性的方法放在里面（改用StringBuilder）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleModel</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">    <span class="keyword">private</span> String birth;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">wrap</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="string">"\""</span> + obj.toString() + <span class="string">"\""</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">wrapComma</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="string">"\""</span> + obj.toString() + <span class="string">"\","</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">form</span><span class="params">()</span> </span>&#123;</div><div class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">        sb.append(<span class="string">"["</span>);</div><div class="line">        sb.append(wrapComma(name));</div><div class="line">        sb.append(wrapComma(age));</div><div class="line">        sb.append(wap(birth));</div><div class="line">        sb.append(<span class="string">"]"</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意，wrapComma(Objet)比wrap(Object)多返回一个逗号，这两个方法是放在另外一个工具类里来调用，这里我放在一起方便阅读，最后form()方法的返回的一般格式就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&quot;张三&quot;, &quot;22&quot;, &quot;1990-01-01&quot;]</div></pre></td></tr></table></figure>
+<p>由于返回的是多行，所以用循环来完成，专门写一个工具方法来做转换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">convertList2StringArray</span><span class="params">(List&lt;ExampleModel&gt; list)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span> || list.size() == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"[[]]"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"["</span>);</div><div class="line">    <span class="keyword">for</span> (ExampleModel model : list) &#123;</div><div class="line">        sb.append(model.form());</div><div class="line">        sb.append(<span class="string">","</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    sb.replace(sb.length() - <span class="number">1</span>, sb.length(), <span class="string">"]"</span>);</div><div class="line">    <span class="keyword">return</span> sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样，返回的结果一般格式为二维数组字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[&quot;张三&quot;, &quot;22&quot;, &quot;1990-01-01&quot;], [&quot;张四&quot;, &quot;23&quot;, &quot;1990-01-02&quot;]] 或者 [[]]</div></pre></td></tr></table></figure>
+<p>那么问题来了（不是挖掘机技术哪家强），项目里Model多如狗，一个表格就对应一个Model，这样做显然是不够，这个时候很自然的想到，多态就派上用场。当然我们不会使用父类，使用接口让Model重写特定的方法就行。先定义一个接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICommonForm</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 返回描述Model特定的字符串形式</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">form</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后让对应要展示的Model都实现这个接口，例如上面的ExampleModel。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleModel</span> <span class="keyword">implements</span> <span class="title">ICommonForm</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 省略其他属性和方法</span></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">form</span><span class="params">()</span> </span>&#123;</div><div class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">        sb.append(<span class="string">"["</span>);</div><div class="line">        sb.append(wrapComma(name));</div><div class="line">        sb.append(wrapComma(age));</div><div class="line">        sb.append(wrap(birth));</div><div class="line">        sb.append(<span class="string">"]"</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，再修改下convertList2StringArray(List)方法，使之更为通用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">convertList2StringArray</span><span class="params">(List&lt;? extends ICommonForm&gt; list)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span> || list.size() == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"[[]]"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"["</span>);</div><div class="line">    <span class="keyword">for</span> (ICommonForm model : list) &#123;</div><div class="line">        sb.append(model.form());</div><div class="line">        sb.append(<span class="string">","</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    sb.replace(sb.length() - <span class="number">1</span>, sb.length(), <span class="string">"]"</span>);</div><div class="line">    <span class="keyword">return</span> sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新的方法里，参数定义和for语句发生了变化，不再是特定的类，只要是实现了ICommonForm接口的类的列表，都是合法的参数，和前面提到的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">doSomeThing</span><span class="params">(List&lt;T extends BaseModel&gt; list)</span></span></div></pre></td></tr></table></figure>
+<p>非常相似。<br>设计模式里，很多模式都用到了多态，可以简化代码和结构。丫写了快两年Java代码，才终于能自然的、主动的想到用多态来解决问题……</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li></ul>
+
+        <a data-url="http://yoursite.com/2016/07/02/program-with-OOP-md/" data-id="cird2lzgr000gzke1oqyt4l84" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/30/Hello-Hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello Hexo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/17/add-env-var-on-OSX-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在OS X上添加环境变量</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS-X/">OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-spider/">python spider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 王乐心的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
+</nav>
+  
+
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
