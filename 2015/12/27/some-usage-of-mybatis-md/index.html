@@ -8,18 +8,18 @@
   <title>Mybatis使用经验总结 | 王乐心的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
-1、foreach-in在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下">
+1、foreach-in灵活使用在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis使用经验总结">
 <meta property="og:url" content="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/index.html">
 <meta property="og:site_name" content="王乐心的博客">
 <meta property="og:description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
-1、foreach-in在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下">
-<meta property="og:updated_time" content="2016-08-14T03:41:38.000Z">
+1、foreach-in灵活使用在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的">
+<meta property="og:updated_time" content="2016-08-14T05:03:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis使用经验总结">
 <meta name="twitter:description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
-1、foreach-in在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下">
+1、foreach-in灵活使用在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的">
   
   
   <link rel="stylesheet" href="/css/style.css">
@@ -104,7 +104,7 @@
       
         
         <p>这是<a href="http://mybatis.org/mybatis-3/zh/" target="_blank" rel="external">mybatis 的中文官方文档</a>，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。</p>
-<h3 id="1、foreach-in"><a href="#1、foreach-in" class="headerlink" title="1、foreach-in"></a>1、foreach-in</h3><p>在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下：</p>
+<h3 id="1、foreach-in灵活使用"><a href="#1、foreach-in灵活使用" class="headerlink" title="1、foreach-in灵活使用"></a>1、foreach-in灵活使用</h3><p>在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">    #&#123;m&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>foreach 的各项参数就不用多解释了，这里，open 和 close 都显示的写到了foreach标签里。同理，当构建插入多条数据的语句时，同样的语法，不过稍有点变化：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></div><div class="line">    (#&#123;m.id&#125;, #&#123;m.name&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -113,11 +113,15 @@
 <p>这里唯一注意的是 separator 的变化，这两种插入数据时的写法，效果都是一致的。想到这里，separator 可以是多个字符，那可不可以是 AND、OR 这样的分隔符呢？答案是肯定的，如此一来，foreach 可以构造多个重复条件的方法就灵活的多了。</p>
 <h3 id="2、SQL-注解"><a href="#2、SQL-注解" class="headerlink" title="2、SQL 注解"></a>2、SQL 注解</h3><p>在mapper文件里写 SQL 时，每个 SQL 的 id 都要对应一个DAO中的接口名称，保证他们可以找到彼此，其实，对于比较简单的一两行的 SQL，可以不用在 mapper 文件里写配置，直接在Java代码里添加注解的方式来实现。这样做的好处是在调试的时候，可以不用再去找 xml 文件里的 SQL 代码。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"SELECT name FROM user WHERE province_id = #&#123;address&#125; AND gender = #&#123;gender&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>Integer address, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gender)</span>;</div></pre></td></tr></table></figure>
-<p>除了@Select 注解，还有@Insert、@Update、@Delete，使用方法同上。这样SQL和Java代码放在一起，<br>查看起来非常的方便。这四个注解还有其他属性，不过我也没用过，就不作介绍了。</p>
-<h3 id="3、注解参数"><a href="#3、注解参数" class="headerlink" title="3、注解参数"></a>3、注解参数</h3><p>在传入多个参数到 Mybatis 的时候，如果是构建像上面的 IN 语句或插入多条数据，可以用 List 来达到目的。如果是多个不同类型的参数，有的是 String，有的是 List 的话，一般会用 Map<string, object="">，把 Key 作为参数名称，真正的参数放到 Value 中，在 mapper 文件里通过#{Key}的方式可以取到参数。这种方法虽然是极好的，但每次都要构造一个Map，然后把参数再一个个 put 进去，确实麻烦。这里就可以使用注解，省去这一堆步骤。同时，不用硬编码 SQL 里变量的引用和代码里的 key 值保持一致，这样调用接口传参数就可以了，调用者不用关心 SQL 里参数用的是哪个名字。</string,></p>
+<p>除了@Select 注解，还有@Insert、@Update、@Delete，使用方法同上。这样SQL和Java代码放在一起，<br>查看起来非常的方便。这四个注解还有其他属性，不过我没用过，就不介绍了。</p>
+<h3 id="3、注解参数"><a href="#3、注解参数" class="headerlink" title="3、注解参数"></a>3、注解参数</h3><p>在传入多个参数到 Mybatis 的时候，同类型参数可以用List传递，不同类型参数用Map传递，对于Map这种情况比较麻烦，首先要专门构造一个Map，另外最难以忍受的是用Map传多个参数不知道里面到底有什么内容，只有到执行SQL时才会报出问题。这里就可以使用参数注解，省去这一堆步骤。同时，直观的展示有哪些变量传入SQL，这样调用接口传参数就可以了，调用者不用关心 SQL 里参数用的是哪个名字。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>List&lt;Integer&gt; addrs, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gds)</span>;</div></pre></td></tr></table></figure>
-<p>调用的时候，只需要把相应的参数传进去即可，在mapper文件里，用 @Param 里的注解名称来取参数，例如这里的address和gender，和Map的取用方式一样，#{address} 就可以拿到参数了。</p>
-<h3 id="4、insert和select语句"><a href="#4、insert和select语句" class="headerlink" title="4、insert和select语句"></a>4、insert和select语句</h3><p>在插入数据和查询数据时，有种场景是</p>
+<p>调用的时候，只需要把相应的参数传进去即可，在mapper文件里，用 @Param 里的注解名称来取参数，例如这里的address和gender，SQL里取参数方式不变，用#{gender}或${gender}。</p>
+<h3 id="4、insert和select语句调优"><a href="#4、insert和select语句调优" class="headerlink" title="4、insert和select语句调优"></a>4、insert和select语句调优</h3><p>在插入或查询时，在mapper文件里，select要写resultMap标签来映射属性和列的关系，insert语句要写一个foreach语句来拼接values后面的内容，这一切都没有问题，但是当一次性查询或插入上千、上万条数据，Mybatis就显得力不从心。Mybatis虽然有强大的动态拼接SQL的能力，但此时应用比较简单，可以考虑尽量减少Mybatis的工作，把它仅仅当做是SQL语句来执行。     </p>
+<p>对insert语句，values后面的内容可以预先在Java代码里拼接好，直接传入：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertPOJO"</span> <span class="attr">parameterType</span>=<span class="string">"java.util.List"</span>&gt;</span></div><div class="line">    insert into </div><div class="line">        table(...)</div><div class="line">    values</div><div class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"value"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">            $&#123;value&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>甚至，连foreach标签也去掉，在Java里就全部拼接好。不过我比较倾向于上面这种，可以看出是插入多条数据，又不至于插入速率太慢。  </p>
+<p>对select语句类似：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectPOJO"</span> <span class="attr">resultType</span>=<span class="string">"java.util.Map"</span>&gt;</span></div><div class="line">    select </div><div class="line">        *</div><div class="line">    from</div><div class="line">        table</div><div class="line">    where</div><div class="line">        ...    </div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里让返回值为Map，在Java里用 List&lt;Map&lt;Object, Object&gt;&gt; 接收，剩下的工作就是将返回结果再转换为List&lt;Pojo&gt;对象。工作量增加了一些，但对数据流较大的查询，性能提升比较明显，还是值得的。</p>
 
       
     </div>
