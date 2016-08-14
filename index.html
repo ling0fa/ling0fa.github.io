@@ -132,7 +132,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
 
-        <a data-url="http://yoursite.com/2016/07/30/Hello-Hexo/" data-id="cird346hx0000afe1grr5k96i" class="article-share-link">分享到</a>
+        <a data-url="http://yoursite.com/2016/07/30/Hello-Hexo/" data-id="ciru2ffqk0000ape16i8wt33b" class="article-share-link">分享到</a>
         
       </div>
     </footer>
@@ -199,7 +199,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OOP/">OOP</a></li></ul>
 
-        <a data-url="http://yoursite.com/2016/07/02/program-with-OOP-md/" data-id="cird346i70004afe1q4d5cjk4" class="article-share-link">分享到</a>
+        <a data-url="http://yoursite.com/2016/07/02/program-with-OOP-md/" data-id="ciru2ffqz0007ape1gu4zmlcf" class="article-share-link">分享到</a>
         
       </div>
     </footer>
@@ -258,7 +258,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境变量/">环境变量</a></li></ul>
 
-        <a data-url="http://yoursite.com/2016/04/17/add-env-var-on-OSX-md/" data-id="cird346i60003afe1rqzz4g26" class="article-share-link">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/17/add-env-var-on-OSX-md/" data-id="ciru2ffqu0004ape1vbabviyp" class="article-share-link">分享到</a>
         
       </div>
     </footer>
@@ -315,7 +315,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-spider/">python spider</a></li></ul>
 
-        <a data-url="http://yoursite.com/2016/04/10/a-simple-python-spider-md/" data-id="cird346i10001afe1h91x66kf" class="article-share-link">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/10/a-simple-python-spider-md/" data-id="ciru2ffqp0002ape1mrifbl87" class="article-share-link">分享到</a>
         
       </div>
     </footer>
@@ -376,7 +376,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OS-X/">OS X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/virtualenv/">virtualenv</a></li></ul>
 
-        <a data-url="http://yoursite.com/2016/03/27/use-virtualenv-md/" data-id="cird346ik000jafe169gxtn28" class="article-share-link">分享到</a>
+        <a data-url="http://yoursite.com/2016/03/27/use-virtualenv-md/" data-id="ciru2ffr10008ape1dfr72519" class="article-share-link">分享到</a>
         
       </div>
     </footer>
@@ -428,6 +428,7 @@
 <h3 id="3、注解参数"><a href="#3、注解参数" class="headerlink" title="3、注解参数"></a>3、注解参数</h3><p>在传入多个参数到 Mybatis 的时候，如果是构建像上面的 IN 语句或插入多条数据，可以用 List 来达到目的。如果是多个不同类型的参数，有的是 String，有的是 List 的话，一般会用 Map<string, object="">，把 Key 作为参数名称，真正的参数放到 Value 中，在 mapper 文件里通过#{Key}的方式可以取到参数。这种方法虽然是极好的，但每次都要构造一个Map，然后把参数再一个个 put 进去，确实麻烦。这里就可以使用注解，省去这一堆步骤。同时，不用硬编码 SQL 里变量的引用和代码里的 key 值保持一致，这样调用接口传参数就可以了，调用者不用关心 SQL 里参数用的是哪个名字。</string,></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>List&lt;Integer&gt; addrs, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gds)</span>;</div></pre></td></tr></table></figure>
 <p>调用的时候，只需要把相应的参数传进去即可，在mapper文件里，用 @Param 里的注解名称来取参数，例如这里的address和gender，和Map的取用方式一样，#{address} 就可以拿到参数了。</p>
+<h3 id="4、insert和select语句"><a href="#4、insert和select语句" class="headerlink" title="4、insert和select语句"></a>4、insert和select语句</h3><p>在插入数据和查询数据时，有种场景是</p>
 
       
     </div>
@@ -436,7 +437,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li></ul>
 
-        <a data-url="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/" data-id="cird346ib0006afe1qv7w5l1s" class="article-share-link">分享到</a>
+        <a data-url="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/" data-id="ciru2ffqx0005ape1p0j6gzhp" class="article-share-link">分享到</a>
         
       </div>
     </footer>

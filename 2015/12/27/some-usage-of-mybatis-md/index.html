@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="王乐心的博客">
 <meta property="og:description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
 1、foreach-in在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下">
-<meta property="og:updated_time" content="2016-08-02T05:50:30.000Z">
+<meta property="og:updated_time" content="2016-08-14T03:41:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis使用经验总结">
 <meta name="twitter:description" content="这是mybatis 的中文官方文档，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。
@@ -117,6 +117,7 @@
 <h3 id="3、注解参数"><a href="#3、注解参数" class="headerlink" title="3、注解参数"></a>3、注解参数</h3><p>在传入多个参数到 Mybatis 的时候，如果是构建像上面的 IN 语句或插入多条数据，可以用 List 来达到目的。如果是多个不同类型的参数，有的是 String，有的是 List 的话，一般会用 Map<string, object="">，把 Key 作为参数名称，真正的参数放到 Value 中，在 mapper 文件里通过#{Key}的方式可以取到参数。这种方法虽然是极好的，但每次都要构造一个Map，然后把参数再一个个 put 进去，确实麻烦。这里就可以使用注解，省去这一堆步骤。同时，不用硬编码 SQL 里变量的引用和代码里的 key 值保持一致，这样调用接口传参数就可以了，调用者不用关心 SQL 里参数用的是哪个名字。</string,></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>List&lt;Integer&gt; addrs, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gds)</span>;</div></pre></td></tr></table></figure>
 <p>调用的时候，只需要把相应的参数传进去即可，在mapper文件里，用 @Param 里的注解名称来取参数，例如这里的address和gender，和Map的取用方式一样，#{address} 就可以拿到参数了。</p>
+<h3 id="4、insert和select语句"><a href="#4、insert和select语句" class="headerlink" title="4、insert和select语句"></a>4、insert和select语句</h3><p>在插入数据和查询数据时，有种场景是</p>
 
       
     </div>
@@ -125,7 +126,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li></ul>
 
-        <a data-url="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/" data-id="cird346ib0006afe1qv7w5l1s" class="article-share-link">分享到</a>
+        <a data-url="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/" data-id="ciru2ffqx0005ape1p0j6gzhp" class="article-share-link">分享到</a>
         
       </div>
     </footer>
