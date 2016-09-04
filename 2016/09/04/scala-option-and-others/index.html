@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+  <title>学习笔记：Scala的Option以及其他容器 | 王乐心的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="除了List、Set、Map等常见容器，本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
+
+1、Option 容器
+Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  
+Scala里常见的容器像L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记：Scala的Option以及其他容器">
+<meta property="og:url" content="http://yoursite.com/2016/09/04/scala-option-and-others/index.html">
+<meta property="og:site_name" content="王乐心的博客">
+<meta property="og:description" content="除了List、Set、Map等常见容器，本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
+
+1、Option 容器
+Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  
+Scala里常见的容器像L">
+<meta property="og:updated_time" content="2016-09-04T04:10:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习笔记：Scala的Option以及其他容器">
+<meta name="twitter:description" content="除了List、Set、Map等常见容器，本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
+
+1、Option 容器
+Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  
+Scala里常见的容器像L">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
+        
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/ling0fa"></a>
+        
+      </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">吾生也有涯，而知也无涯。以有涯随无涯，殆已。</a>
+        </h1>
+      
+    </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">feeling</li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+        <li class="cara"></li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">Home</a>
+      
+        <a class="main-nav-link" href="/archives">Archives</a>
+      
+        <a class="main-nav-link" href="/about">About</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
+  </div>
+</header>
+
+    <div class="outer">
+      <section id="main"><article id="post-scala-option-and-others" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2016/09/04/scala-option-and-others/" class="article-date">
+  <time datetime="2016-09-04T03:11:14.000Z" itemprop="datePublished">2016-09-04</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      学习笔记：Scala的Option以及其他容器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <blockquote>
+<p>除了List、Set、Map等常见容器，本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br>本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</p>
+</blockquote>
+<h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
+<li>Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  </li>
+<li>Scala里常见的容器像List、Map等都可以使用for推导式，Scala的for推导式是一个语法糖，最终都会被展开为对foreach、map、flatMap、withFilter的调用，Option实现了这些方法，所以可以在for推导式中使用Option容器。</li>
+<li>Option的API定义：<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sealed</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Option</span>[+<span class="type">A</span>] </span>&#123; self =&gt;</div><div class="line">	<span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span></span>: <span class="type">Boolean</span> <span class="comment">// 子类会实现这个变量</span></div><div class="line"></div><div class="line">	<span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">foreach</span></span>[<span class="type">U</span>](f:<span class="type">A</span> =&gt; <span class="type">U</span>): <span class="type">Unit</span> =</div><div class="line">	  <span class="keyword">if</span> (!isEmpty) f(<span class="keyword">this</span>.get)</div><div class="line"></div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>sealed</code>关键字限定子类必须和父类在同一个文件里，<code>self</code>是Option的别名，<code>final</code>限制子类重写，其余方法定义和foreach类似。</p>
+<h3 id="2、Some和None"><a href="#2、Some和None" class="headerlink" title="2、Some和None"></a>2、Some和None</h3><ol>
+<li>这两个是Option的子类，分别是非空对象和空对象。</li>
+<li>上面列出的方法，只有当Option为非空时，才会使用传入的函数参数，利用这个特性，可以方便的过滤出结果里的非空结果。分布式任务收集结果也会利用了这个特性。</li>
+<li>示例：<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> results: <span class="type">Seq</span>[<span class="type">Option</span>[<span class="type">Int</span>]] = <span class="type">Vector</span>(<span class="type">Some</span>(<span class="number">10</span>), <span class="type">Some</span>(<span class="number">20</span>), <span class="type">None</span>)</div><div class="line"><span class="keyword">val</span> results2 = <span class="keyword">for</span> &#123;</div><div class="line">	<span class="type">Some</span>(i) &lt;- results</div><div class="line">&#125; <span class="keyword">yield</span> (<span class="number">2</span> * i)</div><div class="line"><span class="comment">// results2:Seq[Int] = Vector(20, 40)</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><code>Some(i) &lt;- results</code>会对results里的元素进行模式匹配，移除None元素，并抽取包含的数值。利用for推导式的转化规则，可以转化为：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> result2 = <span class="keyword">for</span> &#123;</div><div class="line">	<span class="type">Some</span>(i) &lt;- results withFilter &#123;</div><div class="line">	    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; <span class="literal">true</span></div><div class="line">	    <span class="keyword">case</span> <span class="type">None</span> =&gt; <span class="literal">false</span></div><div class="line">	&#125; map &#123;</div><div class="line">	    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; (<span class="number">2</span> * i)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>map里的case会产生警告，不过没关系，在withFilter里已经过滤了None的情况，运行时代码不会报MatchError。  </p>
+<ol>
+<li>应用。对一组值做合法性检查：<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Option</span>[<span class="type">Int</span>] = </div><div class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Some</span>(i) <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">	i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">	i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">	i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">	i4 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = Some(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">	i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">	i2 &lt;- positive(i1 * <span class="number">-1</span>) <span class="comment">// 一旦这里返回None，后续表达式会停止执行，所以下一句可以引用i2变量</span></div><div class="line">	i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">	i4 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = None</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Option/">Option</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scala/">scala</a></li></ul>
+
+        <a data-url="http://yoursite.com/2016/09/04/scala-option-and-others/" data-id="ciso3pqa80002kle13kmtm84m" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/30/Hello-Hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello Hexo</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/09/04/scala-option-and-others/">学习笔记：Scala的Option以及其他容器</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS-X/">OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Option/">Option</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-spider/">python spider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scala/">scala</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 王乐心的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
+</nav>
+  
+
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
