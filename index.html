@@ -1,1 +1,443 @@
-<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>王乐心的博客</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">王乐心的博客</h1><a id="logo" href="/.">王乐心的博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h2 class="post-title"><a href="/2016/09/04/scala-option-and-others/">学习笔记：Scala的Option以及其他容器</a></h2><div class="post-meta">2016-09-04</div><div class="post-content"><p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p></div><p class="readmore"><a href="/2016/09/04/scala-option-and-others/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a></h2><div class="post-meta">2016-07-30</div><div class="post-content"><p>闲的蛋疼的我又开始折腾了，这次是通过Hexo来搭建个人博客，需要提前了解一些包括github、nodejs的基本使用，怎么搭建的过程就不多说了，网上有很多教程，这里推荐两个<a href="http://beiyuu.com/github-pages" target="_blank" rel="external">教程1</a>、<a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">教程2</a>，里面很详细的介绍了整个过程。   </p></div><p class="readmore"><a href="/2016/07/30/Hello-Hexo/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a></h2><div class="post-meta">2016-07-02</div><div class="post-content"><h3 id="1-初识"><a href="#1-初识" class="headerlink" title="1 初识"></a>1 初识</h3><p>最早接触面向对象概念是在大一学习C++，课上，老师用了一学期时间，在讲解C++这门课知识的同时，想尽了各种比喻隐喻暗喻让我们理解面向对象。人的自然状态下更容易接受直观的东西，像蝉在叫车在跑，云是白色土是黑色，这些都很直观。当时学习理解面向对象很慢，只知道类、class、封装、继承、多态这些概念，这些概念听起来就抽象，理解起来当然是费劲。后续除了数据结构选修，再也没了软件方面的课程。<br>到了大四开始找工作，学长送了我一本《程序员面试指南》开始临时抱佛脚，基本上把这本书过了一遍，收获还是挺大的，一次京东的笔试有个题问怎么理解面向对象的多态，我只写了一句话记得是：运行时父类可以指向子类的特性。现在看好像也没什么不对。</p></div><p class="readmore"><a href="/2016/07/02/program-with-OOP-md/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a></h2><div class="post-meta">2016-04-17</div><div class="post-content"><p>在 Windows 上添加环境变量的操作都很熟悉了。但是在 OSX 上还是很生疏，上次在 OSX 上添加环境变量，还是在刚买笔记本，添加 Java 环境变量，当时添加完了，起作用后就没管了，今天又要添加 Scala 环境变量时，基本忘了怎么弄，现在把整个过程记下来。   </p></div><p class="readmore"><a href="/2016/04/17/add-env-var-on-OSX-md/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a></h2><div class="post-meta">2016-04-10</div><div class="post-content"><p>由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。</p></div><p class="readmore"><a href="/2016/04/10/a-simple-python-spider-md/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a></h2><div class="post-meta">2016-03-27</div><div class="post-content"><h3 id="1，理解virtualenv"><a href="#1，理解virtualenv" class="headerlink" title="1，理解virtualenv"></a>1，理解virtualenv</h3><p>virtualenv从字面意思来理解的话，就是虚拟环境的意思，这个第一印象容易对我们产生误导，其实并不是虚拟环境，以我的理解是一个<strong>独立</strong>环境。什么意思呢？好比一台电脑上装好Python以后，可以把安装的Python拷贝到另一个目录(官方:其实并没有真正安装多个 Python 副本，但是它确实提供了一种巧妙的方式来让各项目环境保持独立)，这样两个Python环境相互独立，互不影响，那有了多个Python环境，在什么时候启用谁禁用谁呢？virtualenv这个时候就派上用场了。官方对virtualenv的解释：<a href="https://virtualenv.pypa.io/" target="_blank" rel="external">virtualenv is a tool to create isolated Python environments</a>.</p></div><p class="readmore"><a href="/2016/03/27/use-virtualenv-md/">Mehr lesen</a></p></div><div class="post"><h2 class="post-title"><a href="/2015/12/27/some-usage-of-mybatis-md/">Mybatis使用经验总结</a></h2><div class="post-meta">2015-12-27</div><div class="post-content"><p>这是<a href="http://mybatis.org/mybatis-3/zh/" target="_blank" rel="external">mybatis 的中文官方文档</a>，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。</p></div><p class="readmore"><a href="/2015/12/27/some-usage-of-mybatis-md/">Mehr lesen</a></p></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/教程/" style="font-size: 15px;">教程</a> <a href="/tags/python-spider/" style="font-size: 15px;">python spider</a> <a href="/tags/OS-X/" style="font-size: 15px;">OS X</a> <a href="/tags/环境变量/" style="font-size: 15px;">环境变量</a> <a href="/tags/OOP/" style="font-size: 15px;">OOP</a> <a href="/tags/scala/" style="font-size: 15px;">scala</a> <a href="/tags/Option/" style="font-size: 15px;">Option</a> <a href="/tags/mybatis/" style="font-size: 15px;">mybatis</a> <a href="/tags/virtualenv/" style="font-size: 15px;">virtualenv</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/scala-option-and-others/">学习笔记：Scala的Option以及其他容器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/Hello-Hexo/">Hello Hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/some-usage-of-mybatis-md/">Mybatis使用经验总结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">王乐心的博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>王乐心的博客</title>
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="王乐心的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="王乐心的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">王乐心的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-04T03:11:14.000Z"><a href="/2016/09/04/scala-option-and-others/">2016-09-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/09/04/scala-option-and-others/">学习笔记：Scala的Option以及其他容器</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+<h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
+<li>Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  </li>
+<li>Scala里常见的容器像List、Map等都可以使用for推导式，Scala的for推导式是一个语法糖，最终都会被展开为对foreach、map、flatMap、withFilter的调用，Option实现了这些方法，所以可以在for推导式中使用Option容器。</li>
+<li>Option的API定义：</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sealed</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Option</span>[+<span class="type">A</span>] </span>&#123; self =&gt;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span></span>: <span class="type">Boolean</span> <span class="comment">// 子类会实现这个变量</span></div><div class="line"></div><div class="line">  <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">foreach</span></span>[<span class="type">U</span>](f:<span class="type">A</span> =&gt; <span class="type">U</span>): <span class="type">Unit</span> =</div><div class="line">    <span class="keyword">if</span> (!isEmpty) f(<span class="keyword">this</span>.get)</div><div class="line"></div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>sealed</code>关键字限定子类必须和父类在同一个文件里，<code>self</code>是Option的别名，<code>final</code>限制子类重写，其余方法定义和foreach类似。</p>
+<h3 id="2、Some和None"><a href="#2、Some和None" class="headerlink" title="2、Some和None"></a>2、Some和None</h3><ol>
+<li>这两个是Option的子类，分别是非空对象和空对象。</li>
+<li>上面列出的方法，只有当Option为非空时，才会使用传入的函数参数，利用这个特性，可以方便的过滤出结果里的非空结果。分布式任务收集结果也会利用了这个特性。</li>
+<li>示例：</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> results: <span class="type">Seq</span>[<span class="type">Option</span>[<span class="type">Int</span>]] = <span class="type">Vector</span>(<span class="type">Some</span>(<span class="number">10</span>), <span class="type">Some</span>(<span class="number">20</span>), <span class="type">None</span>)</div><div class="line"><span class="keyword">val</span> results2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results</div><div class="line">&#125; <span class="keyword">yield</span> (<span class="number">2</span> * i)</div><div class="line"><span class="comment">// results2:Seq[Int] = Vector(20, 40)</span></div></pre></td></tr></table></figure>
+<p><code>Some(i) &lt;- results</code>会对results里的元素进行模式匹配，移除None元素，并抽取包含的数值。利用for推导式的转化规则，可以转化为：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">val</span> result2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results withFilter &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; <span class="literal">true</span></div><div class="line">    <span class="keyword">case</span> <span class="type">None</span> =&gt; <span class="literal">false</span></div><div class="line">  &#125; map &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; (<span class="number">2</span> * i)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>map里的case会产生警告，不过没关系，在withFilter里已经过滤了None的情况，运行时代码不会报MatchError。<br>应用：对一组值做合法性检查：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Option</span>[<span class="type">Int</span>] = </div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Some</span>(i) <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = Some(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>) <span class="comment">// 一旦这里返回None，后续表达式会停止执行，所以下一句可以引用i2变量</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = None</span></div></pre></td></tr></table></figure>
+<h3 id="3、Either容器"><a href="#3、Either容器" class="headerlink" title="3、Either容器"></a>3、Either容器</h3><ol>
+<li>Option容器的None有个缺陷，就是不能返回为什么没有返回值。此时Either是替代Option的一种解决方案，与其字面意思一致，Option表示含有0或1个元素，Either表示含有这个或那个元素。  </li>
+<li>Either的定义：<code>sealed abstract class Either[+A, +B] extends AnyRef</code>，A、B表示Either对象可以持有的对象类型（可以不同），加号表示参数是协变的。  </li>
+<li>Either有两个子类，<code>Left[A]</code>和<code>Right[B]</code>，通过这两个子类从两个可能的元素中选一个。Either的历史早于Scala，约定用Left来表示错误，Right表示正常返回结果。  </li>
+<li>示例：用Either重写前面的🌰：</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Either</span>[<span class="type">String</span>, <span class="type">Int</span>] =</div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Right</span>(i) <span class="keyword">else</span> <span class="type">Left</span>(<span class="string">s"non-positive number <span class="subst">$i</span>"</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>).right</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>).right</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Right(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>).right <span class="comment">// 失败</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>).right <span class="comment">// 失败</span></div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Left(non-positive number -5)</span></div></pre></td></tr></table></figure>
+<p>和前面一样，一旦调用<code>.right</code>返回的是Left类型时，调用结束，后面的不再执行。至于为什么，目前来看，Left和Right都可以调用<code>left</code>和<code>right</code>方法，分别返回LeftProjection和RightProjection实例，但再对LeftProjection和RightProjection取值时，for推导式可以自己推导出来。比如：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> <span class="type">L</span> = <span class="type">Left</span>(<span class="number">33</span>)</div><div class="line"><span class="keyword">val</span> left = <span class="type">L</span>.left      <span class="comment">// left = LeftProjection(Left(33))</span></div><div class="line"><span class="keyword">val</span> lvalue = left.get  <span class="comment">// lvalue = 33</span></div><div class="line"><span class="keyword">val</span> right = <span class="type">L</span>.right    <span class="comment">// right = RightProjection(Left(33))</span></div><div class="line"><span class="keyword">val</span> rvalue = right.get <span class="comment">// NoSuchElementException</span></div></pre></td></tr></table></figure></p>
+<p>示例2，对于出现异常的情况，可以将异常列在返回值的Either左值里，不再通过抛出异常来捕获调用堆栈中某些应用的控制权，同时调用者更能明白API的含义。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addInts</span></span>(s1: <span class="type">String</span>, s2: <span class="type">String</span>): <span class="type">Either</span>[<span class="type">NumberFormatException</span>,<span class="type">Int</span>] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="type">Right</span>(s1.toInt + s2.toInt)</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> nfe: <span class="type">NumberFormatException</span> =&gt; <span class="type">Left</span>(nfe)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">println(addInts(<span class="string">"11"</span>, <span class="string">"22"</span>)) <span class="comment">// Right(33)</span></div><div class="line">println(addInts(<span class="string">"f"</span>, <span class="string">"33"</span>))  <span class="comment">// Left(java.lang.NumberFormatException: For input string: "f")</span></div></pre></td></tr></table></figure></p>
+<h3 id="4、Try容器"><a href="#4、Try容器" class="headerlink" title="4、Try容器"></a>4、Try容器</h3><ol>
+<li>scala.util.Try的结构和Either类似，有两个子类Success和Failure，Success与Right相似，保存正常的返回值，Failure与Left相似，但总是包含Throwable对象，所以Try的定义只有一个泛型参数：<code>sealed abstract class Try[+T] extends AnyRef</code>。</li>
+<li>示例：从一组Try值中，过滤掉Failure对象。</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scala.util.&#123;<span class="type">Try</span>, <span class="type">Success</span>, <span class="type">Failure</span>&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>): <span class="type">Try</span>[<span class="type">Int</span>] = <span class="type">Try</span> &#123;</div><div class="line">  assert(i &gt; <span class="number">0</span>, <span class="string">s"non-positive number <span class="subst">$i</span>"</span>)</div><div class="line">  i</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i3 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Try[Int] = Success(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i3 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Try[Int] = Failure(java.lang.AssertionError: assert failed: non-positive number -5)</span></div></pre></td></tr></table></figure>
+<h3 id="5、Scalaz提供的Validation类"><a href="#5、Scalaz提供的Validation类" class="headerlink" title="5、Scalaz提供的Validation类"></a>5、Scalaz提供的Validation类</h3><ol>
+<li>以上介绍的容器，在for推到中遇到不满足情况会立即停止，如果想收集所有所有执行过程中的错误，并判断后面执行什么操作，典型的场景就是验证网页表单，这样可以一次将所有错误信息返回。Scala标准库无法提供这样的功能，第三方库Scalaz提供了Validation满足这种需求。</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scalaz._, std.<span class="type">AllInstance</span>._</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validName</span></span>(key: <span class="type">String</span>, name: <span class="type">String</span>): </div><div class="line">        <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">val</span> n = name.trim</div><div class="line">  <span class="keyword">if</span> (n.length &gt; <span class="number">0</span> &amp;&amp; n.matches(<span class="string">""</span><span class="string">"^\p&#123;Alpha&#125;$"</span><span class="string">""</span>)) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; n))</div><div class="line">  <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> &lt;<span class="subst">$n</span>&gt;"</span>))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(key: <span class="type">String</span>, n: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">val</span> i = n.toInt</div><div class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; i))</div><div class="line">    <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> <span class="subst">$i</span>"</span>))</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> _: java.lang.<span class="type">NumberFormatException</span> =&gt; <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"<span class="subst">$n</span> is not a Integer"</span>))</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validForm</span></span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>, age: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  validName(<span class="string">"first-name"</span>, firstName) </div><div class="line">  +++ validName(<span class="string">"last-name"</span>, lastName) </div><div class="line">  +++ positive(<span class="string">"age"</span>, age)</div><div class="line">&#125;</div><div class="line"></div><div class="line">validForm(<span class="string">"Dean"</span>, <span class="string">"Wampler"</span>, <span class="string">"29"</span>)</div><div class="line"><span class="comment">// Success(List((first-name,Dean),(last-name,Wampler),(age,29)))</span></div><div class="line"></div><div class="line">validForm(<span class="string">""</span>, <span class="string">"Wampler"</span>, <span class="string">"0"</span>)</div><div class="line"><span class="comment">// Failure(List(Invalid first-name &lt;&gt;, Invalid age 0))</span></div></pre></td></tr></table></figure>
+<p>这里的Success和Failure和Try的两个子类不是同一个类。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-30T13:53:26.000Z"><a href="/2016/07/30/Hello-Hexo/">2016-07-30</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>闲的蛋疼的我又开始折腾了，这次是通过Hexo来搭建个人博客，需要提前了解一些包括github、nodejs的基本使用，怎么搭建的过程就不多说了，网上有很多教程，这里推荐两个<a href="http://beiyuu.com/github-pages" target="_blank" rel="external">教程1</a>、<a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">教程2</a>，里面很详细的介绍了整个过程。   </p>
+<p>这里主要记录下我在搭建过程中遇到的问题和解决方案。   </p>
+<h3 id="1、-SSH-key和使用多个github账号"><a href="#1、-SSH-key和使用多个github账号" class="headerlink" title="1、 SSH key和使用多个github账号"></a>1、 SSH key和使用多个github账号</h3><p>上面的两个教程里有说怎么在本地新建一个ssh key，并添加到github的过程，如果要使用第二个账号时，有些不同的地方。首先进入保存ssh key的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/.ssh</div></pre></td></tr></table></figure>
+<p>这个目录是隐藏的，用ls命令不会回显。进入之后，如果之前已经创建了key，会有如下两个文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id_rsa  id_rsa.pub</div></pre></td></tr></table></figure>
+<p>有印象吧，然后再走上一次的流程，在.ssh目录输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"your-email@xxx.com"</span></div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key(~/.ssh): second_key</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>注意要在上面的<strong>second_key</strong>那里输入新的key名词，然后后面一路回车。完了目录下会新增下面两个文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">second  second.pub</div></pre></td></tr></table></figure>
+<p>如果是在其他目录生成的这两个文件，可以拷贝到.ssh目录。把second.pub里的内容添加到github账号，具体可以参考上面的两个教程。<br>再在.ssh目录新建一个config文件，添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Host defaultgit</div><div class="line">    HostName github.com</div><div class="line">    PreferredAuthentications publickey</div><div class="line">    IdentityFile ~/.ssh/id_rsa</div><div class="line"></div><div class="line">Host secondgit</div><div class="line">    HostName github.com</div><div class="line">    PreferredAuthentications publickey</div><div class="line">    IdentityFile ~/.ssh/second</div></pre></td></tr></table></figure>
+<p>Host 名称可以随意起，表示SSH连接的单独代号，IdentityFile告诉SSH去哪里读私钥。执行ssh-add添加新生成的私钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-add ~/.ssh/second</div></pre></td></tr></table></figure>
+<p>然后测试是否配置成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@defaultgit</div><div class="line">Hi yourname1! You have successfully ...</div><div class="line"></div><div class="line">$ ssh -T git@secondgit</div><div class="line">Hi yourname2! You have successfully ...</div></pre></td></tr></table></figure>
+<p>如果出现上面的提示，说明配置成功。以后用到那个账号，就使用哪个账号Host对应的名称，例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> git@defaultgit:xxx/yyy.git</div><div class="line">git <span class="built_in">clone</span> git@secondgit:xxx/yyy.git</div></pre></td></tr></table></figure>
+<p>上面克隆了同一个仓库，但使用的是不同的SSH连接。也可以只在项目下配置区别于全局的设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git config --global --unset user.name</div><div class="line">git config --global --unset user.email</div><div class="line"></div><div class="line">git config user.name <span class="string">"new name"</span></div><div class="line">git config user.email <span class="string">"new email"</span></div></pre></td></tr></table></figure>
+<p>用户名的邮箱就是注册github账号使用的用户名和邮箱，这样在每个目录下提交就可以自动识别github账号了。</p>
+<h3 id="2、部署Hexo"><a href="#2、部署Hexo" class="headerlink" title="2、部署Hexo"></a>2、部署Hexo</h3><p>配置Hexo的部署部分，repo的配置特别注意，需要github网址URL+用户名+repo名，如下在deploy节点</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">    type:</span> git</div><div class="line"><span class="attr">    repo:</span> https://github.com/user-name/repo-name</div><div class="line"><span class="attr">    branch:</span> master</div></pre></td></tr></table></figure>
+<p>这里的user-name和repo-name是github账户的用户名和仓库名，一般格式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/ngbyte/ngbyte.github.com</div></pre></td></tr></table></figure>
+<p>还有就是部署时候如果提示找不到仓库，多半就是deploy节点的repo没有配置好，按照上面格式来填写就可以了。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-02T06:15:20.000Z"><a href="/2016/07/02/program-with-OOP-md/">2016-07-02</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1-初识"><a href="#1-初识" class="headerlink" title="1 初识"></a>1 初识</h3><p>最早接触面向对象概念是在大一学习C++，课上，老师用了一学期时间，在讲解C++这门课知识的同时，想尽了各种比喻隐喻暗喻让我们理解面向对象。人的自然状态下更容易接受直观的东西，像蝉在叫车在跑，云是白色土是黑色，这些都很直观。当时学习理解面向对象很慢，只知道类、class、封装、继承、多态这些概念，这些概念听起来就抽象，理解起来当然是费劲。后续除了数据结构选修，再也没了软件方面的课程。<br>到了大四开始找工作，学长送了我一本《程序员面试指南》开始临时抱佛脚，基本上把这本书过了一遍，收获还是挺大的，一次京东的笔试有个题问怎么理解面向对象的多态，我只写了一句话记得是：运行时父类可以指向子类的特性。现在看好像也没什么不对。</p>
+<h3 id="2-再接触"><a href="#2-再接触" class="headerlink" title="2 再接触"></a>2 再接触</h3><p>毕业去了第一家公司，做Java Web的项目，带我的老员工给了我一本《Java 编程思想》也没看懂多少就开始写代码。刚开始那段时间，当时写过的一个函数，记得大概是这样的： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">doSomeThing</span><span class="params">(List&lt;T extends BaseModel&gt; list)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">// ... ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>项目里，BaseModel是父类，它有三个子类，我这里写了一个公共的方法，可以接收对应三个子类的列表参数，做一些公共的处理后返回。这个写法也是从网上搜来的，用起来也没什么问题，但其实并没有完全理解。这里可以看出来用到了继承和多态的知识，任何继承了BaseModel的类的列表都可以作为方法的合法参数。</p>
+<h3 id="3-最近一次使用"><a href="#3-最近一次使用" class="headerlink" title="3 最近一次使用"></a>3 最近一次使用</h3><p>最近做一个项目，用JQuery的Datatable来展示表格，由于要把List结果转换成用字符串表示的二维数组形式，再返回给Ajax请求，这样js代码里做少量处理就可以展示出表格。由于我中途接手这个项目，把直接用+拼接十来个属性的代码提取出来，把Model类都添加一个form()方法，把拼接属性的方法放在里面（改用StringBuilder）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleModel</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line">    <span class="keyword">private</span> String birth;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">wrap</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="string">"\""</span> + obj.toString() + <span class="string">"\""</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">wrapComma</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="string">"\""</span> + obj.toString() + <span class="string">"\","</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">form</span><span class="params">()</span> </span>&#123;</div><div class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">        sb.append(<span class="string">"["</span>);</div><div class="line">        sb.append(wrapComma(name));</div><div class="line">        sb.append(wrapComma(age));</div><div class="line">        sb.append(wap(birth));</div><div class="line">        sb.append(<span class="string">"]"</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意，wrapComma(Objet)比wrap(Object)多返回一个逗号，这两个方法是放在另外一个工具类里来调用，这里我放在一起方便阅读，最后form()方法的返回的一般格式就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&quot;张三&quot;, &quot;22&quot;, &quot;1990-01-01&quot;]</div></pre></td></tr></table></figure>
+<p>由于返回的是多行，所以用循环来完成，专门写一个工具方法来做转换：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">convertList2StringArray</span><span class="params">(List&lt;ExampleModel&gt; list)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span> || list.size() == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"[[]]"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"["</span>);</div><div class="line">    <span class="keyword">for</span> (ExampleModel model : list) &#123;</div><div class="line">        sb.append(model.form());</div><div class="line">        sb.append(<span class="string">","</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    sb.replace(sb.length() - <span class="number">1</span>, sb.length(), <span class="string">"]"</span>);</div><div class="line">    <span class="keyword">return</span> sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样，返回的结果一般格式为二维数组字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[&quot;张三&quot;, &quot;22&quot;, &quot;1990-01-01&quot;], [&quot;张四&quot;, &quot;23&quot;, &quot;1990-01-02&quot;]] 或者 [[]]</div></pre></td></tr></table></figure>
+<p>那么问题来了（不是挖掘机技术哪家强），项目里Model多如狗，一个表格就对应一个Model，这样做显然是不够，这个时候很自然的想到，多态就派上用场。当然我们不会使用父类，使用接口让Model重写特定的方法就行。先定义一个接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICommonForm</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 返回描述Model特定的字符串形式</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">form</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后让对应要展示的Model都实现这个接口，例如上面的ExampleModel。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleModel</span> <span class="keyword">implements</span> <span class="title">ICommonForm</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 省略其他属性和方法</span></div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">form</span><span class="params">()</span> </span>&#123;</div><div class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">        sb.append(<span class="string">"["</span>);</div><div class="line">        sb.append(wrapComma(name));</div><div class="line">        sb.append(wrapComma(age));</div><div class="line">        sb.append(wrap(birth));</div><div class="line">        sb.append(<span class="string">"]"</span>);</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，再修改下convertList2StringArray(List)方法，使之更为通用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">convertList2StringArray</span><span class="params">(List&lt;? extends ICommonForm&gt; list)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span> || list.size() == <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"[[]]"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">"["</span>);</div><div class="line">    <span class="keyword">for</span> (ICommonForm model : list) &#123;</div><div class="line">        sb.append(model.form());</div><div class="line">        sb.append(<span class="string">","</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    sb.replace(sb.length() - <span class="number">1</span>, sb.length(), <span class="string">"]"</span>);</div><div class="line">    <span class="keyword">return</span> sb.toString();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新的方法里，参数定义和for语句发生了变化，不再是特定的类，只要是实现了ICommonForm接口的类的列表，都是合法的参数，和前面提到的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">doSomeThing</span><span class="params">(List&lt;T extends BaseModel&gt; list)</span></span></div></pre></td></tr></table></figure>
+<p>非常相似。<br>设计模式里，很多模式都用到了多态，可以简化代码和结构。丫写了快两年Java代码，才终于能自然的、主动的想到用多态来解决问题……</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-17T06:09:16.000Z"><a href="/2016/04/17/add-env-var-on-OSX-md/">2016-04-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>在 Windows 上添加环境变量的操作都很熟悉了。但是在 OSX 上还是很生疏，上次在 OSX 上添加环境变量，还是在刚买笔记本，添加 Java 环境变量，当时添加完了，起作用后就没管了，今天又要添加 Scala 环境变量时，基本忘了怎么弄，现在把整个过程记下来。   </p>
+<p>OSX 上添加环境变量的第一个地方：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/profile</div></pre></td></tr></table></figure></p>
+<p>这是全局公有配置，不管哪个用户登录，都会读取该文件。所以不建议在这个文件里添加。</p>
+<p>第二个地方：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/bashrc</div></pre></td></tr></table></figure></p>
+<p>也是全局公有配置，一般在里面添加系统级环境变量，执行 bash shell 时，会读取该文件。</p>
+<p>第三个地方，bash_profile：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ~/.bash_profile</div></pre></td></tr></table></figure></p>
+<p>如果该文件不存在，创建该文件即可，然后往里面写入环境变量值。当看到 bash_profile 这个文件时，突然想起当初配 Java 环境变量好像已经建好了这个文件，输入下面命令打开一看果然有 Java 的环境变量配置。配置过程如下。<br>输入如下命令后，按下 <kbd>i</kbd> 键，进入编辑模式：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ vim ~/.bash_profile</div></pre></td></tr></table></figure></p>
+<p>添加环境变量对应的路径，例如，需要添加 Scala 环境变量路径，在文件最后写入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=&quot;$PATH:/usr/local/scala-path/bin&quot;</div></pre></td></tr></table></figure></p>
+<p>其中，scala-path 是从官网下载下来的解压后的文件夹，放在 /usr/local/目录下。完成后按 <kbd>esc</kbd> 键，进入普通模式，输入如下命令保存并退出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:wq</div></pre></td></tr></table></figure>
+<p>此时重启终端，输入 Scala，就进入了 Scala 的命令模式。此时会输出类似如下信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Welcome to Scala 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0).</div><div class="line">Type in expressions for evaluation. Or try :help.</div></pre></td></tr></table></figure></p>
+<p>如果要退出 Scala 命令模式，输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:q  或者  :quit</div></pre></td></tr></table></figure></p>
+<p>整个过程还是很简单的。:)</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-10T06:01:39.000Z"><a href="/2016/04/10/a-simple-python-spider-md/">2016-04-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。</p>
+<p>除了需要 Python 环境外，还需要安装 requests、BeautifulSoup4等。获取微博页面内容时使用cookie的方式，这样不需要用户名和密码就可以请求到微博。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install requests BeautifulSoup4</div></pre></td></tr></table></figure></p>
+<p>好了，准备工作基本OK。这个爬虫是从新浪微博上爬取某个博主的所有图片，在观察了新浪微博里图片URL的规律后，发现链接主要有3部分构成，如下。img-key 部分我估计是存取图片的唯一ID值，part2 取不同的值，会得到不同尺寸的图片，最大尺寸时，part2取值 ‘large’，有了这个规律就好办了，将页面所有图片满足3段式的链接中间那部分替换成’large’，再下载图片即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://ww2.sinaimg.cn/part2/img-key.jpg</div></pre></td></tr></table></figure>
+<p>另外，由于使用的是 <em>weibo.cn</em> 域名，从浏览器里得到是一张图片和一个<strong>更多</strong>作为链接，点了链接才看得到所有图片，所以爬每个页面有个二次请求，将更多的图片下载下来。为了避免重复下载导致图片难以维护，保存图片时，将微博的发布日期和图片链接的MD5值组合成图片名称，这样下载到本地后，图片会以在微博上发布的日期排序，同时，再次运行爬虫时，将图片名称后半截的MD5值提取出来，在下载时候对比该图片的链接MD5值是否已经存在，避免重复下载。</p>
+<p>下面是下载一个页面里所有图片的函数代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_one_page</span><span class="params">(soup, user_id, exists)</span>:</span></div><div class="line"><span class="string">"""</span></div><div class="line">download all pictures on the website</div><div class="line">:param soup: web page soup</div><div class="line">:param user_id: the weibo user id</div><div class="line">:param exists exists pic names</div><div class="line">:return: find weibo divs, return True, else False</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="comment"># ten weibo div in every page</span></div><div class="line">divs = soup.find_all(div_filter_func)</div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> divs:</div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">    spans = div.find_all(<span class="string">'span'</span>)</div><div class="line">    wb_post_time = get_weibo_post_time(spans[<span class="number">1</span>].text)</div><div class="line"></div><div class="line">    <span class="comment"># abstract a link</span></div><div class="line">    all_img = div.find_all(<span class="string">'img'</span>)</div><div class="line">    img_link = filter(<span class="keyword">lambda</span> x: x.endswith(<span class="string">'.jpg'</span>), [all_img[<span class="number">0</span>].get(<span class="string">'src'</span>)] <span class="keyword">if</span> all_img <span class="keyword">else</span> [])</div><div class="line"></div><div class="line">    <span class="comment"># abstract more links</span></div><div class="line">    more_links = [link[<span class="string">'href'</span>] <span class="keyword">for</span> link <span class="keyword">in</span> div.find_all(<span class="string">'a'</span>) <span class="keyword">if</span> link.get(<span class="string">'href'</span>) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>]</div><div class="line">    more_links_real = [x <span class="keyword">for</span> x <span class="keyword">in</span> more_links <span class="keyword">if</span> <span class="string">'picAll'</span> <span class="keyword">in</span> x]</div><div class="line">    <span class="keyword">if</span> more_links_real:</div><div class="line">        more_content = requests.get(more_links_real[<span class="number">0</span>], cookies = get_cookie())</div><div class="line">        more_soup = BeautifulSoup(more_content.content, <span class="string">'html.parser'</span>)</div><div class="line">        more_soup_urls = get_more_page_image_url(more_soup)</div><div class="line">        img_link = more_soup_urls <span class="keyword">if</span> more_soup_urls <span class="keyword">else</span> img_link</div><div class="line"></div><div class="line">    <span class="comment"># download</span></div><div class="line">    <span class="keyword">for</span> idx, link <span class="keyword">in</span> enumerate(img_link):</div><div class="line">        md5 = calculate_md5(link)</div><div class="line">        <span class="keyword">if</span> md5 <span class="keyword">not</span> <span class="keyword">in</span> exists:</div><div class="line">            large_link = replace_part2_in_link(link)</div><div class="line">            image_content = requests.get(large_link, cookies = get_cookie())</div><div class="line"></div><div class="line">            image_name = <span class="string">"&#123;&#125;&gt;&#123;&#125;_&#123;&#125;"</span>.format(wb_post_time, str(idx), md5)</div><div class="line">            <span class="keyword">with</span> open(<span class="string">'./downloads/&#123;&#125;/&#123;&#125;.jpg'</span>.format(user_id, image_name), <span class="string">'wb'</span>) <span class="keyword">as</span> jpg:</div><div class="line">                jpg.write(image_content.content)</div><div class="line"></div><div class="line">                exists.add(image_name)</div><div class="line">                print(<span class="string">'download'</span>, large_link, image_name, datetime.datetime.now())</div><div class="line">                time.sleep(random.random())</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            print(<span class="string">'jump over:'</span>, link)</div><div class="line"></div><div class="line">sleep = <span class="number">8</span> * random.random()</div><div class="line">print(<span class="string">'sleep'</span>, sleep, <span class="string">'seconds'</span>)</div><div class="line">time.sleep(sleep)</div><div class="line"><span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<p>在某次打算爬取大量某个博主的图片时，出现了请求失败，查了资料发现是网站有反爬虫功能，于是使用了一些简单的策略，比如请求加上头消息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">header = &#123;</div><div class="line">      <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'</span>,</div><div class="line">      <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,</div><div class="line">      <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,en;q=0.6'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除此之外，对请求的cookie也在末尾添加随机数，每次用不同的cookie去请求，并且，每爬取完一个页面的内容，随机休眠0-8秒，这样做虽然抓取速度慢了点，但至少能保证每次抓取不会半途报错。</p>
+<p>完整的代码示例<a href="https://github.com/hsqs/spiders/blob/master/weibo/weibo_miner.py" target="_blank" rel="external">点这里</a>。    </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-03-27T05:53:45.000Z"><a href="/2016/03/27/use-virtualenv-md/">2016-03-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1，理解virtualenv"><a href="#1，理解virtualenv" class="headerlink" title="1，理解virtualenv"></a>1，理解virtualenv</h3><p>virtualenv从字面意思来理解的话，就是虚拟环境的意思，这个第一印象容易对我们产生误导，其实并不是虚拟环境，以我的理解是一个<strong>独立</strong>环境。什么意思呢？好比一台电脑上装好Python以后，可以把安装的Python拷贝到另一个目录(官方:其实并没有真正安装多个 Python 副本，但是它确实提供了一种巧妙的方式来让各项目环境保持独立)，这样两个Python环境相互独立，互不影响，那有了多个Python环境，在什么时候启用谁禁用谁呢？virtualenv这个时候就派上用场了。官方对virtualenv的解释：<a href="https://virtualenv.pypa.io/" target="_blank" rel="external">virtualenv is a tool to create isolated Python environments</a>.</p>
+<h3 id="2，安装virtualenv"><a href="#2，安装virtualenv" class="headerlink" title="2，安装virtualenv"></a>2，安装virtualenv</h3><p>安装就太简单了，使用pip安装即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install virtualenv</div></pre></td></tr></table></figure>
+<p>如果有权限问题，前面加一个sudo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pip install virtualenv</div></pre></td></tr></table></figure>
+<h3 id="3，使用virtualenv"><a href="#3，使用virtualenv" class="headerlink" title="3，使用virtualenv"></a>3，使用virtualenv</h3><p>首先找到一个合适的空文件夹，在终端里输入如下命令，创建一个虚拟环境（Python已经安装到电脑上）：</p>
+<pre><code>$ virtualenv [-p python3] dir-name
+</code></pre><p>如果电脑上安装了多个版本的Python，默认会使用OS X自带的2.7版本，如果想创建3.0以上的版本的话，指定版本参数即可。输入完成回车，可以到Finder里查看目录dir-name，里面有bin、include、lib三个目录。最后一步，继续在终端里输入如下命令，激活这个刚刚创建的环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">source</span> dir-name/bin/activate</div></pre></td></tr></table></figure>
+<p>这个时候，当前Python环境就激活了，终端也会有相应的变化，在最前面会出现当前环境的名字：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(dir-name)your-computer-name $:</div></pre></td></tr></table></figure>
+<p>hah，这个时候就可以使用了，比如在这个而环境里开发Flask应用，执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install Flask</div></pre></td></tr></table></figure>
+<p>此时，Flask会安装在dir-name里，而不会安装在其他环境，这样就达到了isolated的效果。如果不再使用当前环境，使用如下命令即可退出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ deactivate</div></pre></td></tr></table></figure>
+<h3 id="4，删除virtualenv"><a href="#4，删除virtualenv" class="headerlink" title="4，删除virtualenv"></a>4，删除virtualenv</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rmvirtualenv env-name</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-27T05:36:04.000Z"><a href="/2015/12/27/some-usage-of-mybatis-md/">2015-12-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/12/27/some-usage-of-mybatis-md/">Mybatis使用经验总结</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>这是<a href="http://mybatis.org/mybatis-3/zh/" target="_blank" rel="external">mybatis 的中文官方文档</a>，前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧。Mybatis 的基本用法和优点什么的就不用多介绍了，想了解怎么使用可以直接看官方文档，把文档过一遍基本就了解的差不多了，剩下的就直接开撸吧。</p>
+<h3 id="1、foreach-in灵活使用"><a href="#1、foreach-in灵活使用" class="headerlink" title="1、foreach-in灵活使用"></a>1、foreach-in灵活使用</h3><p>在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">    #&#123;m&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>foreach 的各项参数就不用多解释了，这里，open 和 close 都显示的写到了foreach标签里。同理，当构建插入多条数据的语句时，同样的语法，不过稍有点变化：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></div><div class="line">    (#&#123;m.id&#125;, #&#123;m.name&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意，foreach 里的语句是带了圆括号，去掉了 open 和 close 属性，分隔符依旧是,，这是其中一种对 values 后面 SQL 的一种分解方式，或者用下面这种：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">"),("</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">    #&#123;m.id&#125;, #&#123;m.name&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里唯一注意的是 separator 的变化，这两种插入数据时的写法，效果都是一致的。想到这里，separator 可以是多个字符，那可不可以是 AND、OR 这样的分隔符呢？答案是肯定的，如此一来，foreach 可以构造多个重复条件的方法就灵活的多了。</p>
+<h3 id="2、SQL-注解"><a href="#2、SQL-注解" class="headerlink" title="2、SQL 注解"></a>2、SQL 注解</h3><p>在mapper文件里写 SQL 时，每个 SQL 的 id 都要对应一个DAO中的接口名称，保证他们可以找到彼此，其实，对于比较简单的一两行的 SQL，可以不用在 mapper 文件里写配置，直接在Java代码里添加注解的方式来实现。这样做的好处是在调试的时候，可以不用再去找 xml 文件里的 SQL 代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"SELECT name FROM user WHERE province_id = #&#123;address&#125; AND gender = #&#123;gender&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>Integer address, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gender)</span>;</div></pre></td></tr></table></figure>
+<p>除了@Select 注解，还有@Insert、@Update、@Delete，使用方法同上。这样SQL和Java代码放在一起，<br>查看起来非常的方便。这四个注解还有其他属性，不过我没用过，就不介绍了。</p>
+<h3 id="3、注解参数"><a href="#3、注解参数" class="headerlink" title="3、注解参数"></a>3、注解参数</h3><p>在传入多个参数到 Mybatis 的时候，同类型参数可以用List传递，不同类型参数用Map传递，对于Map这种情况比较麻烦，首先要专门构造一个Map，另外最难以忍受的是用Map传多个参数不知道里面到底有什么内容，只有到执行SQL时才会报出问题。这里就可以使用参数注解，省去这一堆步骤。同时，直观的展示有哪些变量传入SQL，这样调用接口传参数就可以了，调用者不用关心 SQL 里参数用的是哪个名字。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>List&lt;Integer&gt; addrs, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gds)</span>;</div></pre></td></tr></table></figure>
+<p>调用的时候，只需要把相应的参数传进去即可，在mapper文件里，用 @Param 里的注解名称来取参数，例如这里的address和gender，SQL里取参数方式不变，用#{gender}或${gender}。</p>
+<h3 id="4、insert和select语句调优"><a href="#4、insert和select语句调优" class="headerlink" title="4、insert和select语句调优"></a>4、insert和select语句调优</h3><p>在插入或查询时，在mapper文件里，select要写resultMap标签来映射属性和列的关系，insert语句要写一个foreach语句来拼接values后面的内容，这一切都没有问题，但是当一次性查询或插入上千、上万条数据，Mybatis就显得力不从心。Mybatis虽然有强大的动态拼接SQL的能力，但此时应用比较简单，可以考虑尽量减少Mybatis的工作，把它仅仅当做是SQL语句来执行。     </p>
+<p>对insert语句，values后面的内容可以预先在Java代码里拼接好，直接传入：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertPOJO"</span> <span class="attr">parameterType</span>=<span class="string">"java.util.List"</span>&gt;</span></div><div class="line">    insert into </div><div class="line">        table(...)</div><div class="line">    values</div><div class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"value"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">            $&#123;value&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>甚至，连foreach标签也去掉，在Java里就全部拼接好。不过我比较倾向于上面这种，可以看出是插入多条数据，又不至于插入速率太慢。  </p>
+<p>对select语句类似：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectPOJO"</span> <span class="attr">resultType</span>=<span class="string">"java.util.Map"</span>&gt;</span></div><div class="line">    select </div><div class="line">        *</div><div class="line">    from</div><div class="line">        table</div><div class="line">    where</div><div class="line">        ...    </div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里让返回值为Map，在Java里用 List&lt;Map&lt;Object, Object&gt;&gt; 接收，剩下的工作就是将返回结果再转换为List&lt;Pojo&gt;对象。工作量增加了一些，但对数据流较大的查询，性能提升比较明显，还是值得的。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 王乐心的博客
+  
+  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

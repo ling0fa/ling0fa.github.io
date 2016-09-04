@@ -1,4 +1,69 @@
-<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>学习笔记：Scala的Option以及其他容器 | 王乐心的博客</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">学习笔记：Scala的Option以及其他容器</h1><a id="logo" href="/.">王乐心的博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">学习笔记：Scala的Option以及其他容器</h1><div class="post-meta">Sep 4, 2016<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>学习笔记：Scala的Option以及其他容器 | 王乐心的博客</title>
+  
+  
+  <meta name="description" content="本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
+1、Option 容器
+Option容器比较常见，Java8和Java第三方库G">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="学习笔记：Scala的Option以及其他容器"/>
+  <meta property="og:site_name" content="王乐心的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="王乐心的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">王乐心的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-04T03:11:14.000Z"><a href="/2016/09/04/scala-option-and-others/">2016-09-04</a></time>
+      
+      
+  
+    <h1 class="title">学习笔记：Scala的Option以及其他容器</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
 <h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
 <li>Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  </li>
 <li>Scala里常见的容器像List、Map等都可以使用for推导式，Scala的for推导式是一个语法糖，最终都会被展开为对foreach、map、flatMap、withFilter的调用，Option实现了这些方法，所以可以在for推导式中使用Option容器。</li>
@@ -34,4 +99,87 @@
 </ol>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scalaz._, std.<span class="type">AllInstance</span>._</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validName</span></span>(key: <span class="type">String</span>, name: <span class="type">String</span>): </div><div class="line">        <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">val</span> n = name.trim</div><div class="line">  <span class="keyword">if</span> (n.length &gt; <span class="number">0</span> &amp;&amp; n.matches(<span class="string">""</span><span class="string">"^\p&#123;Alpha&#125;$"</span><span class="string">""</span>)) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; n))</div><div class="line">  <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> &lt;<span class="subst">$n</span>&gt;"</span>))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(key: <span class="type">String</span>, n: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">val</span> i = n.toInt</div><div class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; i))</div><div class="line">    <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> <span class="subst">$i</span>"</span>))</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> _: java.lang.<span class="type">NumberFormatException</span> =&gt; <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"<span class="subst">$n</span> is not a Integer"</span>))</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validForm</span></span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>, age: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  validName(<span class="string">"first-name"</span>, firstName) </div><div class="line">  +++ validName(<span class="string">"last-name"</span>, lastName) </div><div class="line">  +++ positive(<span class="string">"age"</span>, age)</div><div class="line">&#125;</div><div class="line"></div><div class="line">validForm(<span class="string">"Dean"</span>, <span class="string">"Wampler"</span>, <span class="string">"29"</span>)</div><div class="line"><span class="comment">// Success(List((first-name,Dean),(last-name,Wampler),(age,29)))</span></div><div class="line"></div><div class="line">validForm(<span class="string">""</span>, <span class="string">"Wampler"</span>, <span class="string">"0"</span>)</div><div class="line"><span class="comment">// Failure(List(Invalid first-name &lt;&gt;, Invalid age 0))</span></div></pre></td></tr></table></figure>
 <p>这里的Success和Failure和Try的两个子类不是同一个类。</p>
-</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2016/09/04/scala-option-and-others/" data-id="ciso5vdj5000799e1w8807l6q" class="article-share-link">Aktie</a><div class="tags"><a href="/tags/scala/">scala</a><a href="/tags/Option/">Option</a></div><div class="post-nav"><a href="/2016/07/30/Hello-Hexo/" class="next">Hello Hexo</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/教程/" style="font-size: 15px;">教程</a> <a href="/tags/python-spider/" style="font-size: 15px;">python spider</a> <a href="/tags/OS-X/" style="font-size: 15px;">OS X</a> <a href="/tags/环境变量/" style="font-size: 15px;">环境变量</a> <a href="/tags/OOP/" style="font-size: 15px;">OOP</a> <a href="/tags/scala/" style="font-size: 15px;">scala</a> <a href="/tags/Option/" style="font-size: 15px;">Option</a> <a href="/tags/mybatis/" style="font-size: 15px;">mybatis</a> <a href="/tags/virtualenv/" style="font-size: 15px;">virtualenv</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/scala-option-and-others/">学习笔记：Scala的Option以及其他容器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/Hello-Hexo/">Hello Hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/some-usage-of-mybatis-md/">Mybatis使用经验总结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">王乐心的博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/scala/">scala</a>, <a href="/tags/Option/">Option</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2016/09/04/scala-option-and-others/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 王乐心的博客
+  
+  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
