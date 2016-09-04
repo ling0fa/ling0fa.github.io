@@ -1,282 +1,37 @@
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  
-  <title>学习笔记：Scala的Option以及其他容器 | 王乐心的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-
-1、Option 容器
-Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  
-Scala里常见的容器像List、Map等都可以使用for推导式，">
-<meta property="og:type" content="article">
-<meta property="og:title" content="学习笔记：Scala的Option以及其他容器">
-<meta property="og:url" content="http://yoursite.com/2016/09/04/scala-option-and-others/index.html">
-<meta property="og:site_name" content="王乐心的博客">
-<meta property="og:description" content="本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-
-1、Option 容器
-Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  
-Scala里常见的容器像List、Map等都可以使用for推导式，">
-<meta property="og:updated_time" content="2016-09-04T05:10:57.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习笔记：Scala的Option以及其他容器">
-<meta name="twitter:description" content="本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-
-1、Option 容器
-Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  
-Scala里常见的容器像List、Map等都可以使用for推导式，">
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-  
-  
-
-</head>
-
-<body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <nav id="upper-nav" class="inner">
-      <a id="main-nav-toggle" class="nav-icon"></a>
-      <div class="sub-nav">
-        
-        
-          <a id="nav-github" class="nav-icon" href="https://github.com/ling0fa"></a>
-        
-      </div>
-    </nav>
-    <div id="header-title">
-      
-        <h1 id="blog-title-wrap">
-          <a href="/" id="blog-title">吾生也有涯，而知也无涯。以有涯随无涯，殆已。</a>
-        </h1>
-      
-    </div>
-    <div id="contenedor">
-      <ul class="cube">
-        <li class="cara">feeling</li>
-        <li class="cara"></li>
-        <li class="cara"></li>
-        <li class="cara"></li>
-        <li class="cara"></li>
-        <li class="cara"></li>
-      </ul>
-    </div>
-    <nav id="main-nav">
-      
-        <a class="main-nav-link" href="/">Home</a>
-      
-        <a class="main-nav-link" href="/archives">Archives</a>
-      
-        <a class="main-nav-link" href="/about">About</a>
-      
-      <a class="main-nav-link st-search-show-outputs">Search</a>
-    </nav>
-  </div>
-</header>
-
-    <div class="outer">
-      <section id="main"><article id="post-scala-option-and-others" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <h3 href="/2016/09/04/scala-option-and-others/" class="article-date">
-  <time datetime="2016-09-04T03:11:14.000Z" itemprop="datePublished">2016-09-04</time>
-</h3>
-    
-  </div>
-  <div class="article-inner">
-  <div class="curve-down">
-  <div class="fill-content">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      学习笔记：Scala的Option以及其他容器
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-        <blockquote>
-<p>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br>本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</p>
-</blockquote>
+<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>学习笔记：Scala的Option以及其他容器 | 王乐心的博客</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">学习笔记：Scala的Option以及其他容器</h1><a id="logo" href="/.">王乐心的博客</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Start</i></a><a href="/archives/"><i class="fa fa-archive"> Archiv</i></a><a href="/about/"><i class="fa fa-user"> Über</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">学习笔记：Scala的Option以及其他容器</h1><div class="post-meta">Sep 4, 2016<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><div class="post-content"><p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
 <h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
 <li>Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  </li>
 <li>Scala里常见的容器像List、Map等都可以使用for推导式，Scala的for推导式是一个语法糖，最终都会被展开为对foreach、map、flatMap、withFilter的调用，Option实现了这些方法，所以可以在for推导式中使用Option容器。</li>
-<li>Option的API定义：<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sealed</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Option</span>[+<span class="type">A</span>] </span>&#123; self =&gt;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span></span>: <span class="type">Boolean</span> <span class="comment">// 子类会实现这个变量</span></div><div class="line"></div><div class="line">  <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">foreach</span></span>[<span class="type">U</span>](f:<span class="type">A</span> =&gt; <span class="type">U</span>): <span class="type">Unit</span> =</div><div class="line">    <span class="keyword">if</span> (!isEmpty) f(<span class="keyword">this</span>.get)</div><div class="line"></div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
+<li>Option的API定义：</li>
 </ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sealed</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Option</span>[+<span class="type">A</span>] </span>&#123; self =&gt;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span></span>: <span class="type">Boolean</span> <span class="comment">// 子类会实现这个变量</span></div><div class="line"></div><div class="line">  <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">foreach</span></span>[<span class="type">U</span>](f:<span class="type">A</span> =&gt; <span class="type">U</span>): <span class="type">Unit</span> =</div><div class="line">    <span class="keyword">if</span> (!isEmpty) f(<span class="keyword">this</span>.get)</div><div class="line"></div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>sealed</code>关键字限定子类必须和父类在同一个文件里，<code>self</code>是Option的别名，<code>final</code>限制子类重写，其余方法定义和foreach类似。</p>
 <h3 id="2、Some和None"><a href="#2、Some和None" class="headerlink" title="2、Some和None"></a>2、Some和None</h3><ol>
 <li>这两个是Option的子类，分别是非空对象和空对象。</li>
 <li>上面列出的方法，只有当Option为非空时，才会使用传入的函数参数，利用这个特性，可以方便的过滤出结果里的非空结果。分布式任务收集结果也会利用了这个特性。</li>
-<li>示例：<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> results: <span class="type">Seq</span>[<span class="type">Option</span>[<span class="type">Int</span>]] = <span class="type">Vector</span>(<span class="type">Some</span>(<span class="number">10</span>), <span class="type">Some</span>(<span class="number">20</span>), <span class="type">None</span>)</div><div class="line"><span class="keyword">val</span> results2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results</div><div class="line">&#125; <span class="keyword">yield</span> (<span class="number">2</span> * i)</div><div class="line"><span class="comment">// results2:Seq[Int] = Vector(20, 40)</span></div></pre></td></tr></table></figure>
-</li>
+<li>示例：</li>
 </ol>
-<p><code>Some(i) &lt;- results</code>会对results里的元素进行模式匹配，移除None元素，并抽取包含的数值。利用for推导式的转化规则，可以转化为：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> result2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results withFilter &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; <span class="literal">true</span></div><div class="line">    <span class="keyword">case</span> <span class="type">None</span> =&gt; <span class="literal">false</span></div><div class="line">  &#125; map &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; (<span class="number">2</span> * i)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>map里的case会产生警告，不过没关系，在withFilter里已经过滤了None的情况，运行时代码不会报MatchError。  </p>
-<ol>
-<li>应用。对一组值做合法性检查：<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Option</span>[<span class="type">Int</span>] = </div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Some</span>(i) <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = Some(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>) <span class="comment">// 一旦这里返回None，后续表达式会停止执行，所以下一句可以引用i2变量</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = None</span></div></pre></td></tr></table></figure>
-</li>
-</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> results: <span class="type">Seq</span>[<span class="type">Option</span>[<span class="type">Int</span>]] = <span class="type">Vector</span>(<span class="type">Some</span>(<span class="number">10</span>), <span class="type">Some</span>(<span class="number">20</span>), <span class="type">None</span>)</div><div class="line"><span class="keyword">val</span> results2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results</div><div class="line">&#125; <span class="keyword">yield</span> (<span class="number">2</span> * i)</div><div class="line"><span class="comment">// results2:Seq[Int] = Vector(20, 40)</span></div></pre></td></tr></table></figure>
+<p><code>Some(i) &lt;- results</code>会对results里的元素进行模式匹配，移除None元素，并抽取包含的数值。利用for推导式的转化规则，可以转化为：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">val</span> result2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results withFilter &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; <span class="literal">true</span></div><div class="line">    <span class="keyword">case</span> <span class="type">None</span> =&gt; <span class="literal">false</span></div><div class="line">  &#125; map &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; (<span class="number">2</span> * i)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>map里的case会产生警告，不过没关系，在withFilter里已经过滤了None的情况，运行时代码不会报MatchError。<br>应用：对一组值做合法性检查：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Option</span>[<span class="type">Int</span>] = </div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Some</span>(i) <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = Some(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>) <span class="comment">// 一旦这里返回None，后续表达式会停止执行，所以下一句可以引用i2变量</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = None</span></div></pre></td></tr></table></figure>
 <h3 id="3、Either容器"><a href="#3、Either容器" class="headerlink" title="3、Either容器"></a>3、Either容器</h3><ol>
 <li>Option容器的None有个缺陷，就是不能返回为什么没有返回值。此时Either是替代Option的一种解决方案，与其字面意思一致，Option表示含有0或1个元素，Either表示含有这个或那个元素。  </li>
-<li>Either的定义：<code>sealed abstract class Either[+A, +B] extends AnyRef</code>，A、B表示Either对象可以持有的对象类型（可以不同），加号表示参数是协变得。  </li>
-<li>Either有两个子类，<code>Left[A]</code>和<code>Right[B]</code>，通过这两个子类从两个可能的元素中选一个。Either的历史早于Scala，约定通用用Left来表示错误，Right表示正常返回结果。  </li>
-<li>示例：用Either重写前面的🌰：<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Either</span>[<span class="type">String</span>, <span class="type">Int</span>] =</div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Right</span>(i) <span class="keyword">else</span> <span class="type">Left</span>(<span class="string">s"non-positive number <span class="subst">$i</span>"</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>).right</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>).right</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Right(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>).right <span class="comment">// 失败</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>).right <span class="comment">// 失败</span></div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Left(non-positive number -5)</span></div></pre></td></tr></table></figure>
-</li>
+<li>Either的定义：<code>sealed abstract class Either[+A, +B] extends AnyRef</code>，A、B表示Either对象可以持有的对象类型（可以不同），加号表示参数是协变的。  </li>
+<li>Either有两个子类，<code>Left[A]</code>和<code>Right[B]</code>，通过这两个子类从两个可能的元素中选一个。Either的历史早于Scala，约定用Left来表示错误，Right表示正常返回结果。  </li>
+<li>示例：用Either重写前面的🌰：</li>
 </ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Either</span>[<span class="type">String</span>, <span class="type">Int</span>] =</div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Right</span>(i) <span class="keyword">else</span> <span class="type">Left</span>(<span class="string">s"non-positive number <span class="subst">$i</span>"</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>).right</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>).right</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Right(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>).right <span class="comment">// 失败</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>).right <span class="comment">// 失败</span></div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Left(non-positive number -5)</span></div></pre></td></tr></table></figure>
 <p>和前面一样，一旦调用<code>.right</code>返回的是Left类型时，调用结束，后面的不再执行。至于为什么，目前来看，Left和Right都可以调用<code>left</code>和<code>right</code>方法，分别返回LeftProjection和RightProjection实例，但再对LeftProjection和RightProjection取值时，for推导式可以自己推导出来。比如：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> <span class="type">L</span> = <span class="type">Left</span>(<span class="number">33</span>)</div><div class="line"><span class="keyword">val</span> left = <span class="type">L</span>.left      <span class="comment">// left = LeftProjection(Left(33))</span></div><div class="line"><span class="keyword">val</span> lvalue = left.get  <span class="comment">// lvalue = 33</span></div><div class="line"><span class="keyword">val</span> right = <span class="type">L</span>.right    <span class="comment">// right = RightProjection(Left(33))</span></div><div class="line"><span class="keyword">val</span> rvalue = right.get <span class="comment">// NoSuchElementException</span></div></pre></td></tr></table></figure></p>
-<p>示例2，对于出现异常的情况，可以将异常列在返回值的Either左值里，不再通过抛出异常来捕获调用堆栈中某些应用的控制权，同时调用者更能明白API的含义。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addInts</span></span>(s1: <span class="type">String</span>, s2: <span class="type">String</span>): <span class="type">Either</span>[<span class="type">NumberFormatException</span>,<span class="type">Int</span>] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="type">Right</span>(s1.toInt + s2.toInt)</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> nfe: <span class="type">NumberFormatException</span> =&gt; <span class="type">Left</span>(nfe)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">println(addInts(<span class="string">"11"</span>, <span class="string">"22"</span>)) <span class="comment">// Right(33)</span></div><div class="line">println(addInts(<span class="string">"f"</span>, <span class="string">"33"</span>))  <span class="comment">// Left(java.lang.NumberFormatException: For input string: "f")</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <div class="article-footer-content">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Option/">Option</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scala/">scala</a></li></ul>
-
-        <a data-url="http://yoursite.com/2016/09/04/scala-option-and-others/" data-id="ciso5vdj5000799e1w8807l6q" class="article-share-link">Share</a>
-        
-      </div>
-    </footer>
-  </div>
-  </div>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2016/07/30/Hello-Hexo/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello Hexo</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-      
-      <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recents</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2016/09/04/scala-option-and-others/">学习笔记：Scala的Option以及其他容器</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/30/Hello-Hexo/">Hello Hexo</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS-X/">OS X</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Option/">Option</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-spider/">python spider</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scala/">scala</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-  
-</aside>
-      
-    </div>
-    <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 王乐心的博客<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
-</nav>
-  
-
-<!-- totop start -->
-<div id="totop">
-	<a title="To Top"></a>
-</div>
-<!-- totop end -->
-
-<!-- swiftype search start -->
-
-<!-- swiftype search end -->
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-</div>
-</body>
-</html>
+<p>示例2，对于出现异常的情况，可以将异常列在返回值的Either左值里，不再通过抛出异常来捕获调用堆栈中某些应用的控制权，同时调用者更能明白API的含义。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addInts</span></span>(s1: <span class="type">String</span>, s2: <span class="type">String</span>): <span class="type">Either</span>[<span class="type">NumberFormatException</span>,<span class="type">Int</span>] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="type">Right</span>(s1.toInt + s2.toInt)</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> nfe: <span class="type">NumberFormatException</span> =&gt; <span class="type">Left</span>(nfe)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">println(addInts(<span class="string">"11"</span>, <span class="string">"22"</span>)) <span class="comment">// Right(33)</span></div><div class="line">println(addInts(<span class="string">"f"</span>, <span class="string">"33"</span>))  <span class="comment">// Left(java.lang.NumberFormatException: For input string: "f")</span></div></pre></td></tr></table></figure></p>
+<h3 id="4、Try容器"><a href="#4、Try容器" class="headerlink" title="4、Try容器"></a>4、Try容器</h3><ol>
+<li>scala.util.Try的结构和Either类似，有两个子类Success和Failure，Success与Right相似，保存正常的返回值，Failure与Left相似，但总是包含Throwable对象，所以Try的定义只有一个泛型参数：<code>sealed abstract class Try[+T] extends AnyRef</code>。</li>
+<li>示例：从一组Try值中，过滤掉Failure对象。</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scala.util.&#123;<span class="type">Try</span>, <span class="type">Success</span>, <span class="type">Failure</span>&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>): <span class="type">Try</span>[<span class="type">Int</span>] = <span class="type">Try</span> &#123;</div><div class="line">  assert(i &gt; <span class="number">0</span>, <span class="string">s"non-positive number <span class="subst">$i</span>"</span>)</div><div class="line">  i</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i3 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Try[Int] = Success(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i3 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Try[Int] = Failure(java.lang.AssertionError: assert failed: non-positive number -5)</span></div></pre></td></tr></table></figure>
+<h3 id="5、Scalaz提供的Validation类"><a href="#5、Scalaz提供的Validation类" class="headerlink" title="5、Scalaz提供的Validation类"></a>5、Scalaz提供的Validation类</h3><ol>
+<li>以上介绍的容器，在for推到中遇到不满足情况会立即停止，如果想收集所有所有执行过程中的错误，并判断后面执行什么操作，典型的场景就是验证网页表单，这样可以一次将所有错误信息返回。Scala标准库无法提供这样的功能，第三方库Scalaz提供了Validation满足这种需求。</li>
+</ol>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scalaz._, std.<span class="type">AllInstance</span>._</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validName</span></span>(key: <span class="type">String</span>, name: <span class="type">String</span>): </div><div class="line">        <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">val</span> n = name.trim</div><div class="line">  <span class="keyword">if</span> (n.length &gt; <span class="number">0</span> &amp;&amp; n.matches(<span class="string">""</span><span class="string">"^\p&#123;Alpha&#125;$"</span><span class="string">""</span>)) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; n))</div><div class="line">  <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> &lt;<span class="subst">$n</span>&gt;"</span>))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(key: <span class="type">String</span>, n: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">val</span> i = n.toInt</div><div class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; i))</div><div class="line">    <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> <span class="subst">$i</span>"</span>))</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> _: java.lang.<span class="type">NumberFormatException</span> =&gt; <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"<span class="subst">$n</span> is not a Integer"</span>))</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validForm</span></span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>, age: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  validName(<span class="string">"first-name"</span>, firstName) </div><div class="line">  +++ validName(<span class="string">"last-name"</span>, lastName) </div><div class="line">  +++ positive(<span class="string">"age"</span>, age)</div><div class="line">&#125;</div><div class="line"></div><div class="line">validForm(<span class="string">"Dean"</span>, <span class="string">"Wampler"</span>, <span class="string">"29"</span>)</div><div class="line"><span class="comment">// Success(List((first-name,Dean),(last-name,Wampler),(age,29)))</span></div><div class="line"></div><div class="line">validForm(<span class="string">""</span>, <span class="string">"Wampler"</span>, <span class="string">"0"</span>)</div><div class="line"><span class="comment">// Failure(List(Invalid first-name &lt;&gt;, Invalid age 0))</span></div></pre></td></tr></table></figure>
+<p>这里的Success和Failure和Try的两个子类不是同一个类。</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2016/09/04/scala-option-and-others/" data-id="ciso5vdj5000799e1w8807l6q" class="article-share-link">Aktie</a><div class="tags"><a href="/tags/scala/">scala</a><a href="/tags/Option/">Option</a></div><div class="post-nav"><a href="/2016/07/30/Hello-Hexo/" class="next">Hello Hexo</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://yoursite.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Kategorien</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/教程/" style="font-size: 15px;">教程</a> <a href="/tags/python-spider/" style="font-size: 15px;">python spider</a> <a href="/tags/OS-X/" style="font-size: 15px;">OS X</a> <a href="/tags/环境变量/" style="font-size: 15px;">环境变量</a> <a href="/tags/OOP/" style="font-size: 15px;">OOP</a> <a href="/tags/scala/" style="font-size: 15px;">scala</a> <a href="/tags/Option/" style="font-size: 15px;">Option</a> <a href="/tags/mybatis/" style="font-size: 15px;">mybatis</a> <a href="/tags/virtualenv/" style="font-size: 15px;">virtualenv</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Letzte</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/09/04/scala-option-and-others/">学习笔记：Scala的Option以及其他容器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/30/Hello-Hexo/">Hello Hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/02/program-with-OOP-md/">面向对象编程的一些体会</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/add-env-var-on-OSX-md/">在OS X上添加环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/27/some-usage-of-mybatis-md/">Mybatis使用经验总结</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Blogroll</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">王乐心的博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
