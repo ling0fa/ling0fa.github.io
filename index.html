@@ -50,6 +50,59 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-09-11T12:08:21.000Z"><a href="/2016/09/11/a-refactor-of-threads-calling/">2016-09-11</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/09/11/a-refactor-of-threads-calling/">记一次多线程调用的重构优化</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>这次重构对效率上有小幅提升，但大大的简化了调用方式，对应的代码也减少了很多。</p>
+</blockquote>
+<p>&emsp;&emsp;事情是这样的，项目里数据库分了库，需要分库调用，于是老员工写了一个工具，当一个请求来了后，把请求封装成一个Task，把Task丢给线程池取执行，然后循环等待执行结果。下面大概说下各个类的代码，不一定能编译过，凭记忆写。</p>
+<p>1、Task类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> List&lt;Object&gt; results;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Task</span><span class="params">(String dbKey, Object object, String methodName, Object ... args)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        TaskIdentity.setIdentity(dbKey);</div><div class="line">        <span class="comment">// .......</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// other methods</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上面results用来保存执行完后的结果，如果只有一个结果，也返回包含一个元素的List。构造函数有四个参数，第一个是数据库分库的路由，由调用者的参数决定。第二个是要调用的方法所在的类的实例（对，就是这么设计的），第三个是调用的方法的字符串形式（对，是这样的），最后一个是调用的方法的参数列表，有了以上信息，通过反射来确定要调用哪个方法。<br>&emsp;&emsp;设计这个类的时候，为了保证可以保持任何类型的结果，用了List<object>，为了可以调用任意类的方法，构造函数的第二个第三个参数都设计的有点违反直觉，最后也是为了接受任意参数，使用Object的可变参数。<br>&emsp;&emsp;最后，Task里还有一些其他方法，用来处理参数的匹配问题。因为参数列表可能是原生类型，也有可能是包装类型，也有可能是二者的混合，还会加上其他引用类型什么的。我曾经尝试重写里面通过方法名和参数列表确定是哪个方法的函数，最终失败了，原因就是传原生类型和包装类型时，通过反射是不能确定到底是哪一个。所以里面通过列举所有可能的参数组合，来反射对应的方法，直到反射成功为止（我觉得也只能这样的了）。<br>&emsp;&emsp;总之，功能还是实现了，反射也反射成功了，只是实现的有些丑陋，不优美，整个类有300行以上的代码。</object></p>
+<p>2、TaskIndentity类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskIdentity</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;String&gt; identity = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setIdentity</span><span class="params">(String dbKey)</span> </span>&#123;</div><div class="line">        identity.set(dbKey);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIdentity</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> identity.get();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这个类没啥说的，就是对线程保存当前执行对应的数据库标识，在线程刚开始执行前调用setIndentity，真正访问数据库时，映射到对应的数据库连接（Spring来完成）。   </p>
+<p>3、TaskExecutor类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskExecutor</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">submitSelectTask</span><span class="params">(List&lt;Task&gt; tasks)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">submitUpdateTask</span><span class="params">(List&lt;Task&gt; tasks)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这里定义了一个工具类。里面有一个线程池变量，用来执行任务。参数都是任务的列表（想覆盖一个任务或多个任务的情况），第一个是查询类任务，依次提交了所有任务后，在后面循环等待任务执行完成，完成后取出所有结果，再强制将Object类型结果转换为返回的T类型。其实在循环等待结果前，代码里会睡眠10毫秒（原作者这样写的）。<br>&emsp;&emsp;第二个方法类似，执行更新、删除、插入任务，返回值按理说是整形，不过设计的时候没有把这些值返回，返回的意义也不大，毕竟执行了多个任务。整个类大概有100~200行代码。   </p>
+<p>4、好了，介绍完上面的类，终于可以说怎么调用了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Task task = <span class="keyword">new</span> Task(<span class="string">"dbkey"</span>, SomeObject.instance(), <span class="string">"someMethod"</span>, <span class="string">"hello"</span>, <span class="string">"world"</span>);</div><div class="line">List&lt;Task&gt; tasks = Arrays.asList(task);</div><div class="line">List&lt;String&gt; ret = TaskExecutor.submitSelectTask(tasks);</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;整个调用过程如上。在new Task对象的时候，第二个参数是Object类型，所以传任何引用类型都不会报错，第三个参数是字符串类型，传任意的字符串都可以，第四个参数是可变长度，传任意个参数也不会编译器报错。我在使用这套代码提供的接口，偶尔就会忘了改参数，导致到运行时才报错，搞得很头痛。总的来说，就是没有利用Java的强类型特性，在编译期来预防错误的参数传入。   </p>
+<p>5、重构后的代码<br>&emsp;&emsp;上面的这套代码其实有个误区，就是想把所有的调用封装起来，统一入口和统一出口。其实根本不用封装，在不同的对外接口里，起一个线程去调用对应的接口就行了。<br>&emsp;&emsp;首先对执行任务的工具类重构，不再封装Task，直接接收一个Callable子类或Runnable子类，整个工具类也不用去强转结果的类型，也不用循环等待结果，调用是阻塞，TaskException是自定义的异常类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskExecutor</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ExecutorService service = Executors.newFixedThreadPool(<span class="number">8</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;V&gt; <span class="function">V <span class="title">submitTask</span><span class="params">(Callable&lt;V&gt; callable)</span> <span class="keyword">throws</span> TaskException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">return</span> service.submit(callable).get(<span class="number">10</span>, TimeUnit.SECONDS);</div><div class="line">        &#125; <span class="keyword">catch</span> (RejectedExecutionException | InterruptedException | ExecutionException | TimeoutException e) &#123;</div><div class="line">            <span class="comment">// log</span></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> TaskException(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">submitTask</span><span class="params">(Runnable runnable)</span> <span class="keyword">throws</span> TaskException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            service.submit(runnable);</div><div class="line">        &#125; <span class="keyword">catch</span> (RejectedExecutionException e) &#123;</div><div class="line">            <span class="comment">// log</span></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> TaskException(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;最后看下怎么调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; ret = TaskExecutor.submitTask(<span class="keyword">new</span> Callable&lt;List&lt;String&gt;&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        TaskIdentity.setIdentity(<span class="string">"dbkey"</span>);</div><div class="line">        <span class="keyword">return</span> SomeObject.someMethod(<span class="string">"param1"</span>, <span class="string">"param2"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在调用时候，不再new Task对象，在call方法里设置数据库路由，调用对应的方法即可。整个过程不再有硬编码，任何类型的不匹配都会在编译期报错，不再有对结果的强制转换，和对结果的循环等待，调用方式也简单明了了许多，Task类也可以去掉了，整个功能代码量不过100行。<br>&emsp;&emsp;还有一个不同的是重构以后，只接收一个任务。其实在我重构以前，我没有任何一次是传了多个任务给老接口，每次都要去构造一个List<task>去配合以前的接口，为此我还专门写了一个中间工具类只接收一个Task，所以传多个Task情况很少很少，不过重构后这些类都可以去掉了。<br>&emsp;&emsp;整个过程回过头来看，其实也就是原先的接口作者估计不知道有Callable这个东西，或者是为了工具化而工具化。重构后也没什么高大上的东西，不过效果是好的，功能不变，减少了代码量和复杂度。</task></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-09-11T06:01:09.000Z"><a href="/2016/09/11/scala-pattern-match/">2016-09-11</a></time>
       
       
