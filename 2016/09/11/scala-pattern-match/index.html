@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>学习笔记：Scala的模式匹配 | 王乐心的博客</title>
+  
+  
+  <meta name="description" content="本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
+Scala的模式匹配有点像以前接触的switch-case语句，但功能比swit">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="学习笔记：Scala的模式匹配"/>
+  <meta property="og:site_name" content="王乐心的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="王乐心的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">王乐心的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-09-11T06:01:09.000Z"><a href="/2016/09/11/scala-pattern-match/">2016-09-11</a></time>
+      
+      
+  
+    <h1 class="title">学习笔记：Scala的模式匹配</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+<p>Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。</p>
+<h3 id="1、简单匹配"><a href="#1、简单匹配" class="headerlink" title="1、简单匹配"></a>1、简单匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> bools = <span class="type">Seq</span>(<span class="literal">true</span>, <span class="literal">false</span>)</div><div class="line"><span class="keyword">for</span> (bool &lt;- bools) &#123;</div><div class="line">  bool <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="literal">true</span> =&gt; println(<span class="string">"hello"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="literal">false</span> =&gt; println(<span class="string">"world"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// hello</span></div><div class="line"><span class="comment">// world</span></div></pre></td></tr></table></figure>
+<p>case后面没有跟break语句。如果将上面任意一个case语句注释，编译器会抛出MatchError，因为case语句没有包含所有可能出现的情况。</p>
+<h3 id="2、match中的值、变量和类型"><a href="#2、match中的值、变量和类型" class="headerlink" title="2、match中的值、变量和类型"></a>2、match中的值、变量和类型</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  x &lt;- <span class="type">Seq</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3.7</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="symbol">'four</span>)</div><div class="line">&#125; &#123;</div><div class="line">  <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>          =&gt; <span class="string">"int 1"</span></div><div class="line">    <span class="keyword">case</span> i: <span class="type">Int</span>     =&gt; <span class="string">"other int :"</span> + i                <span class="comment">// 除1以外的所有整数</span></div><div class="line">    <span class="keyword">case</span> d: <span class="type">Double</span>  =&gt; <span class="string">"a double:"</span> + d</div><div class="line">    <span class="keyword">case</span> <span class="string">"one"</span>      =&gt; <span class="string">"String one"</span></div><div class="line">    <span class="keyword">case</span> s: <span class="type">String</span>  =&gt; <span class="string">"other string:"</span> + s</div><div class="line">    <span class="keyword">case</span> unexpected =&gt; <span class="string">"unexpected value:"</span> + unexpected <span class="comment">// 匹配其他的情况，x的值赋值给unexpected，类型为Any</span></div><div class="line">  &#125;</div><div class="line">  println(str)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意上面序列最后一个是Scala的Symbol对象。str的类型是所有case语句返回值类型的最近公共父类。另外，<strong>匹配具体的case语句要出现在匹配宽泛的case语句前</strong>，否则具体的case语句永远没有机会匹配上（编译器也可以识别这种错误）。在匹配Double类型时，为了避免舍入误差导致的无法匹配，可以使用下面的方式：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  x &lt;- <span class="type">Seq</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3.7</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="symbol">'four</span>)</div><div class="line">&#125; &#123;</div><div class="line">  <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>          =&gt; <span class="string">"int 1"</span></div><div class="line">    <span class="keyword">case</span> _: <span class="type">Int</span>     =&gt; <span class="string">"other int :"</span> + x                </div><div class="line">    <span class="keyword">case</span> _: <span class="type">Double</span>  =&gt; <span class="string">"a double:"</span> + x</div><div class="line">    <span class="keyword">case</span> <span class="string">"one"</span>      =&gt; <span class="string">"String one"</span></div><div class="line">    <span class="keyword">case</span> _: <span class="type">String</span>  =&gt; <span class="string">"other string:"</span> + x</div><div class="line">    <span class="keyword">case</span> _          =&gt; <span class="string">"unexpected value:"</span> + x</div><div class="line">  &#125;</div><div class="line">  println(str)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面使用占位符<code>_</code>替代了变量，使用x来获取匹配的值。编写case语句时有个陷阱，就是编译器会假定大写字母开头的是类型名，小写字母开头的是变量名。如果要引用在前面定义的变量时，用反引号将其括起来，如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkY</span></span>(y:<span class="type">Int</span>) = &#123;</div><div class="line">  <span class="keyword">for</span> &#123;</div><div class="line">    x &lt;- <span class="type">Seq</span>(<span class="number">99</span>, <span class="number">100</span>, <span class="number">101</span>)</div><div class="line">  &#125; &#123;</div><div class="line">    <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">      <span class="keyword">case</span> `y` =&gt; <span class="string">"found y!"</span></div><div class="line">      <span class="keyword">case</span> i:<span class="type">Int</span> =&gt; <span class="string">"found other"</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有时不同的匹配语句需要处理相同的逻辑代码，为了避免冗余，可以使用“|”符号：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> _:<span class="type">Int</span> | <span class="keyword">case</span> _:<span class="type">Double</span> =&gt; <span class="string">"found number:"</span> + x</div><div class="line">  <span class="keyword">case</span> _:<span class="type">Any</span> =&gt; <span class="string">"found other"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3、序列的匹配"><a href="#3、序列的匹配" class="headerlink" title="3、序列的匹配"></a>3、序列的匹配</h3><p>先看一个Scala的语法。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> x +: y = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// x: Int = 1</span></div><div class="line"><span class="comment">// y: List[Int] = List(2, 3)</span></div></pre></td></tr></table></figure>
+<p>这里的<code>+:</code>是序列的构造操作符（其实就是一个方法），Scala里以<code>:</code>结尾的方法是向右结合的，所有x只有一个头部，y包含整个尾部。类似的还有<code>++:</code>、<code>/:</code>等。对序列就可以这样匹配：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">seqToString</span></span>[<span class="type">T</span>](seq: <span class="type">Seq</span>[<span class="type">T</span>]): <span class="type">String</span> = seq <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> head +: tail =&gt; <span class="string">s"<span class="subst">$head</span> +: "</span> + seqToString(tail)</div><div class="line">  <span class="keyword">case</span> <span class="type">Nil</span> =&gt; <span class="string">"Nil"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">seqToString(<span class="type">Seq</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">1</span>))</div><div class="line"><span class="comment">// String = 2 +: 3 +: 4 +: 1 +: Nil</span></div></pre></td></tr></table></figure>
+<p>上面使用<code>+:</code>来<strong>提取</strong>序列的头部和尾部放到head和tail变量里，Seq里也有head和tail方法，和这里的是不一样概念。返回的字符串是头部加尾部的递归调用返回的结果。下面是用Nil来匹配空序列。两个case语句包含了序列可能出现的所有可以匹配的情况，怎么理解呢，序列要么包含一个以上的元素，要么为空，非空的时候可以调用<code>+:</code>，匹配第一个case，空的时候就匹配第二个case，相当于分而治之的思想。<br><code>+:</code>其实是一个单例对象，这个类型只有一个方法，即编译器在case语句中用来提取数据的unapply方法，unapply的示意（非完整）如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">unapply</span></span>[<span class="type">T</span>, <span class="type">Coll</span>](collection:<span class="type">Coll</span>):<span class="type">Option</span>[(<span class="type">T</span>, <span class="type">Coll</span>)]</div></pre></td></tr></table></figure>
+<p>头部类型被推断为T，剩余部分的类型和序列本身类型一致（可能为空序列）。<code>case head +: tail =&gt; …</code>是中缀表达式的写法，对应的形式是<code>case +:(head, tail)</code>，真正调用是<code>+:.unapply(collection)</code>。相对的，使用<code>:+</code>可以达到相反的效果，<code>prefix :+ end</code>前后两个变量分别提取了前N-1个元素和最后一个元素。   </p>
+<p>为什么返回的是Option呢？其实这是为了允许在自定义unapply里返回需要的属性，对外隐藏内部的细节，比如年龄、住址什么的，当然也有可能返回None。</p>
+<h3 id="4、元组的匹配"><a href="#4、元组的匹配" class="headerlink" title="4、元组的匹配"></a>4、元组的匹配</h3><p>直接举栗子把：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> langs = <span class="type">Seq</span>(</div><div class="line">  (<span class="string">"Scala"</span>, <span class="string">"Martin"</span>),</div><div class="line">  (<span class="string">"Clojure"</span>, <span class="string">"Rich"</span>),</div><div class="line">  (<span class="string">"Lisp"</span>, <span class="string">"John"</span>)</div><div class="line">)</div><div class="line"><span class="keyword">for</span> (tuple &lt;- langs) &#123;</div><div class="line">  tuple <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> (_, <span class="string">"Martin"</span>) =&gt; println(<span class="string">"found Scala"</span>)</div><div class="line">    <span class="keyword">case</span> (lang, name) =&gt; println(<span class="string">s"found other language:<span class="subst">$lang</span> (<span class="subst">$name</span>)"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>匹配元组时可以匹配一部分，lang和name都被推断为String。</p>
+<h3 id="5、case中的guard语句"><a href="#5、case中的guard语句" class="headerlink" title="5、case中的guard语句"></a>5、case中的guard语句</h3><p>和for推导式中一样，case语句也可以有guard语句。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (i &lt;- <span class="type">Seq</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)) &#123;</div><div class="line">  i <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> _ <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> =&gt; println(<span class="string">"even"</span>)</div><div class="line">    <span class="keyword">case</span> _               =&gt; println(<span class="string">"odd"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="6、case类的匹配"><a href="#6、case类的匹配" class="headerlink" title="6、case类的匹配"></a>6、case类的匹配</h3><p>case类的成员都是val修饰的，所以类的对象和元组有点像。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span>(<span class="params">street:<span class="type">String</span>, city:<span class="type">String</span>, country:<span class="type">String</span></span>)</span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">name:<span class="type">String</span>, age:<span class="type">Int</span>, address:<span class="type">Address</span></span>)</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> alice = <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="type">Address</span>(<span class="string">"1 Lane"</span>, <span class="string">"Chicago"</span>, <span class="string">"USA"</span>))</div><div class="line"><span class="keyword">val</span> bob   = <span class="type">Person</span>(<span class="string">"Bob"</span>, <span class="number">33</span>, <span class="type">Address</span>(<span class="string">"2 Ave"</span>, <span class="string">"Miami"</span>, <span class="string">"USA"</span>))</div><div class="line"><span class="keyword">val</span> charlie = <span class="type">Person</span>(<span class="string">"Charlie"</span>, <span class="number">21</span>, <span class="type">Address</span>(<span class="string">"3 Ct"</span>, <span class="string">"Boston"</span>, <span class="string">"USA"</span>))</div><div class="line"></div><div class="line"><span class="keyword">for</span> (person &lt;- <span class="type">Seq</span>(alice, bob, charlie)) &#123;</div><div class="line">  person <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="type">Address</span>(_, <span class="string">"Chicago"</span>, _)) =&gt; println(<span class="string">"hi Alice"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">Person</span>(<span class="string">"Bob"</span>, <span class="number">33</span>, <span class="type">Address</span>(<span class="string">"2 Ave"</span>, <span class="string">"Miami"</span>, <span class="string">"USA"</span>)) =&gt; println(<span class="string">"hi bob"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">Person</span>(name, age, _) =&gt; println(<span class="string">s"who is <span class="subst">$name</span>, age is <span class="subst">$age</span>"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里和匹配元组类似，也用了通配符，匹配需要的部分。最后一条匹配其余的情况。匹配case类的原理，其实是调用了case类的unapply方法，返回Option[TupleN[ ]]，N表示类里成员变量个数。</p>
+<h3 id="7、可变参数列表的匹配"><a href="#7、可变参数列表的匹配" class="headerlink" title="7、可变参数列表的匹配"></a>7、可变参数列表的匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> lists = <span class="type">Seq</span>(</div><div class="line">  <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),</div><div class="line">  <span class="type">List</span>(<span class="number">4</span>,<span class="number">5</span>)</div><div class="line">)</div><div class="line"><span class="keyword">for</span> (list &lt;- lists) &#123;</div><div class="line">  list <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">List</span>(_, _)         =&gt; println(<span class="string">"2 elements"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">List</span>(<span class="number">1</span>, vals @ _*) =&gt; println(<span class="string">"tail:"</span> + vals)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// tail:List(2, 3)</span></div><div class="line"><span class="comment">// 2 elements</span></div></pre></td></tr></table></figure>
+<h3 id="8、正则表达式的匹配"><a href="#8、正则表达式的匹配" class="headerlink" title="8、正则表达式的匹配"></a>8、正则表达式的匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> bookRE = <span class="string">""</span><span class="string">"Book: title=([^,]+),\s+issue=(.+)"</span><span class="string">""</span>.r   <span class="comment">// 创建一个正则表达式</span></div><div class="line"><span class="keyword">val</span> catalog = <span class="string">"Book: title=Programming Scala, author=Deam Wampler"</span></div><div class="line"></div><div class="line">catalog <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> bookRE(title, author) =&gt; println(<span class="string">"title is $titile,author is $author"</span>)</div><div class="line">  <span class="keyword">case</span> notmatch              =&gt; println(<span class="string">"not match"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里用title和author来在匹配的同时，提取对应的字符串。</p>
+<h3 id="9、模式匹配的漏洞"><a href="#9、模式匹配的漏洞" class="headerlink" title="9、模式匹配的漏洞"></a>9、模式匹配的漏洞</h3><p>考虑下面的匹配语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x match &#123;</div><div class="line">  case s1:Seq[Double] =&gt; println(&quot;Double&quot;)</div><div class="line">  case s2:Seq[String] =&gt; println(&quot;String&quot;)</div><div class="line">  case _              =&gt; println(&quot;unkonwn&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的匹配语句看似没什么问题，其实编译会产生告警。问题出在JVM的类型擦除机制，所以编译器认为第二个case语句不可达。有一个不太美观但有效的解决办法，先匹配头部，根据头部类型判断怎么处理，对空列表则单独处理。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">x <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> <span class="type">Nil</span> =&gt; <span class="string">"nothing"</span></div><div class="line">  <span class="keyword">case</span> head +: _ =&gt; head <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> _:<span class="type">Double</span> =&gt; <span class="string">"do with double"</span></div><div class="line">    <span class="keyword">case</span> _:<span class="type">String</span> =&gt; <span class="string">"do with string"</span></div><div class="line">    <span class="keyword">case</span> _        =&gt; <span class="string">"un-matched"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="10、其他"><a href="#10、其他" class="headerlink" title="10、其他"></a>10、其他</h3><h4 id="1、避免使用枚举来匹配"><a href="#1、避免使用枚举来匹配" class="headerlink" title="1、避免使用枚举来匹配"></a>1、避免使用枚举来匹配</h4><p>用枚举来匹配的坏处是编译器无法判定case语句是否以及全覆盖，只有到了运行时才会抛出MatchError异常。</p>
+<h4 id="2、提取想要的值"><a href="#2、提取想要的值" class="headerlink" title="2、提取想要的值"></a>2、提取想要的值</h4><p>以前面的Person和Address为例。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> <span class="type">Persion</span>(name, age, <span class="type">Address</span>(_, state, _)) = <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="type">Address</span>(<span class="string">"1 Lane"</span>, <span class="string">"Chicago"</span>, <span class="string">"USA"</span>))</div></pre></td></tr></table></figure>
+<p>想要提取的值都保持在变量name、age等变量里。同样对List也可以有类似操作：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> head +: tail = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// head = 1, tail:List[Int] = List(2,3)</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> head1 +: head2 +: tail = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// head1 = 1, head2 = 2, tail = List(3)</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> <span class="type">Seq</span>(a,b,c) = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// a = 1, b = 2, c = 3</span></div></pre></td></tr></table></figure>
+<p>回顾前面的用法，很多时候模式匹配都会用来提取对应的值，再进行相应的处理。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/scala/">scala</a>, <a href="/tags/模式匹配/">模式匹配</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2016/09/11/scala-pattern-match/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 王乐心的博客
+  
+  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
