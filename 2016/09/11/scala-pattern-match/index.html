@@ -6,8 +6,9 @@
   <title>学习笔记：Scala的模式匹配 | 王乐心的博客</title>
   
   
-  <meta name="description" content="本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-Scala的模式匹配有点像以前接触的switch-case语句，但功能比swit">
+  <meta name="description" content="本文主要总结模式匹配的用法。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
+Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。
+1、简单匹配123456789va">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -62,7 +63,7 @@ Scala的模式匹配有点像以前接触的switch-case语句，但功能比swit
     </header>
     <div class="entry">
       
-        <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+        <p><em>本文主要总结模式匹配的用法。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
 <p>Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。</p>
 <h3 id="1、简单匹配"><a href="#1、简单匹配" class="headerlink" title="1、简单匹配"></a>1、简单匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> bools = <span class="type">Seq</span>(<span class="literal">true</span>, <span class="literal">false</span>)</div><div class="line"><span class="keyword">for</span> (bool &lt;- bools) &#123;</div><div class="line">  bool <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="literal">true</span> =&gt; println(<span class="string">"hello"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="literal">false</span> =&gt; println(<span class="string">"world"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// hello</span></div><div class="line"><span class="comment">// world</span></div></pre></td></tr></table></figure>
 <p>case后面没有跟break语句。如果将上面任意一个case语句注释，编译器会抛出MatchError，因为case语句没有包含所有可能出现的情况。</p>
