@@ -50,6 +50,53 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2017-02-05T04:26:40.000Z"><a href="/2017/02/05/scala-partialfunction/">2017-02-05</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/02/05/scala-partialfunction/">学习笔记：Scala的偏函数</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1、偏函数的定义"><a href="#1、偏函数的定义" class="headerlink" title="1、偏函数的定义"></a>1、偏函数的定义</h3><p>简单的说：输入值集合 <em>X</em> 中，可能存在某些值 <em>Xi</em> 在输出集合 <em>Y</em> 中找不到映射的值。  </p>
+<p>所以在 Scala 中，偏函数只接收某个输入参数类型的某些特定值。例如 <code>(Int) =&gt; String</code> 只接收 <code>Int</code> 类型的某些值作为合法输入。这也是偏函数和 scala.Function1 的主要区别。  </p>
+<p>这点就和 <code>case</code> 语句关联上来有木有，<code>case</code> 语句不就是只处理某个类型下的某些值么，case 语句其实就是一个匿名的偏函数。</p>
+<p>详细可以查看 wiki 百科对<a href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0#.E5.AE.9A.E7.BE.A9" target="_blank" rel="external">函数</a>的定义，里面有对偏函数的介绍。</p>
+<h3 id="2、Scala-的偏函数"><a href="#2、Scala-的偏函数" class="headerlink" title="2、Scala 的偏函数"></a>2、Scala 的偏函数</h3><p>Scala 里有专门定义的偏函数的类型 PartialFunction：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> pf: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">	<span class="keyword">case</span> i <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> =&gt; <span class="string">"even"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>和 <code>orElse</code> 组合使用：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> tf: (<span class="type">Int</span> =&gt; <span class="type">String</span>) = pf orElse &#123; <span class="keyword">case</span> _ =&gt; <span class="string">"odd"</span>&#125;</div><div class="line"></div><div class="line">tf(<span class="number">1</span>) == <span class="string">"odd"</span></div><div class="line">tf(<span class="number">2</span>) == <span class="string">"even"</span></div></pre></td></tr></table></figure>
+<p>使用 <code>isDefinedAt</code> 来检查输入值：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pf.isDefinedAt(<span class="number">1</span>) == <span class="literal">false</span></div><div class="line">pf.isDefinedAt(<span class="number">2</span>) == <span class="literal">true</span></div></pre></td></tr></table></figure>
+<h3 id="3、应用"><a href="#3、应用" class="headerlink" title="3、应用"></a>3、应用</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> sample = <span class="number">1</span> to <span class="number">10</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> isEven: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">    <span class="keyword">case</span> x <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span> =&gt; x + <span class="string">" is even"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// method collect use isDefinedAt to select members</span></div><div class="line"><span class="keyword">val</span> evens = sample collect isEven</div><div class="line"></div><div class="line"><span class="keyword">val</span> isOdd: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">    <span class="keyword">case</span> x <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">1</span> =&gt; x + <span class="string">" is Odd"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用 map 方法要保证输入域的全覆盖，否则报错，collect 方法可以不用全覆盖</span></div><div class="line"><span class="keyword">val</span> result1 = sample map (isEven orElse isOdd)</div><div class="line"><span class="keyword">val</span> result2 = sample collect (isEven orElse isOdd)</div></pre></td></tr></table></figure>
+<p>如果把偏函数的返回值定义为 Boolean，输入域在 isDefinedAt 判断下全为 true，此时偏函数就退化为谓词函数。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> p: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">Boolean</span>] = &#123;</div><div class="line">	<span class="keyword">case</span> x <span class="keyword">if</span> x &gt; <span class="number">0</span> =&gt; <span class="literal">true</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 此时 filter 没有任何过滤功能，collect 相当于 map 函数，因为 isDefinedAt 全部都是返回 true，</span></div><div class="line">sample filter p</div><div class="line">sample collect p</div><div class="line"></div><div class="line"><span class="comment">// 这样做好像没什么用，但是当 case 语句对应的类型是 case 类时</span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">name: <span class="type">String</span>, age: <span class="type">Int</span></span>)</span></div><div class="line"><span class="keyword">val</span> persons = <span class="type">List</span>(<span class="type">Person</span>(<span class="string">"steve"</span>, <span class="number">15</span>), <span class="type">Person</span>(<span class="string">"Leo"</span>, <span class="number">19</span>))</div><div class="line">persons filter &#123;</div><div class="line">	<span class="keyword">case</span> <span class="type">Person</span>(name, age) =&gt; age &gt; <span class="number">18</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Scala 的集合类很多都有方法 <code>isDefinedAt(idx: Int)</code>，用来判断在索引 idx 下是否定义了值，在适当的情况下，集合对象 Seq[A] 会被转换为偏函数 PartialFunction[Int, A]，Int 对应的就是集合元素的索引，看个例子🌰吧~~~</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> colors = <span class="type">List</span>(<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>)</div><div class="line">colors.isDefinedAt(<span class="number">1</span>) == <span class="literal">true</span></div><div class="line">colors.isDefinedAt(<span class="number">9</span>) == <span class="literal">false</span></div><div class="line"></div><div class="line">colors(<span class="number">9</span>) <span class="comment">// error</span></div><div class="line"></div><div class="line"><span class="type">Seq</span>(<span class="number">1</span>,<span class="number">9</span>) collect colors</div><div class="line"><span class="comment">// List(blue)  避免了越界下标的异常</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-12-25T08:22:08.000Z"><a href="/2016/12/25/scala-List-doc/">2016-12-25</a></time>
       
       
@@ -626,53 +673,6 @@
 <p>除此之外，对请求的cookie也在末尾添加随机数，每次用不同的cookie去请求，并且，每爬取完一个页面的内容，随机休眠0-8秒，这样做虽然抓取速度慢了点，但至少能保证每次抓取不会半途报错。</p>
 <p>完整的代码示例<a href="https://github.com/hsqs/spiders/blob/master/weibo/weibo_miner.py" target="_blank" rel="external">点这里</a>。    </p>
 
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-03-27T05:53:45.000Z"><a href="/2016/03/27/use-virtualenv-md/">2016-03-27</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/03/27/use-virtualenv-md/">在OS X上使用virtualenv</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h3 id="1，理解virtualenv"><a href="#1，理解virtualenv" class="headerlink" title="1，理解virtualenv"></a>1，理解virtualenv</h3><p>virtualenv从字面意思来理解的话，就是虚拟环境的意思，这个第一印象容易对我们产生误导，其实并不是虚拟环境，以我的理解是一个<strong>独立</strong>环境。什么意思呢？好比一台电脑上装好Python以后，可以把安装的Python拷贝到另一个目录(官方:其实并没有真正安装多个 Python 副本，但是它确实提供了一种巧妙的方式来让各项目环境保持独立)，这样两个Python环境相互独立，互不影响，那有了多个Python环境，在什么时候启用谁禁用谁呢？virtualenv这个时候就派上用场了。官方对virtualenv的解释：<a href="https://virtualenv.pypa.io/" target="_blank" rel="external">virtualenv is a tool to create isolated Python environments</a>.</p>
-<h3 id="2，安装virtualenv"><a href="#2，安装virtualenv" class="headerlink" title="2，安装virtualenv"></a>2，安装virtualenv</h3><p>安装就太简单了，使用pip安装即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install virtualenv</div></pre></td></tr></table></figure>
-<p>如果有权限问题，前面加一个sudo</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo pip install virtualenv</div></pre></td></tr></table></figure>
-<h3 id="3，使用virtualenv"><a href="#3，使用virtualenv" class="headerlink" title="3，使用virtualenv"></a>3，使用virtualenv</h3><p>首先找到一个合适的空文件夹，在终端里输入如下命令，创建一个虚拟环境（Python已经安装到电脑上）：</p>
-<pre><code>$ virtualenv [-p python3] dir-name
-</code></pre><p>如果电脑上安装了多个版本的Python，默认会使用OS X自带的2.7版本，如果想创建3.0以上的版本的话，指定版本参数即可。输入完成回车，可以到Finder里查看目录dir-name，里面有bin、include、lib三个目录。最后一步，继续在终端里输入如下命令，激活这个刚刚创建的环境：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">source</span> dir-name/bin/activate</div></pre></td></tr></table></figure>
-<p>这个时候，当前Python环境就激活了，终端也会有相应的变化，在最前面会出现当前环境的名字：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(dir-name)your-computer-name $:</div></pre></td></tr></table></figure>
-<p>hah，这个时候就可以使用了，比如在这个而环境里开发Flask应用，执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install Flask</div></pre></td></tr></table></figure>
-<p>此时，Flask会安装在dir-name里，而不会安装在其他环境，这样就达到了isolated的效果。如果不再使用当前环境，使用如下命令即可退出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ deactivate</div></pre></td></tr></table></figure>
-<h3 id="4，删除virtualenv"><a href="#4，删除virtualenv" class="headerlink" title="4，删除virtualenv"></a>4，删除virtualenv</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rmvirtualenv env-name</div></pre></td></tr></table></figure>
       
     </div>
     <footer>

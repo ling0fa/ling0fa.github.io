@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>学习笔记：Scala的偏函数 | 王乐心的博客</title>
+  
+  
+  <meta name="description" content="1、偏函数的定义简单的说：输入值集合 X 中，可能存在某些值 Xi 在输出集合 Y 中找不到映射的值。  
+所以在 Scala 中，偏函数只接收某个输入参数类型的某些特定值。例如 (Int) =&amp;gt; String 只接收 Int 类型的某些值作为合法输入。这也是偏函数和 scala.Functi">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="学习笔记：Scala的偏函数"/>
+  <meta property="og:site_name" content="王乐心的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="王乐心的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">王乐心的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-02-05T04:26:40.000Z"><a href="/2017/02/05/scala-partialfunction/">2017-02-05</a></time>
+      
+      
+  
+    <h1 class="title">学习笔记：Scala的偏函数</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1、偏函数的定义"><a href="#1、偏函数的定义" class="headerlink" title="1、偏函数的定义"></a>1、偏函数的定义</h3><p>简单的说：输入值集合 <em>X</em> 中，可能存在某些值 <em>Xi</em> 在输出集合 <em>Y</em> 中找不到映射的值。  </p>
+<p>所以在 Scala 中，偏函数只接收某个输入参数类型的某些特定值。例如 <code>(Int) =&gt; String</code> 只接收 <code>Int</code> 类型的某些值作为合法输入。这也是偏函数和 scala.Function1 的主要区别。  </p>
+<p>这点就和 <code>case</code> 语句关联上来有木有，<code>case</code> 语句不就是只处理某个类型下的某些值么，case 语句其实就是一个匿名的偏函数。</p>
+<p>详细可以查看 wiki 百科对<a href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0#.E5.AE.9A.E7.BE.A9" target="_blank" rel="external">函数</a>的定义，里面有对偏函数的介绍。</p>
+<h3 id="2、Scala-的偏函数"><a href="#2、Scala-的偏函数" class="headerlink" title="2、Scala 的偏函数"></a>2、Scala 的偏函数</h3><p>Scala 里有专门定义的偏函数的类型 PartialFunction：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> pf: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">	<span class="keyword">case</span> i <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> =&gt; <span class="string">"even"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>和 <code>orElse</code> 组合使用：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> tf: (<span class="type">Int</span> =&gt; <span class="type">String</span>) = pf orElse &#123; <span class="keyword">case</span> _ =&gt; <span class="string">"odd"</span>&#125;</div><div class="line"></div><div class="line">tf(<span class="number">1</span>) == <span class="string">"odd"</span></div><div class="line">tf(<span class="number">2</span>) == <span class="string">"even"</span></div></pre></td></tr></table></figure>
+<p>使用 <code>isDefinedAt</code> 来检查输入值：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pf.isDefinedAt(<span class="number">1</span>) == <span class="literal">false</span></div><div class="line">pf.isDefinedAt(<span class="number">2</span>) == <span class="literal">true</span></div></pre></td></tr></table></figure>
+<h3 id="3、应用"><a href="#3、应用" class="headerlink" title="3、应用"></a>3、应用</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> sample = <span class="number">1</span> to <span class="number">10</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> isEven: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">    <span class="keyword">case</span> x <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span> =&gt; x + <span class="string">" is even"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// method collect use isDefinedAt to select members</span></div><div class="line"><span class="keyword">val</span> evens = sample collect isEven</div><div class="line"></div><div class="line"><span class="keyword">val</span> isOdd: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">    <span class="keyword">case</span> x <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">1</span> =&gt; x + <span class="string">" is Odd"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用 map 方法要保证输入域的全覆盖，否则报错，collect 方法可以不用全覆盖</span></div><div class="line"><span class="keyword">val</span> result1 = sample map (isEven orElse isOdd)</div><div class="line"><span class="keyword">val</span> result2 = sample collect (isEven orElse isOdd)</div></pre></td></tr></table></figure>
+<p>如果把偏函数的返回值定义为 Boolean，输入域在 isDefinedAt 判断下全为 true，此时偏函数就退化为谓词函数。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> p: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">Boolean</span>] = &#123;</div><div class="line">	<span class="keyword">case</span> x <span class="keyword">if</span> x &gt; <span class="number">0</span> =&gt; <span class="literal">true</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 此时 filter 没有任何过滤功能，collect 相当于 map 函数，因为 isDefinedAt 全部都是返回 true，</span></div><div class="line">sample filter p</div><div class="line">sample collect p</div><div class="line"></div><div class="line"><span class="comment">// 这样做好像没什么用，但是当 case 语句对应的类型是 case 类时</span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">name: <span class="type">String</span>, age: <span class="type">Int</span></span>)</span></div><div class="line"><span class="keyword">val</span> persons = <span class="type">List</span>(<span class="type">Person</span>(<span class="string">"steve"</span>, <span class="number">15</span>), <span class="type">Person</span>(<span class="string">"Leo"</span>, <span class="number">19</span>))</div><div class="line">persons filter &#123;</div><div class="line">	<span class="keyword">case</span> <span class="type">Person</span>(name, age) =&gt; age &gt; <span class="number">18</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Scala 的集合类很多都有方法 <code>isDefinedAt(idx: Int)</code>，用来判断在索引 idx 下是否定义了值，在适当的情况下，集合对象 Seq[A] 会被转换为偏函数 PartialFunction[Int, A]，Int 对应的就是集合元素的索引，看个例子🌰吧~~~</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> colors = <span class="type">List</span>(<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>)</div><div class="line">colors.isDefinedAt(<span class="number">1</span>) == <span class="literal">true</span></div><div class="line">colors.isDefinedAt(<span class="number">9</span>) == <span class="literal">false</span></div><div class="line"></div><div class="line">colors(<span class="number">9</span>) <span class="comment">// error</span></div><div class="line"></div><div class="line"><span class="type">Seq</span>(<span class="number">1</span>,<span class="number">9</span>) collect colors</div><div class="line"><span class="comment">// List(blue)  避免了越界下标的异常</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/scala/">scala</a>, <a href="/tags/偏函数/">偏函数</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2017/02/05/scala-partialfunction/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 王乐心的博客
+  
+  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
