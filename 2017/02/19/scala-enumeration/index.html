@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>scala 的枚举类型 | 王乐心的博客</title>
+  
+  
+  <meta name="description" content="1、准备知识在 Scala 里，可以产生类型的关键字有 trait、class、object 之外，还有一个就是 type，用于对一个类型标记一个别名产生一个新类型。例如为 Float 定义一个别名，
+12scala&amp;gt; type Ft = Floatdefined type alias Ft
+">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="scala 的枚举类型"/>
+  <meta property="og:site_name" content="王乐心的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="王乐心的博客" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">王乐心的博客</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-02-19T08:40:21.000Z"><a href="/2017/02/19/scala-enumeration/">2017-02-19</a></time>
+      
+      
+  
+    <h1 class="title">scala 的枚举类型</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h3 id="1、准备知识"><a href="#1、准备知识" class="headerlink" title="1、准备知识"></a>1、准备知识</h3><p>在 Scala 里，可以产生类型的关键字有 trait、class、object 之外，还有一个就是 type，用于对一个类型标记一个别名产生一个新类型。例如为 Float 定义一个别名，</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="class"><span class="keyword">type</span> <span class="title">Ft</span> </span>= <span class="type">Float</span></div><div class="line">defined <span class="class"><span class="keyword">type</span> <span class="title">alias</span> <span class="title">Ft</span></span></div></pre></td></tr></table></figure>
+<p>然后就可以在其他地方像使用 Ft 就像使用 Float 一样了。</p>
+<h3 id="2、枚举"><a href="#2、枚举" class="headerlink" title="2、枚举"></a>2、枚举</h3><p>Scala 里是没有枚举的，但是可以通过继承 Enumeration 这个抽象类来达到相同的目的。看个例子🌰</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">TrafficLight</span> <span class="keyword">extends</span> <span class="title">Enumeration</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> <span class="type">Green</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Red</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Yellow</span> = <span class="type">Value</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>定义了交通信号红绿黄灯的枚举，首先继承 Enumeration 抽象类，声明枚举变量时，要将其赋值为 Value 类型（下面介绍 Value 类）。这样在其他地方，可以通过</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> xxx.<span class="type">TrafficLight</span>._</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">judge</span></span>(light: <span class="type">Value</span>) : <span class="type">String</span> = &#123;</div><div class="line">  <span class="keyword">val</span> msg = light <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Red</span> =&gt; <span class="string">"Stop"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">Green</span> =&gt; <span class="string">"Go"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">Yellow</span> =&gt; <span class="string">"Wait"</span></div><div class="line">  &#125;</div><div class="line">  msg</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>的方式，引入和使用该枚举的所有成员。注意，judge 函数的参数类型是 Value，和定义枚举时成员变量的类型一致。如果有人使用这个函数，参数类型是 Value 显然不能给调用者足够的信息这个 TrafficLight 的枚举类型，所以，一般定义枚举时，就会给 Value 类型起个别名，使用时一眼就看的出来这是什么枚举类型。另外，如果不给枚举起别名，在同一个作用域内 import 了多个枚举的话，启动运行时会报 Value 语义歧义，所以一般像下面操作：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">TrafficLight</span> <span class="keyword">extends</span> <span class="title">Enumeration</span> </span>&#123;</div><div class="line">  <span class="class"><span class="keyword">type</span> <span class="title">TrafficLight</span> </span>= <span class="type">Value</span></div><div class="line"></div><div class="line">  <span class="keyword">val</span> <span class="type">Green</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Red</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Yellow</span> = <span class="type">Value</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>前面的 judge 函数的声明就可以变成这样：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">judge</span></span>(light: <span class="type">TrafficLight</span>) : <span class="type">String</span> = &#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>网上很多介绍 Scala 枚举直接给出要定义一个 type 却没有解释为什么，这里应该就比较清楚了。</p>
+<h3 id="3、Enumeration-类"><a href="#3、Enumeration-类" class="headerlink" title="3、Enumeration 类"></a>3、Enumeration 类</h3><p>查看 Enumeration 的源码，里面主要维护了：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vmap 保持枚举 id 和枚举值直接的映射关系</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">val</span> vmap: mutable.<span class="type">Map</span>[<span class="type">Int</span>, <span class="type">Value</span>] = <span class="keyword">new</span> mutable.<span class="type">HashMap</span></div><div class="line"></div><div class="line"><span class="comment">// nmap 保持枚举 id 和枚举对象名称直接的关系</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">val</span> nmap: mutable.<span class="type">Map</span>[<span class="type">Int</span>, <span class="type">String</span>] = <span class="keyword">new</span> mutable.<span class="type">HashMap</span></div><div class="line"></div><div class="line"><span class="comment">// 函数 values 以 Set 形式返回枚举类型所有的枚举对象</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">values</span></span>: <span class="type">ValueSet</span> = &#123;</div><div class="line">  <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 四个初始化枚举对象的 Value 函数，所以我们初始化上面 Red、Green、Yellow 的是否，不是调用 Value 的构造函数，</span></div><div class="line"><span class="comment">// 而是调用返回 Value 类型的函数，只不过跟 Value 同名罢了</span></div><div class="line"><span class="comment">// 初始化时不填 id 和名称，id 默认从 0 开始，名称和枚举对象同名</span></div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>: <span class="type">Value</span> = <span class="type">Value</span>(nextId)</div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>(i: <span class="type">Int</span>): <span class="type">Value</span> = <span class="type">Value</span>(i, nextNameOrNull)</div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>(name: <span class="type">String</span>): <span class="type">Value</span> = <span class="type">Value</span>(nextId, name)</div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>(i: <span class="type">Int</span>, name: <span class="type">String</span>): <span class="type">Value</span> = <span class="keyword">new</span> <span class="type">Val</span>(i, name)</div><div class="line"></div><div class="line"><span class="comment">// 使用 TrafficLight(0) 和 TrafficLight.apply(0) 效果一致</span></div><div class="line"><span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(x: <span class="type">Int</span>): <span class="type">Value</span> = vmap(x)</div><div class="line"></div><div class="line"><span class="comment">// 还有一些其他迭代用到的成员变量</span></div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
+<h3 id="5、Value-类"><a href="#5、Value-类" class="headerlink" title="5、Value 类"></a>5、Value 类</h3><p>Value 类定义在 Enumeration.scala 里，是一个抽象类，被 Val 类实现，Val 类也定义在 Enumeration.scala 里，Val 源码的主要内容有：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义了一个主构造函数和三个辅构造函数，对应被 Enumeration 里四个 Value 函数调用</span></div><div class="line"><span class="keyword">protected</span> <span class="class"><span class="keyword">class</span> <span class="title">Val</span>(<span class="params">i: <span class="type">Int</span>, name: <span class="type">String</span></span>) <span class="keyword">extends</span> <span class="title">Value</span> <span class="keyword">with</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>(i: <span class="type">Int</span>)       = <span class="keyword">this</span>(i, nextNameOrNull)</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>(name: <span class="type">String</span>) = <span class="keyword">this</span>(nextId, name)</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>()             = <span class="keyword">this</span>(nextId)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="5、枚举的简单使用"><a href="#5、枚举的简单使用" class="headerlink" title="5、枚举的简单使用"></a>5、枚举的简单使用</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">TrafficLight</span>.values.foreach(println(_))</div><div class="line"><span class="comment">// Green</span></div><div class="line"><span class="comment">// Red</span></div><div class="line"><span class="comment">// Yellow</span></div><div class="line"></div><div class="line">println(<span class="type">TrafficLight</span>.<span class="type">Red</span>)               <span class="comment">// Red</span></div><div class="line">println(<span class="type">TrafficLight</span>.<span class="type">Red</span>.id) 			<span class="comment">// 1</span></div><div class="line">println(<span class="type">TrafficLight</span>.maxId) 			<span class="comment">// 3</span></div><div class="line">println(<span class="type">TrafficLight</span>.withName(<span class="string">"Red"</span>))   <span class="comment">// Red</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/scala/">scala</a>, <a href="/tags/枚举/">枚举</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2017/02/19/scala-enumeration/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2017 王乐心的博客
+  
+  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
