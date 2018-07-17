@@ -63,7 +63,8 @@
       
         <p>时间嗨得回到 2016 年，那会儿对 Scala 很是喜欢，学习了一点皮毛，今天来看已经忘的差不多了~~~当时把 List 这个类的 API 都仔细看了一遍，发现 <code>indexOf</code> 有个很奇怪的现象，如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-2</span>)</div><div class="line">res393: <span class="type">Int</span> = <span class="number">1</span></div><div class="line"></div><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-3</span>)</div><div class="line">res391: <span class="type">Int</span> = <span class="number">0</span></div></pre></td></tr></table></figure></p>
 <p>不用我解释都知道 <code>indexOf</code> 的含义，当第二个参数为负数的时候，结果返回是错的，且具有不确定性，于是到 StackOverflow 上<a href="https://stackoverflow.com/questions/41395111/scala-list-indexof-has-bug" target="_blank" rel="external">提问</a>。</p>
-<p>有个回答者 <em>Tzach Zohar</em> 说这确实是一个 bug，如果我对他的回答没有理解错的话，他承诺说会在 2.12.2 版本里修复，并给了一个 <a href="https://github.com/scala/scala/pull/5621/commits" target="_blank" rel="external">commit</a> 链接，commit 的时间刚好是我提问的第二天，也是 2016 年的最后一天。</p>
+<p>有个回答者 <em>Tzach Zohar</em> 说这确实是一个 bug，如果我对他的回答没有理解错的话，他承诺说会在 2.12.2 版本里修复，并给了一个 <a href="https://github.com/scala/scala/pull/5621/commits" target="_blank" rel="external">commit</a> 链接，commit 的时间刚好是我提问的第二天，也是 2016 年的最后一天，看了下 commit 提交的内容，是在第二个参数 <code>from</code> 传入时，将 <code>0</code> 和 <code>from</code> 中最大的值作为起始下标，避免了负数引起的错误。</p>
+<p>自己当时还是太菜，要是当时仔细研究一下，再把修改后的代码提上去 merge，然后就可以假装自己也是 Scala 的贡献者了😆。</p>
 
       
     </div>
@@ -102,7 +103,7 @@
 
 
 <section id="comment">
-  <h1 class="title">Comments</h1>
+  <h1 class="title">Kommentare</h1>
 
   
       <div id="fb-root"></div>
