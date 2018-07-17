@@ -62,11 +62,7 @@
       
         <p>由于之前网络的原因，brew 安装和更新都非常慢，于是手贱把 brew 给删掉，重新安装发现一直提示这个错误：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed to connect to 127.0.0.1 port 59095: Connection refused</div></pre></td></tr></table></figure></p>
 <p>当时 Google 了半天也找不到原因，就一直放在那里凉凉。</p>
-<p>今天想起来又研究了一把，看了各种各样的解决方案后，在 StackOverflow 上搜到了一个<a href="https://stackoverflow.com/a/17143676/6027827" target="_blank" rel="external">答案</a>：</p>
-<blockquote>
-<p>For my specific case, I use SOCKS proxy for all traffic. So my installation command is:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ruby -e &quot;$(curl -fsSL --socks5 127.0.0.1:30000 https://raw.github.com/mxcl/homebrew/go)&quot;</div></pre></td></tr></table></figure></p>
-<p>where 127.0.0.1:30000 is the SOCKS proxy.</p>
-</blockquote>
+<p>今天想起来又研究了一把，看了各种各样的解决方案后，在 StackOverflow 上搜到了一个<a href="https://stackoverflow.com/a/17143676/6027827" target="_blank" rel="external">答案</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">For my specific case, I use SOCKS proxy for all traffic. So my installation command is:</div><div class="line"></div><div class="line">ruby -e &quot;$(curl -fsSL --socks5 127.0.0.1:30000 https://raw.github.com/mxcl/homebrew/go)&quot;</div><div class="line"></div><div class="line">where 127.0.0.1:30000 is the SOCKS proxy.</div></pre></td></tr></table></figure></p>
 <p>凭着作为一个程序员的经验，我感觉我找到了问题的原因，然后从官网拷贝安装脚本，再找了一下自己的代理端口，将 30000 改成了 1086，执行安装脚本，回车，成了！</p>
 <p>看到可以安装，猜测是本地使用了代理，导致脚本还是使用了默认的端口，无法走正常的网络端口发起请求，改成代理的端口就可以正常发起访问了。</p>
 
@@ -582,7 +578,7 @@
 <nav id="pagination">
   
   
-    <a href="/page/2/" class="alignright next">Nächste Seite</a>
+    <a href="/page/2/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
