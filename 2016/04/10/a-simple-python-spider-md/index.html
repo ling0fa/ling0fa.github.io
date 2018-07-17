@@ -6,7 +6,8 @@
   <title>一个简单的Python爬虫 | Ling0fa 的博客</title>
   
   
-  <meta name="description" content="由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。">
+  <meta name="description" content="由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫比较方便，在实践了后感觉确实挺简单，考虑如果使用爬虫框架的话还要学习，于是偷懒直接手工撸了起来。
+除了需要 Python 环境外，还需要安装 requests、Be">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -61,7 +62,7 @@
     </header>
     <div class="entry">
       
-        <p>由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫，听起来高大上，在实践了后感觉也不是什么难事，现在来看自己实现的爬虫都很简单，以后要实现更复杂的爬虫的话，看了这篇博客和代码，能让自己也能快速的捡起来，进行二次开发。</p>
+        <p>由于我经常逛微博，看到某些博主的图片都很好看（你懂的），就想干脆下载到本地，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫比较方便，在实践了后感觉确实挺简单，考虑如果使用爬虫框架的话还要学习，于是偷懒直接手工撸了起来。</p>
 <p>除了需要 Python 环境外，还需要安装 requests、BeautifulSoup4等。获取微博页面内容时使用cookie的方式，这样不需要用户名和密码就可以请求到微博。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install requests BeautifulSoup4</div></pre></td></tr></table></figure></p>
 <p>好了，准备工作基本OK。这个爬虫是从新浪微博上爬取某个博主的所有图片，在观察了新浪微博里图片URL的规律后，发现链接主要有3部分构成，如下。img-key 部分我估计是存取图片的唯一ID值，part2 取不同的值，会得到不同尺寸的图片，最大尺寸时，part2取值 ‘large’，有了这个规律就好办了，将页面所有图片满足3段式的链接中间那部分替换成’large’，再下载图片即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://ww2.sinaimg.cn/part2/img-key.jpg</div></pre></td></tr></table></figure>
