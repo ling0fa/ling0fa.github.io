@@ -1,189 +1,389 @@
 <!DOCTYPE html>
-<html lang=null>
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="null">
-  <meta name="keywords" content="undefined">
+<html>
+<head>
+  <meta charset="utf-8">
   
-    <link rel="icon" href="">
-  
-    
   <title>Ling0fa 的博客</title>
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Ling0fa 的博客">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Ling0fa 的博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ling0fa 的博客">
+  
+    <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
 </head>
 
 <body>
-  <header>
-  <div class="header-container">
-    <a class='logo' href="/">
-      <span>Ling0fa 的博客</span>
-    </a>
-    <ul class="right-header">
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       
-        <li class="nav-item">
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">Ling0fa 的博客</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
           
-            <a href="/" class="item-link active">首页</a>
+  
+    <article id="post-Hello-Hexo" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/30/Hello-Hexo/">新加一个 GIT 账号创建 Hexo 博客</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2016/07/30/Hello-Hexo/" class="article-date"><time datetime="2016-07-30T13:53:26.000Z" itemprop="datePublished">2016-07-30</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>闲的蛋疼的我又开始折腾了，这次是通过Hexo来搭建个人博客，需要提前了解一些包括github、nodejs的基本使用，怎么搭建的过程就不多说了，网上有很多教程，这里推荐两个<a href="http://beiyuu.com/github-pages" target="_blank" rel="external">教程1</a>、<a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">教程2</a>，里面很详细的介绍了整个过程。   </p>
+<p>这里主要记录下我在搭建过程中遇到的问题和解决方案。   </p>
+<h3 id="1、-SSH-key和使用多个github账号"><a href="#1、-SSH-key和使用多个github账号" class="headerlink" title="1、 SSH key和使用多个github账号"></a>1、 SSH key和使用多个github账号</h3><p>上面的两个教程里有说怎么在本地新建一个ssh key，并添加到github的过程，如果要使用第二个账号时，有些不同的地方。首先进入保存ssh key的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> ~/.ssh</div></pre></td></tr></table></figure>
+<p>这个目录是隐藏的，用ls命令不会回显。进入之后，如果之前已经创建了key，会有如下两个文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id_rsa  id_rsa.pub</div></pre></td></tr></table></figure>
+<p>有印象吧，然后再走上一次的流程，在.ssh目录输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"your-email@xxx.com"</span></div><div class="line">Generating public/private rsa key pair.</div><div class="line">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key(~/.ssh): second_key</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>注意要在上面的<strong>second_key</strong>那里输入新的key名词，然后后面一路回车。完了目录下会新增下面两个文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">second  second.pub</div></pre></td></tr></table></figure>
+<p>如果是在其他目录生成的这两个文件，可以拷贝到.ssh目录。把second.pub里的内容添加到github账号，具体可以参考上面的两个教程。<br>再在.ssh目录新建一个config文件，添加以下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Host defaultgit</div><div class="line">    HostName github.com</div><div class="line">    PreferredAuthentications publickey</div><div class="line">    IdentityFile ~/.ssh/id_rsa</div><div class="line"></div><div class="line">Host secondgit</div><div class="line">    HostName github.com</div><div class="line">    PreferredAuthentications publickey</div><div class="line">    IdentityFile ~/.ssh/second</div></pre></td></tr></table></figure>
+<p>Host 名称可以随意起，表示SSH连接的单独代号，IdentityFile告诉SSH去哪里读私钥。执行ssh-add添加新生成的私钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-add ~/.ssh/second</div></pre></td></tr></table></figure>
+<p>然后测试是否配置成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@defaultgit</div><div class="line">Hi yourname1! You have successfully ...</div><div class="line"></div><div class="line">$ ssh -T git@secondgit</div><div class="line">Hi yourname2! You have successfully ...</div></pre></td></tr></table></figure>
+<p>如果出现上面的提示，说明配置成功。以后用到那个账号，就使用哪个账号Host对应的名称，例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> git@defaultgit:xxx/yyy.git</div><div class="line">git <span class="built_in">clone</span> git@secondgit:xxx/yyy.git</div></pre></td></tr></table></figure>
+<p>上面克隆了同一个仓库，但使用的是不同的SSH连接。也可以只在项目下配置区别于全局的设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git config --global --unset user.name</div><div class="line">git config --global --unset user.email</div><div class="line"></div><div class="line">git config user.name <span class="string">"new name"</span></div><div class="line">git config user.email <span class="string">"new email"</span></div></pre></td></tr></table></figure>
+<p>用户名的邮箱就是注册github账号使用的用户名和邮箱，这样在每个目录下提交就可以自动识别github账号了。</p>
+<h3 id="2、部署Hexo"><a href="#2、部署Hexo" class="headerlink" title="2、部署Hexo"></a>2、部署Hexo</h3><p>配置Hexo的部署部分，repo的配置特别注意，需要github网址URL+用户名+repo名，如下在deploy节点</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">    type:</span> git</div><div class="line"><span class="attr">    repo:</span> https://github.com/user-name/repo-name</div><div class="line"><span class="attr">    branch:</span> master</div></pre></td></tr></table></figure>
+<p>这里的user-name和repo-name是github账户的用户名和仓库名，一般格式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://github.com/ngbyte/ngbyte.github.com</div></pre></td></tr></table></figure>
+<p>还有就是部署时候如果提示找不到仓库，多半就是deploy节点的repo没有配置好，按照上面格式来填写就可以了。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/30/Hello-Hexo/" data-id="cjjwwyg8c00009p660iwbop13" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-a-simple-python-spider-md" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/10/a-simple-python-spider-md/">一个简单的Python爬虫</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2016/04/10/a-simple-python-spider-md/" class="article-date"><time datetime="2016-04-10T06:01:39.000Z" itemprop="datePublished">2016-04-10</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于我经常逛微博，看到某些博主的图片都很好看，就想下载到本地保存起来，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫比较方便，考虑如果使用爬虫框架的话还要二次学习，于是偷懒直接手工撸了起来。</p>
+<p>除了需要 Python 环境外，还需要安装 requests、BeautifulSoup4等。获取微博页面内容时使用cookie的方式，这样不需要用户名和密码就可以请求到微博。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pip install requests BeautifulSoup4</div></pre></td></tr></table></figure></p>
+<p>好了，准备工作基本OK。这个爬虫是从新浪微博上爬取某个博主的所有图片，在观察了新浪微博里图片URL的规律后，发现链接主要有3部分构成，如下。img-key 部分我估计是存取图片的唯一ID值，part2 取不同的值，会得到不同尺寸的图片，最大尺寸时，part2取值 ‘large’，有了这个规律就好办了，将页面所有图片满足3段式的链接中间那部分替换成’large’，再下载图片即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://ww2.sinaimg.cn/part2/img-key.jpg</div></pre></td></tr></table></figure>
+<p>另外，由于使用的是 <em>weibo.cn</em> 域名，从浏览器里得到是一张图片和一个<strong>更多</strong>作为链接，点了链接才看得到所有图片，所以爬每个页面有个二次请求，将更多的图片下载下来。为了避免重复下载导致图片难以维护，保存图片时，将微博的发布日期和图片链接的MD5值组合成图片名称，这样下载到本地后，图片会以在微博上发布的日期排序，同时，再次运行爬虫时，将图片名称后半截的MD5值提取出来，在下载时候对比该图片的链接MD5值是否已经存在，避免重复下载。</p>
+<p>下面是下载一个页面里所有图片的函数代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">download_one_page</span><span class="params">(soup, user_id, exists)</span>:</span></div><div class="line"><span class="string">"""</span></div><div class="line">download all pictures on the website</div><div class="line">:param soup: web page soup</div><div class="line">:param user_id: the weibo user id</div><div class="line">:param exists exists pic names</div><div class="line">:return: find weibo divs, return True, else False</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="comment"># ten weibo div in every page</span></div><div class="line">divs = soup.find_all(div_filter_func)</div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="keyword">not</span> divs:</div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> div <span class="keyword">in</span> divs:</div><div class="line">    spans = div.find_all(<span class="string">'span'</span>)</div><div class="line">    wb_post_time = get_weibo_post_time(spans[<span class="number">1</span>].text)</div><div class="line"></div><div class="line">    <span class="comment"># abstract a link</span></div><div class="line">    all_img = div.find_all(<span class="string">'img'</span>)</div><div class="line">    img_link = filter(<span class="keyword">lambda</span> x: x.endswith(<span class="string">'.jpg'</span>), [all_img[<span class="number">0</span>].get(<span class="string">'src'</span>)] <span class="keyword">if</span> all_img <span class="keyword">else</span> [])</div><div class="line"></div><div class="line">    <span class="comment"># abstract more links</span></div><div class="line">    more_links = [link[<span class="string">'href'</span>] <span class="keyword">for</span> link <span class="keyword">in</span> div.find_all(<span class="string">'a'</span>) <span class="keyword">if</span> link.get(<span class="string">'href'</span>) <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>]</div><div class="line">    more_links_real = [x <span class="keyword">for</span> x <span class="keyword">in</span> more_links <span class="keyword">if</span> <span class="string">'picAll'</span> <span class="keyword">in</span> x]</div><div class="line">    <span class="keyword">if</span> more_links_real:</div><div class="line">        more_content = requests.get(more_links_real[<span class="number">0</span>], cookies = get_cookie())</div><div class="line">        more_soup = BeautifulSoup(more_content.content, <span class="string">'html.parser'</span>)</div><div class="line">        more_soup_urls = get_more_page_image_url(more_soup)</div><div class="line">        img_link = more_soup_urls <span class="keyword">if</span> more_soup_urls <span class="keyword">else</span> img_link</div><div class="line"></div><div class="line">    <span class="comment"># download</span></div><div class="line">    <span class="keyword">for</span> idx, link <span class="keyword">in</span> enumerate(img_link):</div><div class="line">        md5 = calculate_md5(link)</div><div class="line">        <span class="keyword">if</span> md5 <span class="keyword">not</span> <span class="keyword">in</span> exists:</div><div class="line">            large_link = replace_part2_in_link(link)</div><div class="line">            image_content = requests.get(large_link, cookies = get_cookie())</div><div class="line"></div><div class="line">            image_name = <span class="string">"&#123;&#125;&gt;&#123;&#125;_&#123;&#125;"</span>.format(wb_post_time, str(idx), md5)</div><div class="line">            <span class="keyword">with</span> open(<span class="string">'./downloads/&#123;&#125;/&#123;&#125;.jpg'</span>.format(user_id, image_name), <span class="string">'wb'</span>) <span class="keyword">as</span> jpg:</div><div class="line">                jpg.write(image_content.content)</div><div class="line"></div><div class="line">                exists.add(image_name)</div><div class="line">                print(<span class="string">'download'</span>, large_link, image_name, datetime.datetime.now())</div><div class="line">                time.sleep(random.random())</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            print(<span class="string">'jump over:'</span>, link)</div><div class="line"></div><div class="line">sleep = <span class="number">8</span> * random.random()</div><div class="line">print(<span class="string">'sleep'</span>, sleep, <span class="string">'seconds'</span>)</div><div class="line">time.sleep(sleep)</div><div class="line"><span class="keyword">return</span> <span class="keyword">True</span></div></pre></td></tr></table></figure>
+<p>在某次打算爬取大量某个博主的图片时，出现了请求失败，查了资料发现是网站有反爬虫功能，于是使用了一些简单的策略，比如请求加上头消息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">header = &#123;</div><div class="line">      <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.112 Safari/537.36'</span>,</div><div class="line">      <span class="string">'Accept'</span>: <span class="string">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span>,</div><div class="line">      <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.8,en;q=0.6'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除此之外，对请求的cookie也在末尾添加随机数，每次用不同的cookie去请求，并且，每爬取完一个页面的内容，随机休眠0-8秒，这样做虽然抓取速度慢了点，但至少能保证每次抓取不会半途报错。</p>
+<p>完整的代码示例<a href="https://github.com/hsqs/spiders/blob/master/weibo/weibo_miner.py" target="_blank" rel="external">点这里</a>。    </p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/04/10/a-simple-python-spider-md/" data-id="cjjwwyg8i00039p667vwvbywu" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-spider/">python spider</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-some-usage-of-mybatis-md" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/27/some-usage-of-mybatis-md/">Mybatis 语法上的一些技巧</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2015/12/27/some-usage-of-mybatis-md/" class="article-date"><time datetime="2015-12-27T05:36:04.000Z" itemprop="datePublished">2015-12-27</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Mybatis前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧，其实这些都在官方文档里都有说明，只是自己用到而已。</p>
+<h3 id="1、foreach-in灵活使用"><a href="#1、foreach-in灵活使用" class="headerlink" title="1、foreach-in灵活使用"></a>1、foreach-in灵活使用</h3><p>在使用 foreach 标签时，通常用于构建 IN 子查询或插入数据语句，构建 IN 语句的语法如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">    #&#123;m&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>foreach 的各项参数就不用多解释了，这里，open 和 close 都显示的写到了foreach标签里。同理，当构建插入多条数据的语句时，同样的语法，不过稍有点变化：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></div><div class="line">    (#&#123;m.id&#125;, #&#123;m.name&#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>注意，foreach 里的语句是带了圆括号，去掉了 open 和 close 属性，分隔符依旧是,，这是其中一种对 values 后面 SQL 的一种分解方式，或者用下面这种：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"m"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">"),("</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">    #&#123;m.id&#125;, #&#123;m.name&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这里唯一注意的是 separator 的变化，这两种插入数据时的写法，效果都是一致的。想到这里，separator 可以是多个字符，甚至是SQL语句的一部分，怎么使用就看业务场景了。</p>
+<h3 id="2、SQL-注解"><a href="#2、SQL-注解" class="headerlink" title="2、SQL 注解"></a>2、SQL 注解</h3><p>对于比较简单的一两行的 SQL，可以不用在 mapper 文件里写配置，直接在Java代码里添加注解的方式来实现。这样做还有一个就是在调试的时候，可以不用再去找 xml 文件里的 SQL 代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Select</span>(<span class="string">"SELECT name FROM user WHERE province_id = #&#123;address&#125; AND gender = #&#123;gender&#125;"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>Integer address, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gender)</span>;</div></pre></td></tr></table></figure>
+<p>除了@Select 注解，还有@Insert、@Update、@Delete，使用方法同上。这样SQL和Java代码放在一起，<br>查看起来非常的方便。</p>
+<h3 id="3、注解参数"><a href="#3、注解参数" class="headerlink" title="3、注解参数"></a>3、注解参数</h3><p>在传入多个参数到 Mybatis 的时候，可以用List、Map传递，对于Map这种情况比较麻烦，首先要专门构造一个Map，另外最难以忍受的是用Map传多个参数不知道里面到底有什么内容，只有到执行SQL时才会报出问题，维护起来也极为麻烦。<br>这里可以使用参数注解，省去这一堆步骤。同时，直观的展示有哪些变量传入SQL，这样调用接口传参数就可以了，调用者不用关心 SQL 里参数用的是哪个名字。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">selectName</span><span class="params">(@Param(<span class="string">"address"</span>)</span>List&lt;Integer&gt; addrs, @<span class="title">Param</span><span class="params">(<span class="string">"gender"</span>)</span><span class="keyword">char</span> gds)</span>;</div></pre></td></tr></table></figure>
+<p>在mapper文件里，用 @Param 里的注解名称来取参数，例如这里的address和gender，SQL里取参数方式不变，用#{gender}或${gender}。</p>
+<h3 id="4、insert和select语句调优（2016-07-21-补充）"><a href="#4、insert和select语句调优（2016-07-21-补充）" class="headerlink" title="4、insert和select语句调优（2016-07-21 补充）"></a>4、insert和select语句调优（2016-07-21 补充）</h3><p>在插入或查询时，在mapper文件里，select要写resultMap标签来映射属性和列的关系，insert语句要写一个foreach语句来拼接values后面的内容，这一切都没有问题，但是当一次性查询或插入上千、上万条数据，Mybatis就显得力不从心。Mybatis虽然有强大的动态拼接SQL的能力，但此时应用比较简单，可以考虑尽量减少Mybatis的工作，把它仅仅当做是SQL语句来执行。     </p>
+<p>对insert语句，values后面的内容可以预先在Java代码里拼接好，直接传入：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertPOJO"</span> <span class="attr">parameterType</span>=<span class="string">"java.util.List"</span>&gt;</span></div><div class="line">    insert into </div><div class="line">        table(...)</div><div class="line">    values</div><div class="line">        <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"list"</span> <span class="attr">item</span>=<span class="string">"value"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span>&gt;</span></div><div class="line">            $&#123;value&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>甚至，连foreach标签也去掉，在Java里就全部拼接好。不过我比较倾向于上面这种，可以看出是插入多条数据，又不至于插入速率太慢。  </p>
+<p>对select语句类似：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectPOJO"</span> <span class="attr">resultType</span>=<span class="string">"java.util.Map"</span>&gt;</span></div><div class="line">    select </div><div class="line">        *</div><div class="line">    from</div><div class="line">        table</div><div class="line">    where</div><div class="line">        ...    </div><div class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>这里让返回值为Map，在Java里用 List&lt;Map&lt;Object, Object&gt;&gt; 接收，剩下的工作就是将返回结果再转换为List&lt;Pojo&gt;对象。工作量增加了一些，但对数据流较大的查询，性能提升比较明显，查一万条（每条接近40列）从接近两秒减少到不到一秒，还是值得的。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/12/27/some-usage-of-mybatis-md/" data-id="cjjwwyg8q000g9p666rga1q56" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mybatis/">mybatis</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <div id="page-nav">
+    <nav><ul class="pagination"><li><a class="page-prev" rel="prev" href="/"><i class="fa fa-chevron-left"></i> Prev</a></li><li><a class="page-number" href="/">1</a></li><li class="active"><span class="page-number">2</span></li><li class="disabled"><span class="page-next">Next <i class="fa fa-chevron-right"></i></a></li></ul></nav>
+  </div>
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/GIT/">GIT</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Hexo/">Hexo</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/List/">List</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Option/">Option</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/brew/">brew</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/bug/">bug</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/for-comprehension/">for-comprehension</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/gc/">gc</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/idea/">idea</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/java/">java</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/mybatis/">mybatis</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/proxy/">proxy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python-spider/">python spider</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/scala/">scala</a><span class="sidebar-module-list-count">6</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/偏函数/">偏函数</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/多线程/">多线程</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/教程/">教程</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/枚举/">枚举</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/模式匹配/">模式匹配</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/重构/">重构</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/GIT/" style="font-size: 10px;">GIT</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/List/" style="font-size: 10px;">List</a> <a href="/tags/Option/" style="font-size: 10px;">Option</a> <a href="/tags/brew/" style="font-size: 10px;">brew</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/for-comprehension/" style="font-size: 10px;">for-comprehension</a> <a href="/tags/gc/" style="font-size: 10px;">gc</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/python-spider/" style="font-size: 10px;">python spider</a> <a href="/tags/scala/" style="font-size: 20px;">scala</a> <a href="/tags/偏函数/" style="font-size: 10px;">偏函数</a> <a href="/tags/多线程/" style="font-size: 10px;">多线程</a> <a href="/tags/教程/" style="font-size: 10px;">教程</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/模式匹配/" style="font-size: 10px;">模式匹配</a> <a href="/tags/重构/" style="font-size: 10px;">重构</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/07/">July 2018</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/03/">March 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/02/">February 2017</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/09/">September 2016</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2015/12/">December 2015</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2018/07/22/tune-idea-on-startup/">Idea 启动调优</a>
         </li>
       
-        <li class="nav-item">
-          
-            <a href="/about" class="item-link">关于</a>
-          
+        <li>
+          <a href="/2018/07/17/find-a-bug-in-scala/">给 Scala 的源码找了一个 bug</a>
         </li>
       
-        <li class="nav-item">
-          
-            <a href="/archives" class="item-link">归档</a>
-          
+        <li>
+          <a href="/2018/07/17/reinstall-brew/">解决代理导致无法重新安装 brew 的问题</a>
         </li>
       
-        <li class="nav-item">
-          
-            <a href="/tags" class="item-link">标签</a>
-          
+        <li>
+          <a href="/2018/03/10/delete-local-git-ssh-config/">解决删除本地的 GIT 账号不生效的问题</a>
+        </li>
+      
+        <li>
+          <a href="/2017/02/19/scala-enumeration/">scala 的枚举类型</a>
         </li>
       
     </ul>
   </div>
-</header>
 
-  <main id='index'>
-  <div class="posts-list">
-    
-      <section>
-        <a href="/2016/07/30/Hello-Hexo/">
-          <h3 class='post-head'>
-            新加一个 GIT 账号创建 Hexo 博客
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>闲的蛋疼的我又开始折腾了，这次是通过Hexo来搭建个人博客，需要提前了解一些包括github、nodejs的基本使用，怎么搭建的过程就不多说了，网上有很多教程，这里推荐两个<a href="http://beiyuu.com/github-pages" target="_blank" rel="external">教程1</a>、<a href="http://www.jianshu.com/p/05289a4bc8b2" target="_blank" rel="external">教程2</a>，里面很详细的介绍了整个过程。   </p>
-              
-          
+
+
         </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/07/30</time>
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tags" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#Hexo" class='tag'>Hexo</a>
-
-  <a href="/tags/#教程" class='tag'>教程</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2016/04/10/a-simple-python-spider-md/">
-          <h3 class='post-head'>
-            一个简单的Python爬虫
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>由于我经常逛微博，看到某些博主的图片都很好看，就想下载到本地保存起来，于是萌生了搞个爬虫的想法。之前听说 Python 网络爬虫比较方便，考虑如果使用爬虫框架的话还要二次学习，于是偷懒直接手工撸了起来。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/04/10</time>
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tag" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#python spider" class='tag'>python spider</a>
-
-
-          
-        </div>
-      </section>
-    
-      <section>
-        <a href="/2015/12/27/some-usage-of-mybatis-md/">
-          <h3 class='post-head'>
-            Mybatis 语法上的一些技巧
-          </h3>
-        </a>
-        
-        <div class="post-content">
-          
-            
-              
-                <p>Mybatis前后在项目里一共用了大概1年时间，当时为了赶进度，只学了些基本的用法，后来慢慢积累了一些小技巧，其实这些都在官方文档里都有说明，只是自己用到而已。</p>
-              
-          
-        </div>
-        <div class='post-meta'>
-          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2015/12/27</time>
-          
-          
-            <span class="seperator">|</span>
-             
-                <i class="fa fa-tag" aria-hidden="true"></i>
-              
-             
-  <a href="/tags/#mybatis" class='tag'>mybatis</a>
-
-
-          
-        </div>
-      </section>
-    
-  </div>
-  <aside>
-    
-    
-    
-    
-  </aside>
-</main>
-
-  <div class="paging">
-  <div class="paging-container">
-    
-    <div class='page-prev'>
-      <a href="/">zurück</a>
     </div>
-    
-    
   </div>
-</div>
-
-
-
-  <footer>
-  <div class="copyright">
-    <div>
-      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
-    </div>
-    <div>
-      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Ling0fa 的博客<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
 
+  
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
 
 </body>
 </html>
