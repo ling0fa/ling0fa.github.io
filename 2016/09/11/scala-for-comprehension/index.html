@@ -5,22 +5,19 @@
   
   <title>Scala的for推导式 | Ling0fa 的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要总结for推导式的用法和内部原理。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-1、for推导式的一般用法1 for推导式包含一个或多个生成器表达式，外加可选的保护表达式（用于过滤诗句）。2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。3 示例，移除文本中的空行：   
-123456789101112">
+  <meta name="description" content="1、for推导式的一般用法1 for推导式包含一个或多个生成器表达式，外加可选的保护表达式（用于过滤诗句）。2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。3 示例，移除文本中的空行：   
+12345678910111213141516object RemeoveBlanks &amp;#123;  def apply(path:String, compressWhiteSpa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scala的for推导式">
 <meta property="og:url" content="http://yoursite.com/2016/09/11/scala-for-comprehension/index.html">
 <meta property="og:site_name" content="Ling0fa 的博客">
-<meta property="og:description" content="本文主要总结for推导式的用法和内部原理。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-1、for推导式的一般用法1 for推导式包含一个或多个生成器表达式，外加可选的保护表达式（用于过滤诗句）。2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。3 示例，移除文本中的空行：   
-123456789101112">
-<meta property="og:updated_time" content="2018-07-17T14:11:09.000Z">
+<meta property="og:description" content="1、for推导式的一般用法1 for推导式包含一个或多个生成器表达式，外加可选的保护表达式（用于过滤诗句）。2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。3 示例，移除文本中的空行：   
+12345678910111213141516object RemeoveBlanks &amp;#123;  def apply(path:String, compressWhiteSpa">
+<meta property="og:updated_time" content="2018-07-22T14:21:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scala的for推导式">
-<meta name="twitter:description" content="本文主要总结for推导式的用法和内部原理。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-1、for推导式的一般用法1 for推导式包含一个或多个生成器表达式，外加可选的保护表达式（用于过滤诗句）。2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。3 示例，移除文本中的空行：   
-123456789101112">
+<meta name="twitter:description" content="1、for推导式的一般用法1 for推导式包含一个或多个生成器表达式，外加可选的保护表达式（用于过滤诗句）。2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。3 示例，移除文本中的空行：   
+12345678910111213141516object RemeoveBlanks &amp;#123;  def apply(path:String, compressWhiteSpa">
   
     <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
   
@@ -109,8 +106,7 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>本文主要总结for推导式的用法和内部原理。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<h3 id="1、for推导式的一般用法"><a href="#1、for推导式的一般用法" class="headerlink" title="1、for推导式的一般用法"></a>1、for推导式的一般用法</h3><p>1 for推导式包含一个或多个<strong>生成器</strong>表达式，外加可选的<strong>保护表达式</strong>（用于过滤诗句）。<br>2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。<br>3 示例，移除文本中的空行：   </p>
+        <h3 id="1、for推导式的一般用法"><a href="#1、for推导式的一般用法" class="headerlink" title="1、for推导式的一般用法"></a>1、for推导式的一般用法</h3><p>1 for推导式包含一个或多个<strong>生成器</strong>表达式，外加可选的<strong>保护表达式</strong>（用于过滤诗句）。<br>2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。<br>3 示例，移除文本中的空行：   </p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">RemeoveBlanks</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(path:<span class="type">String</span>, compressWhiteSpace:<span class="type">Boolean</span>=<span class="literal">false</span>):<span class="type">Seq</span>[<span class="type">String</span>]=</div><div class="line">    <span class="keyword">for</span> &#123;</div><div class="line">      line &lt;- scala.io.<span class="type">Source</span>.fromFile(path).getLines.toSeq        <span class="comment">// 1</span></div><div class="line">      <span class="keyword">if</span> line.matches(<span class="string">""</span><span class="string">"^\s*$"</span><span class="string">""</span>) == <span class="literal">false</span>                        <span class="comment">// 2</span></div><div class="line">      line2 = <span class="keyword">if</span> (compressWhiteSpace) line replaceAll(<span class="string">"\\s+"</span>, <span class="string">" "</span>) <span class="comment">// 3</span></div><div class="line">              <span class="keyword">else</span> line</div><div class="line">    &#125; <span class="keyword">yield</span> line2                                                  <span class="comment">// 4</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args:<span class="type">Array</span>[<span class="type">String</span>]) = <span class="keyword">for</span> &#123;</div><div class="line">    path2 &lt;- args                                                  <span class="comment">// 5</span></div><div class="line">    (compress, path) = <span class="keyword">if</span> (path2 startWith <span class="string">"-"</span>) (<span class="literal">true</span>, path2.substring(<span class="number">1</span>))</div><div class="line">                       <span class="keyword">else</span> (<span class="literal">false</span>, path2)                         <span class="comment">// 6</span></div><div class="line">    line &lt;- apply(path, compress)</div><div class="line">  &#125; println(line)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面的注释中：<br>&emsp;&emsp;1、 getLines返回的对象是scala.collection.Iterator，无法用于for推导式，故使用toSeq转换为序列。<br>&emsp;&emsp;2、 使用正则表达式过滤出非空白行。<br>&emsp;&emsp;3、 如果压缩标记为true，则将所有空白字符替换为一个空格。<br>&emsp;&emsp;4、 使用yield返回内容。<br>&emsp;&emsp;5、 对参数里的每个文件进行处理。<br>&emsp;&emsp;6、 如果文件路径以“-”开头，则标记为压缩空白字符，否则不压缩。<br>&emsp;&emsp;1、3、5、6是生成器表达式，2是保护表达式。</p>
 <p>注意，标记4用了yield，表明返回结果是惰性的，如果调用apply方法返回结果里只会计算出头部，序列的剩余部分（用?表示）只有使用到了才会计算出来。</p>
@@ -153,7 +149,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/11/scala-for-comprehension/" data-id="cjjwxizt4000blc66c4d6gs5g" class="article-share-link">
+      <a data-url="http://yoursite.com/2016/09/11/scala-for-comprehension/" data-id="cjjwxl797000cor662s94txg6" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       

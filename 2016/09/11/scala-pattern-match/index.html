@@ -5,22 +5,19 @@
   
   <title>Scala的模式匹配 | Ling0fa 的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要总结模式匹配的用法。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。
-1、简单匹配123456789val bools = Seq(true, false)for (bool &amp;lt;- bools) &amp;">
+  <meta name="description" content="Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。
+1、简单匹配123456789val bools = Seq(true, false)for (bool &amp;lt;- bools) &amp;#123;  bool match &amp;#123;    case true =&amp;gt; println(&quot;hello&quot;)    case">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scala的模式匹配">
 <meta property="og:url" content="http://yoursite.com/2016/09/11/scala-pattern-match/index.html">
 <meta property="og:site_name" content="Ling0fa 的博客">
-<meta property="og:description" content="本文主要总结模式匹配的用法。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。
-1、简单匹配123456789val bools = Seq(true, false)for (bool &amp;lt;- bools) &amp;">
-<meta property="og:updated_time" content="2018-07-17T14:11:09.000Z">
+<meta property="og:description" content="Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。
+1、简单匹配123456789val bools = Seq(true, false)for (bool &amp;lt;- bools) &amp;#123;  bool match &amp;#123;    case true =&amp;gt; println(&quot;hello&quot;)    case">
+<meta property="og:updated_time" content="2018-07-22T14:21:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scala的模式匹配">
-<meta name="twitter:description" content="本文主要总结模式匹配的用法。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。
-1、简单匹配123456789val bools = Seq(true, false)for (bool &amp;lt;- bools) &amp;">
+<meta name="twitter:description" content="Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。
+1、简单匹配123456789val bools = Seq(true, false)for (bool &amp;lt;- bools) &amp;#123;  bool match &amp;#123;    case true =&amp;gt; println(&quot;hello&quot;)    case">
   
     <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
   
@@ -109,8 +106,7 @@ Scala的模式匹配有点像以前接触的switch-case语句，但功能比swit
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>本文主要总结模式匹配的用法。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<p>Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。</p>
+        <p>Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。</p>
 <h3 id="1、简单匹配"><a href="#1、简单匹配" class="headerlink" title="1、简单匹配"></a>1、简单匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> bools = <span class="type">Seq</span>(<span class="literal">true</span>, <span class="literal">false</span>)</div><div class="line"><span class="keyword">for</span> (bool &lt;- bools) &#123;</div><div class="line">  bool <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="literal">true</span> =&gt; println(<span class="string">"hello"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="literal">false</span> =&gt; println(<span class="string">"world"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// hello</span></div><div class="line"><span class="comment">// world</span></div></pre></td></tr></table></figure>
 <p>case后面没有跟break语句。如果将上面任意一个case语句注释，编译器会抛出MatchError，因为case语句没有包含所有可能出现的情况。</p>
 <h3 id="2、match中的值、变量和类型"><a href="#2、match中的值、变量和类型" class="headerlink" title="2、match中的值、变量和类型"></a>2、match中的值、变量和类型</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  x &lt;- <span class="type">Seq</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3.7</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="symbol">'four</span>)</div><div class="line">&#125; &#123;</div><div class="line">  <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>          =&gt; <span class="string">"int 1"</span></div><div class="line">    <span class="keyword">case</span> i: <span class="type">Int</span>     =&gt; <span class="string">"other int :"</span> + i                <span class="comment">// 除1以外的所有整数</span></div><div class="line">    <span class="keyword">case</span> d: <span class="type">Double</span>  =&gt; <span class="string">"a double:"</span> + d</div><div class="line">    <span class="keyword">case</span> <span class="string">"one"</span>      =&gt; <span class="string">"String one"</span></div><div class="line">    <span class="keyword">case</span> s: <span class="type">String</span>  =&gt; <span class="string">"other string:"</span> + s</div><div class="line">    <span class="keyword">case</span> unexpected =&gt; <span class="string">"unexpected value:"</span> + unexpected <span class="comment">// 匹配其他的情况，x的值赋值给unexpected，类型为Any</span></div><div class="line">  &#125;</div><div class="line">  println(str)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -159,7 +155,7 @@ Scala的模式匹配有点像以前接触的switch-case语句，但功能比swit
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/11/scala-pattern-match/" data-id="cjjwxizti001hlc66f5va3x03" class="article-share-link">
+      <a data-url="http://yoursite.com/2016/09/11/scala-pattern-match/" data-id="cjjwxl79l001ior66ixa94kjt" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       

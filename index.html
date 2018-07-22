@@ -170,7 +170,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/22/tune-idea-on-startup/" data-id="cjjwxiztj001jlc66hgz8h8q3" class="article-share-link">
+      <a data-url="http://yoursite.com/2018/07/22/tune-idea-on-startup/" data-id="cjjwxl79m001jor666i0i2tjj" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -226,7 +226,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/17/find-a-bug-in-scala/" data-id="cjjwxizt10006lc66fnposx6j" class="article-share-link">
+      <a data-url="http://yoursite.com/2018/07/17/find-a-bug-in-scala/" data-id="cjjwxl7950007or66qynxj9pw" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -283,7 +283,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/17/reinstall-brew/" data-id="cjjwxizt20007lc66ysuw97ht" class="article-share-link">
+      <a data-url="http://yoursite.com/2018/07/17/reinstall-brew/" data-id="cjjwxl7950008or66vlin7j5m" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -340,7 +340,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/10/delete-local-git-ssh-config/" data-id="cjjwxizt00004lc66fm24wqxr" class="article-share-link">
+      <a data-url="http://yoursite.com/2018/03/10/delete-local-git-ssh-config/" data-id="cjjwxl7940005or66e9jktoz9" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -409,7 +409,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/19/scala-enumeration/" data-id="cjjwxizt30008lc66xi06t3bb" class="article-share-link">
+      <a data-url="http://yoursite.com/2017/02/19/scala-enumeration/" data-id="cjjwxl7960009or661bh4ps1y" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -476,7 +476,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/05/scala-partialfunction/" data-id="cjjwxizt6000flc66libux1po" class="article-share-link">
+      <a data-url="http://yoursite.com/2017/02/05/scala-partialfunction/" data-id="cjjwxl79a000gor663gj1yqlc" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -549,7 +549,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/11/a-refactor-of-threads-calling/" data-id="cjjwxizsw0001lc668xthhd3j" class="article-share-link">
+      <a data-url="http://yoursite.com/2016/09/11/a-refactor-of-threads-calling/" data-id="cjjwxl7900002or666148cvpo" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -591,8 +591,7 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>本文主要总结模式匹配的用法。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<p>Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。</p>
+        <p>Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。</p>
 <h3 id="1、简单匹配"><a href="#1、简单匹配" class="headerlink" title="1、简单匹配"></a>1、简单匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> bools = <span class="type">Seq</span>(<span class="literal">true</span>, <span class="literal">false</span>)</div><div class="line"><span class="keyword">for</span> (bool &lt;- bools) &#123;</div><div class="line">  bool <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="literal">true</span> =&gt; println(<span class="string">"hello"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="literal">false</span> =&gt; println(<span class="string">"world"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// hello</span></div><div class="line"><span class="comment">// world</span></div></pre></td></tr></table></figure>
 <p>case后面没有跟break语句。如果将上面任意一个case语句注释，编译器会抛出MatchError，因为case语句没有包含所有可能出现的情况。</p>
 <h3 id="2、match中的值、变量和类型"><a href="#2、match中的值、变量和类型" class="headerlink" title="2、match中的值、变量和类型"></a>2、match中的值、变量和类型</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  x &lt;- <span class="type">Seq</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3.7</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="symbol">'four</span>)</div><div class="line">&#125; &#123;</div><div class="line">  <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>          =&gt; <span class="string">"int 1"</span></div><div class="line">    <span class="keyword">case</span> i: <span class="type">Int</span>     =&gt; <span class="string">"other int :"</span> + i                <span class="comment">// 除1以外的所有整数</span></div><div class="line">    <span class="keyword">case</span> d: <span class="type">Double</span>  =&gt; <span class="string">"a double:"</span> + d</div><div class="line">    <span class="keyword">case</span> <span class="string">"one"</span>      =&gt; <span class="string">"String one"</span></div><div class="line">    <span class="keyword">case</span> s: <span class="type">String</span>  =&gt; <span class="string">"other string:"</span> + s</div><div class="line">    <span class="keyword">case</span> unexpected =&gt; <span class="string">"unexpected value:"</span> + unexpected <span class="comment">// 匹配其他的情况，x的值赋值给unexpected，类型为Any</span></div><div class="line">  &#125;</div><div class="line">  println(str)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -641,7 +640,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/11/scala-pattern-match/" data-id="cjjwxizti001hlc66f5va3x03" class="article-share-link">
+      <a data-url="http://yoursite.com/2016/09/11/scala-pattern-match/" data-id="cjjwxl79l001ior66ixa94kjt" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -683,8 +682,7 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>本文主要总结for推导式的用法和内部原理。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<h3 id="1、for推导式的一般用法"><a href="#1、for推导式的一般用法" class="headerlink" title="1、for推导式的一般用法"></a>1、for推导式的一般用法</h3><p>1 for推导式包含一个或多个<strong>生成器</strong>表达式，外加可选的<strong>保护表达式</strong>（用于过滤诗句）。<br>2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。<br>3 示例，移除文本中的空行：   </p>
+        <h3 id="1、for推导式的一般用法"><a href="#1、for推导式的一般用法" class="headerlink" title="1、for推导式的一般用法"></a>1、for推导式的一般用法</h3><p>1 for推导式包含一个或多个<strong>生成器</strong>表达式，外加可选的<strong>保护表达式</strong>（用于过滤诗句）。<br>2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。<br>3 示例，移除文本中的空行：   </p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">RemeoveBlanks</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(path:<span class="type">String</span>, compressWhiteSpace:<span class="type">Boolean</span>=<span class="literal">false</span>):<span class="type">Seq</span>[<span class="type">String</span>]=</div><div class="line">    <span class="keyword">for</span> &#123;</div><div class="line">      line &lt;- scala.io.<span class="type">Source</span>.fromFile(path).getLines.toSeq        <span class="comment">// 1</span></div><div class="line">      <span class="keyword">if</span> line.matches(<span class="string">""</span><span class="string">"^\s*$"</span><span class="string">""</span>) == <span class="literal">false</span>                        <span class="comment">// 2</span></div><div class="line">      line2 = <span class="keyword">if</span> (compressWhiteSpace) line replaceAll(<span class="string">"\\s+"</span>, <span class="string">" "</span>) <span class="comment">// 3</span></div><div class="line">              <span class="keyword">else</span> line</div><div class="line">    &#125; <span class="keyword">yield</span> line2                                                  <span class="comment">// 4</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args:<span class="type">Array</span>[<span class="type">String</span>]) = <span class="keyword">for</span> &#123;</div><div class="line">    path2 &lt;- args                                                  <span class="comment">// 5</span></div><div class="line">    (compress, path) = <span class="keyword">if</span> (path2 startWith <span class="string">"-"</span>) (<span class="literal">true</span>, path2.substring(<span class="number">1</span>))</div><div class="line">                       <span class="keyword">else</span> (<span class="literal">false</span>, path2)                         <span class="comment">// 6</span></div><div class="line">    line &lt;- apply(path, compress)</div><div class="line">  &#125; println(line)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面的注释中：<br>&emsp;&emsp;1、 getLines返回的对象是scala.collection.Iterator，无法用于for推导式，故使用toSeq转换为序列。<br>&emsp;&emsp;2、 使用正则表达式过滤出非空白行。<br>&emsp;&emsp;3、 如果压缩标记为true，则将所有空白字符替换为一个空格。<br>&emsp;&emsp;4、 使用yield返回内容。<br>&emsp;&emsp;5、 对参数里的每个文件进行处理。<br>&emsp;&emsp;6、 如果文件路径以“-”开头，则标记为压缩空白字符，否则不压缩。<br>&emsp;&emsp;1、3、5、6是生成器表达式，2是保护表达式。</p>
 <p>注意，标记4用了yield，表明返回结果是惰性的，如果调用apply方法返回结果里只会计算出头部，序列的剩余部分（用?表示）只有使用到了才会计算出来。</p>
@@ -727,7 +725,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/11/scala-for-comprehension/" data-id="cjjwxizt4000blc66c4d6gs5g" class="article-share-link">
+      <a data-url="http://yoursite.com/2016/09/11/scala-for-comprehension/" data-id="cjjwxl797000cor662s94txg6" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -769,8 +767,7 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
+        <h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
 <li>Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  </li>
 <li>Scala里常见的容器像List、Map等都可以使用for推导式，Scala的for推导式是一个语法糖，最终都会被展开为对foreach、map、flatMap、withFilter的调用，Option实现了这些方法，所以可以在for推导式中使用Option容器。</li>
 <li>Option的API定义：</li>
@@ -815,7 +812,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/09/04/scala-option-and-others/" data-id="cjjwxizt4000dlc664fof8l6g" class="article-share-link">
+      <a data-url="http://yoursite.com/2016/09/04/scala-option-and-others/" data-id="cjjwxl798000eor662grr5kqk" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
