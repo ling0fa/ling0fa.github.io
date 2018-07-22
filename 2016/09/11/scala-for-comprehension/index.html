@@ -1,68 +1,78 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Scala的for推导式 | Ling0fa 的博客</title>
-  
-  
-  <meta name="description" content="本文主要总结for推导式的用法和内部原理。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-1、for推导式的一般用法1 for推导式包含一个或多个生成器表达式，外加可选的保护表达式（用于过滤诗句）。2 推导式可以用于生成新的容器，也可以执">
-  
-  
+<!DOCTYPE html>
+<html lang=null>
+  <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="Scala的for推导式"/>
-  <meta property="og:site_name" content="Ling0fa 的博客"/>
-
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="null">
+  <meta name="keywords" content="undefined">
   
-    <meta property="og:image" content="undefined"/>
+    <link rel="icon" href="">
   
-
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
+    
+  <title>Scala的for推导式 | Ling0fa 的博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Ling0fa 的博客</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>Ling0fa 的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
 </header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-09-11T02:27:42.000Z"><a href="/2016/09/11/scala-for-comprehension/">2016-09-11</a></time>
-      
-      
-  
-    <h1 class="title">Scala的for推导式</h1>
-  
 
-    </header>
-    <div class="entry">
-      
-        <p><em>本文主要总结for推导式的用法和内部原理。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>Scala的for推导式</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/09/11</time>
+            
+            
+              | 
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#for-comprehension" class='tag'>for-comprehension</a>
+
+
+            
+          </div>
+          <p><em>本文主要总结for推导式的用法和内部原理。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
 <h3 id="1、for推导式的一般用法"><a href="#1、for推导式的一般用法" class="headerlink" title="1、for推导式的一般用法"></a>1、for推导式的一般用法</h3><p>1 for推导式包含一个或多个<strong>生成器</strong>表达式，外加可选的<strong>保护表达式</strong>（用于过滤诗句）。<br>2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。<br>3 示例，移除文本中的空行：   </p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">RemeoveBlanks</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(path:<span class="type">String</span>, compressWhiteSpace:<span class="type">Boolean</span>=<span class="literal">false</span>):<span class="type">Seq</span>[<span class="type">String</span>]=</div><div class="line">    <span class="keyword">for</span> &#123;</div><div class="line">      line &lt;- scala.io.<span class="type">Source</span>.fromFile(path).getLines.toSeq        <span class="comment">// 1</span></div><div class="line">      <span class="keyword">if</span> line.matches(<span class="string">""</span><span class="string">"^\s*$"</span><span class="string">""</span>) == <span class="literal">false</span>                        <span class="comment">// 2</span></div><div class="line">      line2 = <span class="keyword">if</span> (compressWhiteSpace) line replaceAll(<span class="string">"\\s+"</span>, <span class="string">" "</span>) <span class="comment">// 3</span></div><div class="line">              <span class="keyword">else</span> line</div><div class="line">    &#125; <span class="keyword">yield</span> line2                                                  <span class="comment">// 4</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args:<span class="type">Array</span>[<span class="type">String</span>]) = <span class="keyword">for</span> &#123;</div><div class="line">    path2 &lt;- args                                                  <span class="comment">// 5</span></div><div class="line">    (compress, path) = <span class="keyword">if</span> (path2 startWith <span class="string">"-"</span>) (<span class="literal">true</span>, path2.substring(<span class="number">1</span>))</div><div class="line">                       <span class="keyword">else</span> (<span class="literal">false</span>, path2)                         <span class="comment">// 6</span></div><div class="line">    line &lt;- apply(path, compress)</div><div class="line">  &#125; println(line)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面的注释中：<br>&emsp;&emsp;1、 getLines返回的对象是scala.collection.Iterator，无法用于for推导式，故使用toSeq转换为序列。<br>&emsp;&emsp;2、 使用正则表达式过滤出非空白行。<br>&emsp;&emsp;3、 如果压缩标记为true，则将所有空白字符替换为一个空格。<br>&emsp;&emsp;4、 使用yield返回内容。<br>&emsp;&emsp;5、 对参数里的每个文件进行处理。<br>&emsp;&emsp;6、 如果文件路径以“-”开头，则标记为压缩空白字符，否则不压缩。<br>&emsp;&emsp;1、3、5、6是生成器表达式，2是保护表达式。</p>
@@ -97,86 +107,96 @@
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> map = <span class="type">Map</span>(<span class="string">"one"</span> -&gt; <span class="number">1</span>, <span class="string">"two"</span> -&gt; <span class="number">2</span>)</div><div class="line"><span class="keyword">val</span> list1 = <span class="keyword">for</span> &#123;</div><div class="line">  (key, value) &lt;- map</div><div class="line">  i10 = value + <span class="number">10</span></div><div class="line">&#125; <span class="keyword">yield</span> i10</div><div class="line"><span class="comment">// list1: scala.collection.immutable.Iterable[Int] = List(11, 12)</span></div><div class="line"></div><div class="line"><span class="comment">// 翻译后的语句</span></div><div class="line"><span class="keyword">val</span> list2 = <span class="keyword">for</span> &#123;</div><div class="line">  (i, i10) &lt;- <span class="keyword">for</span> &#123;               <span class="comment">// for推导式返回元组</span></div><div class="line">    x1 @ (key, value) &lt;- map      <span class="comment">// x1就是一个key-value的元组对象</span></div><div class="line">  &#125; <span class="keyword">yield</span> &#123;</div><div class="line">    <span class="keyword">val</span> x2 @ i10 = value + <span class="number">10</span>     <span class="comment">// x2和i10值一样</span></div><div class="line">    (x1, x2)                      <span class="comment">// 返回x1、x2，赋值给(i, i10)</span></div><div class="line">  &#125;</div><div class="line">&#125; <span class="keyword">yield</span> (i10)                     <span class="comment">// 其实最后返回的是i10，即x2的值</span></div></pre></td></tr></table></figure>
 <p>5 最后，写了这么多for推导式的工作原理，其实就是对for推导式内容的转化，转化时遵循一定规则，转化时调用容器的foreach、map、flatmap、withFilter方法，具体的规则可能不需要掌握，知道是怎么回事就好了。</p>
 
-      
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、for推导式的一般用法"><span class="toc-number">1.</span> <span class="toc-text">1、for推导式的一般用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、for推导式：内部机制"><span class="toc-number">2.</span> <span class="toc-text">2、for推导式：内部机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、for推导式的转化规则"><span class="toc-number">3.</span> <span class="toc-text">3、for推导式的转化规则</span></a></li></ol>
+        </div>
     </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/scala/">scala</a>, <a href="/tags/for-comprehension/">for-comprehension</a>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
   </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+</footer>
 
 
-<section id="comment">
-  <h1 class="title">Kommentare</h1>
-
-  
-      <div id="fb-root"></div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
 <script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
 
-<div class="fb-comments" data-href="http://yoursite.com/2016/09/11/scala-for-comprehension/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
       
-  
-</section>
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
 
-</div></div>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 Ling0fa 的博客
-  
-  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
 
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
 
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
 </script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
 
 </body>
 </html>

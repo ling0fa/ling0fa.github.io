@@ -1,156 +1,164 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>解决删除本地的 GIT 账号不生效的问题 | Ling0fa 的博客</title>
-  
-  
-  <meta name="description" content="因为在本地配置了两个 GIT 账号，一个用不到了打算删掉。  
-在 .ssh 目录删除所有和该账号相关的公钥私钥和配置，再去提交发现还是使用的是删除的账号。  
-So, Google it.  
-原来是 SSH 的缓存还没有清理掉，于是需要执行删除 SSH 缓存的命令：1$ ssh-add -D
-再">
-  
-  
+<!DOCTYPE html>
+<html lang=null>
+  <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="解决删除本地的 GIT 账号不生效的问题"/>
-  <meta property="og:site_name" content="Ling0fa 的博客"/>
-
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="null">
+  <meta name="keywords" content="undefined">
   
-    <meta property="og:image" content="undefined"/>
+    <link rel="icon" href="">
   
-
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
+    
+  <title>解决删除本地的 GIT 账号不生效的问题 | Ling0fa 的博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Ling0fa 的博客</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>Ling0fa 的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
 </header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-03-10T02:39:16.000Z"><a href="/2018/03/10/delete-local-git-ssh-config/">2018-03-10</a></time>
-      
-      
-  
-    <h1 class="title">解决删除本地的 GIT 账号不生效的问题</h1>
-  
 
-    </header>
-    <div class="entry">
-      
-        <p>因为在本地配置了两个 GIT 账号，一个用不到了打算删掉。  </p>
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>解决删除本地的 GIT 账号不生效的问题</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/03/10</time>
+            
+            
+              | 
+                  <i class="fa fa-tag" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#GIT" class='tag'>GIT</a>
+
+
+            
+          </div>
+          <p>因为在本地配置了两个 GIT 账号，一个用不到了打算删掉。  </p>
 <p>在 .ssh 目录删除所有和该账号相关的公钥私钥和配置，再去提交发现还是使用的是删除的账号。  </p>
 <p>So, Google it.  </p>
 <p>原来是 SSH 的缓存还没有清理掉，于是需要执行删除 SSH 缓存的命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-add -D</div></pre></td></tr></table></figure></p>
 <p>再去提交代码就 O98K 了。</p>
 
-      
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
     </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/GIT/">GIT</a>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
   </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+</footer>
 
 
-<section id="comment">
-  <h1 class="title">Kommentare</h1>
-
-  
-      <div id="fb-root"></div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
 <script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
 
-<div class="fb-comments" data-href="http://yoursite.com/2018/03/10/delete-local-git-ssh-config/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
       
-  
-</section>
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
 
-</div></div>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 Ling0fa 的博客
-  
-  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
 
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
 
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
 </script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
 
 </body>
 </html>

@@ -1,636 +1,428 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Ling0fa 的博客</title>
-  
-  
-  
+<!DOCTYPE html>
+<html lang=null>
+  <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="null">
+  <meta name="keywords" content="undefined">
   
-  <meta property="og:site_name" content="Ling0fa 的博客"/>
-
+    <link rel="icon" href="">
   
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
+    
+  <title>Ling0fa 的博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Ling0fa 的博客</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>Ling0fa 的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link active">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
 </header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper">
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-07-22T06:54:52.000Z"><a href="/2018/07/22/tune-idea-on-startup/">2018-07-22</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/07/22/tune-idea-on-startup/">Idea 启动调优</a></h1>
-  
 
-    </header>
-    <div class="entry">
-      
-        <p>说实话，idea 真的是第一次用就喜欢上了，但平时开发都在公司，电脑和代码都不允许带回家，在家写代码的时候很少，所以安装 Community 版足够了，不然早就买了 Ultimate 版。<br><img src="/pic/takemymoney.jpg" alt="shut up and take my money"></p>
-<h3 id="1、查看启动参数"><a href="#1、查看启动参数" class="headerlink" title="1、查看启动参数"></a>1、查看启动参数</h3><p>先安装最新版本，当前是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Version: 2018.1.6</div><div class="line">Build: 181.5540.7</div><div class="line">Released: July 12, 2018</div></pre></td></tr></table></figure>
-<p>安装完成后打开启动参数配置文件，我用的是 Mac，可以在 <code>Application</code> 里找到 <code>IntelliJ Idea CE</code> 后鼠标右键选择<code>显示包内容</code>，找到 <code>Contents/bin/idea.vmoptions</code> 文件就是 idea 的启动参数配置文件。打开看一下默认配置，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">-Xms128m</div><div class="line">-Xmx750m</div><div class="line">-XX:ReservedCodeCacheSize=240m</div><div class="line">-XX:+UseCompressedOops</div><div class="line">-Dfile.encoding=UTF-8</div><div class="line">-XX:+UseConcMarkSweepGC</div><div class="line">-XX:SoftRefLRUPolicyMSPerMB=50</div><div class="line">-ea</div><div class="line">-Dsun.io.useCanonCaches=false</div><div class="line">-Djava.net.preferIPv4Stack=true</div><div class="line">-XX:+HeapDumpOnOutOfMemoryError</div><div class="line">-XX:-OmitStackTraceInFastThrow</div><div class="line">-Xverify:none</div><div class="line"></div><div class="line">-XX:ErrorFile=$USER_HOME/java_error_in_idea_%p.log</div><div class="line">-XX:HeapDumpPath=$USER_HOME/java_error_in_idea.hprof</div><div class="line"></div><div class="line">-XX:+PrintGCDetails</div><div class="line">-XX:+PrintGCDateStamps</div><div class="line">-Xloggc:./idea.gc.log</div></pre></td></tr></table></figure>
-<p><code>-Xverify:none</code> 禁止了字节码验证，毕竟 idea 代码的可靠性是经过无数次的运行验证了的，所以启动时这一步可以关闭。最后三行是我加的，其余没有做修改。有几个不太常用的参数，参考了 JVMPocket 等资料，在 JDK8 里的含义如下：</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-XX:ReservedCodeCacheSize</td>
-<td>和 <code>-Xmaxjitcodesize</code> 等价，用来设置 CodeCache 的最大值，CodeCache 是用来存放 JIT 编译器编译后的代码，JDK8 64 位系统下默认 240M，如果 CodeCache 满了，会输出 <em>CodeCache is full</em> 日志，并禁止即时编译，如果启用 <code>-XX:+UseCodeCacheFlushing</code> 参数，会丢弃一般老的代码，并在可用空间超过 <code>-XX:CodeCacheMinimumFreeSpace=&lt;N&gt;</code> 指定的空间（默认 500K）后启用即时编译。<a href="https://blogs.oracle.com/poonam/why-do-i-get-message-codecache-is-full-compiler-has-been-disabled" target="_blank" rel="external">参考</a>。</td>
-</tr>
-<tr>
-<td>-XX:+UseCompressedOops</td>
-<td>64 位 OS 下有效，启动指针压缩。</td>
-</tr>
-<tr>
-<td>-XX:SoftRefLRUPolicyMSPerMB</td>
-<td>每兆堆空间中软引用距上一次被引用后的存活时间，默认一秒。</td>
-</tr>
-<tr>
-<td>-ea</td>
-<td>启动断言，在断言失败时抛出异常信息</td>
-</tr>
-<tr>
-<td>-Dsun.io.useCanonCaches</td>
-<td>文件的全路径会默认缓存 30 秒，一般关闭这个功能避免无法及时拿到文件更新后的信息。<a href="https://stackoverflow.com/a/7479642/6027827" target="_blank" rel="external">参考</a>。</td>
-</tr>
-<tr>
-<td>-Djava.net.preferIPv4Stack</td>
-<td>在获取 IP 地址时，优先获取 IPV4 地址，这在启用了 IPV6 地址时推荐使用，避免拿到 IPV6 地址，同样类似的有 <code>-Djava.net.preferIPv6Addresses=true</code> 配置</td>
-</tr>
-<tr>
-<td>-XX:-OmitStackTraceInFastThrow</td>
-<td>禁用 fast throw 优化，虽然该优化会让异常抛出变快，但该优化会清空异常的 message 和 stack trace 信息。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="2、查看启动-GC-日志"><a href="#2、查看启动-GC-日志" class="headerlink" title="2、查看启动 GC 日志"></a>2、查看启动 GC 日志</h3><p>准备工作做完了，就启动 idea 查看日志。启动参数里没有指定新生代的垃圾收集器，默认会使用 <code>ParNew</code>，老年代是 <code>CMS</code>，截取日志中发生了的一次 CMS GC，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">2018-07-22T15:15:19.187-0800: 62.667: [GC (CMS Initial Mark) [1 CMS-initial-mark: 289195K(322756K)] 293702K(362052K), 0.0050779 secs] [Times: user=0.02 sys=0.00, real=0.01 secs] </div><div class="line">2018-07-22T15:15:19.192-0800: 62.673: [CMS-concurrent-mark-start]</div><div class="line">2018-07-22T15:15:19.440-0800: 62.921: [CMS-concurrent-mark: 0.233/0.248 secs] [Times: user=1.37 sys=0.04, real=0.25 secs] </div><div class="line">2018-07-22T15:15:19.440-0800: 62.921: [CMS-concurrent-preclean-start]</div><div class="line">2018-07-22T15:15:19.446-0800: 62.927: [CMS-concurrent-preclean: 0.006/0.006 secs] [Times: user=0.03 sys=0.00, real=0.00 secs] </div><div class="line">2018-07-22T15:15:19.446-0800: 62.927: [CMS-concurrent-abortable-preclean-start]</div><div class="line">2018-07-22T15:15:19.667-0800: 63.148: [GC (Allocation Failure) 2018-07-22T15:15:19.668-0800: 63.148: [ParNew: 39296K-&gt;4352K(39296K), 0.0214260 secs] 328491K-&gt;301375K(362052K), 0.0214942 secs] [Times: user=0.11 sys=0.01, real=0.02 secs] </div><div class="line">2018-07-22T15:15:19.831-0800: 63.312: [CMS-concurrent-abortable-preclean: 0.345/0.384 secs] [Times: user=2.15 sys=0.12, real=0.39 secs] </div><div class="line">2018-07-22T15:15:19.831-0800: 63.312: [GC (CMS Final Remark) [YG occupancy: 22132 K (39296 K)]2018-07-22T15:15:19.831-0800: 63.312: [Rescan (parallel) , 0.0115940 secs]2018-07-22T15:15:19.843-0800: 63.324: [weak refs processing, 0.0031763 secs]2018-07-22T15:15:19.846-0800: 63.327: [class unloading, 0.0451574 secs]2018-07-22T15:15:19.891-0800: 63.372: [scrub symbol table, 0.0384407 secs]2018-07-22T15:15:19.930-0800: 63.411: [scrub string table, 0.0024804 secs][1 CMS-remark: 297023K(322756K)] 319156K(362052K), 0.1190073 secs] [Times: user=0.40 sys=0.01, real=0.12 secs] </div><div class="line">2018-07-22T15:15:19.951-0800: 63.431: [CMS-concurrent-sweep-start]</div><div class="line">2018-07-22T15:15:20.045-0800: 63.526: [GC (Allocation Failure) 2018-07-22T15:15:20.045-0800: 63.526: [ParNew: 39296K-&gt;3219K(39296K), 0.0087767 secs] 314854K-&gt;281310K(362052K), 0.0088410 secs] [Times: user=0.06 sys=0.00, real=0.01 secs] </div><div class="line">2018-07-22T15:15:20.180-0800: 63.661: [GC (Allocation Failure) 2018-07-22T15:15:20.180-0800: 63.661: [ParNew: 38163K-&gt;1500K(39296K), 0.0034745 secs] 277714K-&gt;241051K(362052K), 0.0035767 secs] [Times: user=0.03 sys=0.00, real=0.00 secs] </div><div class="line">2018-07-22T15:15:20.259-0800: 63.740: [CMS-concurrent-sweep: 0.287/0.309 secs] [Times: user=2.03 sys=0.08, real=0.30 secs] </div><div class="line">2018-07-22T15:15:20.260-0800: 63.740: [CMS-concurrent-reset-start]</div><div class="line">2018-07-22T15:15:20.260-0800: 63.741: [CMS-concurrent-reset: 0.001/0.001 secs] [Times: user=0.01 sys=0.00, real=0.00 secs]</div><div class="line">2018-07-22T15:44:56.811-0800: 1840.379: [GC (Allocation Failure) 2018-07-22T15:44:56.811-0800: 1840.379: [ParNew: 38715K-&gt;3210K(39296K), 0.0076007 secs] 269434K-&gt;235709K(391332K), 0.0076813 secs] [Times: user=0.05 sys=0.00, real=0.00 secs] </div><div class="line">2018-07-22T16:04:58.683-0800: 3042.310: [GC (Allocation Failure) 2018-07-22T16:04:58.685-0800: 3042.312: [ParNew: 38154K-&gt;2133K(39296K), 0.0106108 secs] 270653K-&gt;236587K(391332K), 0.0125843 secs] [Times: user=0.05 sys=0.00, real=0.01 secs] </div><div class="line">2018-07-22T16:15:20.083-0800: 3663.741: [Full GC (System.gc()) 2018-07-22T16:15:20.083-0800: 3663.741: [CMS: 234453K-&gt;78464K(352036K), 0.7207876 secs] 261866K-&gt;78464K(391332K), [Metaspace: 182541K-&gt;182541K(1216512K)], 0.7216869 secs] [Times: user=0.70 sys=0.01, real=0.72 secs] </div><div class="line">2018-07-22T17:05:26.942-0800: 6670.747: [GC (Allocation Failure) 2018-07-22T17:05:26.942-0800: 6670.747: [ParNew: 140864K-&gt;7213K(158464K), 0.0076618 secs] 219328K-&gt;85677K(510500K), 0.0077488 secs] [Times: user=0.04 sys=0.00, real=0.01 secs]</div></pre></td></tr></table></figure></p>
-<p>统计了一下，一共发生了 15 次 CMS GC，一次 <code>System.gc()</code> 引起的 Full GC，通过命令 <code>jstat -gcutil &lt;pid&gt;</code> 后结果如下，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">S0      S1    E      O      M      CCS      YGC    YGCT     FGC   FGCT     GCT</div><div class="line">40.98   0.00  13.07  22.29  94.33  91.71    322    2.193    31    1.511    3.704</div></pre></td></tr></table></figure></p>
-<p>31 次 FGC 刚好是 <code>15*2 + 1</code>，和日志的内容展示符合。其中 322 次 YGC 用时 2.193s，平均 6.8ms，31 次 FGC 用时 1.511s，平均 48ms。</p>
-<h3 id="3、分析原因"><a href="#3、分析原因" class="headerlink" title="3、分析原因"></a>3、分析原因</h3><p>只是启动情况，FGC 的次数貌似有点过多了，就主要分析一下这块。启动参数没有指定新生代和老年代的大小，使用 <code>jmap -heap &lt;pid&gt;</code> 查看堆分配情况，其中，Eden 区 200M，S0 和 S1 都是 25M，即默认 8:1，老年代 500M，一共 750M。这个分配是 idea 根据参数在启动时经过多次堆扩容后的结果，我将这个结果作为初始配置，同时，日志显示触发了一次 <code>System.gc()</code> 导致的 FGC，引用一句话：GC 远比我们想象的聪明，所以什么时候触发 GC 最好还是交给它自己处理，所以把这个也干掉，修改如下配置，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-Xms750m</div><div class="line">-Xmn250m</div><div class="line">-Xmx750m</div><div class="line">-XX:SurvivorRatio=8</div><div class="line">-XX:+DisableExplicitGC</div></pre></td></tr></table></figure>
-<p>清空 GC 日志，重启 idea 后再查看一下情况，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">S0   S1       E     O      M      CCS      YGC    YGCT    FGC    FGCT     GCT</div><div class="line">0.00 100.00   1.33  29.95  94.55  91.77      9    0.326     6    0.184    0.510</div></pre></td></tr></table></figure>
-<p>可以看出，由于指定了 <code>-Xms</code> 参数，启动时对空间不需要扩大，由新生代初始空间过小触发的 YGC，和老年代初始空间过小导致的 FGC 都明显少了很多。再分析一下第一次发生 FGC 的日志，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">2018-07-22T19:06:55.561-0800: 3.279: [GC (CMS Initial Mark) [1 CMS-initial-mark: 35531K(512000K)] 63204K(742400K), 0.0025610 secs] [Times: user=0.02 sys=0.00, real=0.00 secs] </div><div class="line">2018-07-22T19:06:55.564-0800: 3.282: [CMS-concurrent-mark-start]</div><div class="line">2018-07-22T19:06:55.570-0800: 3.288: [CMS-concurrent-mark: 0.006/0.006 secs] [Times: user=0.02 sys=0.00, real=0.01 secs] </div><div class="line">2018-07-22T19:06:55.570-0800: 3.288: [CMS-concurrent-preclean-start]</div><div class="line">2018-07-22T19:06:55.571-0800: 3.289: [CMS-concurrent-preclean: 0.001/0.001 secs] [Times: user=0.00 sys=0.00, real=0.00 secs] </div><div class="line">2018-07-22T19:06:55.571-0800: 3.289: [CMS-concurrent-abortable-preclean-start]</div><div class="line">2018-07-22T19:06:56.021-0800: 3.739: [CMS-concurrent-abortable-preclean: 0.228/0.450 secs] [Times: user=1.38 sys=0.10, real=0.45 secs] </div><div class="line">2018-07-22T19:06:56.023-0800: 3.741: [GC (CMS Final Remark) [YG occupancy: 129882 K (230400 K)]2018-07-22T19:06:56.023-0800: 3.741: [Rescan (parallel) , 0.0091620 secs]2018-07-22T19:06:56.032-0800: 3.750: [weak refs processing, 0.0000412 secs]2018-07-22T19:06:56.032-0800: 3.750: [class unloading, 0.0041112 secs]2018-07-22T19:06:56.036-0800: 3.754: [scrub symbol table, 0.0058510 secs]2018-07-22T19:06:56.042-0800: 3.760: [scrub string table, 0.0005136 secs][1 CMS-remark: 35531K(512000K)] 165414K(742400K), 0.0208645 secs] [Times: user=0.09 sys=0.00, real=0.02 secs] </div><div class="line">2018-07-22T19:06:56.044-0800: 3.762: [CMS-concurrent-sweep-start]</div><div class="line">2018-07-22T19:06:56.050-0800: 3.768: [CMS-concurrent-sweep: 0.006/0.006 secs] [Times: user=0.02 sys=0.00, real=0.01 secs] </div><div class="line">2018-07-22T19:06:56.050-0800: 3.768: [CMS-concurrent-reset-start]</div><div class="line">2018-07-22T19:06:56.054-0800: 3.772: [CMS-concurrent-reset: 0.004/0.004 secs] [Times: user=0.01 sys=0.00, real=0.00 secs]</div></pre></td></tr></table></figure>
-<p>可以看出，老年代在触发 FGC 后，在 CMS 的 Initial Mark 阶段，老年代使用了 35531K，老年代总大小是 51200K，按理 JDK8 里面 <code>-XX:CMSInitiatingOccupancyFraction=&lt;n&gt;</code> 参数在未指定情况，默认值约为 92（<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html" target="_blank" rel="external">参考</a>），还远不及进行 FGC 的标准，包括后面两次 CMS GC，也是这样的情况。</p>
-<h3 id="4、进一步分析"><a href="#4、进一步分析" class="headerlink" title="4、进一步分析"></a>4、进一步分析</h3><p>从上面日志可以看出，触发 FGC 时，堆空间是足够的，并不是引起 FGC 的原因，考虑 JVM 的内存模型，把栈区、程序计数器区排除开，那最有可能的就是元空间了。元空间最大值一般都 1G 以上，一般都不会超过这个值，但在上面的启动配置里，没有设置元空间初始大小，和前面分析一样，元空间大小初始值可能偏小，启动过程中扩容导致 FGC，也是查看启动后已使用元空间大小，将比这个值的略大的值作为初始大小，于是增加下面启动参数，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-XX:MetaspaceSize=256m</div></pre></td></tr></table></figure>
-<p>删掉日志再来一次，查看 GC 次数，</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">S0   S1      E      O      M      CCS      YGC    YGCT    FGC    FGCT     GCT</div><div class="line">0.00 100.00  67.64  27.19  94.54  92.11      9    0.247     0    0.000    0.247</div></pre></td></tr></table></figure>
-<p>符合预期，FGC 一次都没有了。考虑自己电脑内存较充足，把最大内存扩大到 1024m，新生代 400m，重启后 YGC 只有 5 次，FGC 0 次。</p>
+  <main id='index'>
+  <div class="posts-list">
+    
+      <section>
+        <a href="/2018/07/22/tune-idea-on-startup/">
+          <h3 class='post-head'>
+            Idea 启动调优
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>说实话，idea 真的是第一次用就喜欢上了，但平时开发都在公司，电脑和代码都不允许带回家，在家写代码的时候很少，所以安装 Community 版足够了，不然早就买了 Ultimate 版。<br><img src="/pic/takemymoney.jpg" alt="shut up and take my money"></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/22</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#gc" class='tag'>gc</a>
 
-      
+  <a href="/tags/#idea" class='tag'>idea</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/07/17/find-a-bug-in-scala/">
+          <h3 class='post-head'>
+            给 Scala 的源码找了一个 bug
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>时间嗨得回到 2016 年，那会儿对 Scala 很是喜欢，学习了一点皮毛，今天来看已经忘的差不多了~~~当时把 List 这个类的 API 都仔细看了一遍，发现 <code>indexOf</code> 有个很奇怪的现象，如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-2</span>)</div><div class="line">res393: <span class="type">Int</span> = <span class="number">1</span></div><div class="line"></div><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-3</span>)</div><div class="line">res391: <span class="type">Int</span> = <span class="number">0</span></div></pre></td></tr></table></figure></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/17</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#List" class='tag'>List</a>
+
+  <a href="/tags/#bug" class='tag'>bug</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/07/17/reinstall-brew/">
+          <h3 class='post-head'>
+            解决代理导致无法重新安装 brew 的问题
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>由于之前网络的原因，brew 安装和更新都非常慢，于是手贱把 brew 给删掉，重新安装发现一直提示这个错误：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed to connect to 127.0.0.1 port 59095: Connection refused</div></pre></td></tr></table></figure></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/17</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#brew" class='tag'>brew</a>
+
+  <a href="/tags/#proxy" class='tag'>proxy</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2018/03/10/delete-local-git-ssh-config/">
+          <h3 class='post-head'>
+            解决删除本地的 GIT 账号不生效的问题
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p>因为在本地配置了两个 GIT 账号，一个用不到了打算删掉。  </p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/03/10</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tag" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#GIT" class='tag'>GIT</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2017/02/19/scala-enumeration/">
+          <h3 class='post-head'>
+            scala 的枚举类型
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="1、准备知识"><a href="#1、准备知识" class="headerlink" title="1、准备知识"></a>1、准备知识</h3><p>在 Scala 里，可以产生类型的关键字有 trait、class、object 之外，还有一个就是 type，用于对一个类型标记一个别名产生一个新类型。例如为 Float 定义一个别名，</p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017/02/19</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#枚举" class='tag'>枚举</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2017/02/05/scala-partialfunction/">
+          <h3 class='post-head'>
+            Scala的偏函数
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <h3 id="1、偏函数的定义"><a href="#1、偏函数的定义" class="headerlink" title="1、偏函数的定义"></a>1、偏函数的定义</h3><p>简单的说：输入值集合 <em>X</em> 中，可能存在某些值 <em>Xi</em> 在输出集合 <em>Y</em> 中找不到映射的值。  </p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2017/02/05</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#偏函数" class='tag'>偏函数</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2016/09/11/a-refactor-of-threads-calling/">
+          <h3 class='post-head'>
+            记一次多线程调用的重构优化
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <blockquote>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/09/11</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#java" class='tag'>java</a>
+
+  <a href="/tags/#多线程" class='tag'>多线程</a>
+
+  <a href="/tags/#重构" class='tag'>重构</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2016/09/11/scala-pattern-match/">
+          <h3 class='post-head'>
+            Scala的模式匹配
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p><em>本文主要总结模式匹配的用法。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/09/11</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#模式匹配" class='tag'>模式匹配</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2016/09/11/scala-for-comprehension/">
+          <h3 class='post-head'>
+            Scala的for推导式
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p><em>本文主要总结for推导式的用法和内部原理。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/09/11</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#for-comprehension" class='tag'>for-comprehension</a>
+
+
+          
+        </div>
+      </section>
+    
+      <section>
+        <a href="/2016/09/04/scala-option-and-others/">
+          <h3 class='post-head'>
+            Scala的Option以及其他容器
+          </h3>
+        </a>
+        
+        <div class="post-content">
+          
+            
+              
+                <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+              
+          
+        </div>
+        <div class='post-meta'>
+          <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/09/04</time>
+          
+          
+            <span class="seperator">|</span>
+             
+                <i class="fa fa-tags" aria-hidden="true"></i>
+              
+             
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#Option" class='tag'>Option</a>
+
+
+          
+        </div>
+      </section>
+    
+  </div>
+  <aside>
+    
+    
+    
+    
+  </aside>
+</main>
+
+  <div class="paging">
+  <div class="paging-container">
+    
+    <div></div>    
+    
+    
+    <div class='page-next'>
+      <a href="/page/2/">weiter</a>
     </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
+    
   </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-07-17T15:25:55.000Z"><a href="/2018/07/17/find-a-bug-in-scala/">2018-07-17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/07/17/find-a-bug-in-scala/">给 Scala 的源码找了一个 bug</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>时间嗨得回到 2016 年，那会儿对 Scala 很是喜欢，学习了一点皮毛，今天来看已经忘的差不多了~~~当时把 List 这个类的 API 都仔细看了一遍，发现 <code>indexOf</code> 有个很奇怪的现象，如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-2</span>)</div><div class="line">res393: <span class="type">Int</span> = <span class="number">1</span></div><div class="line"></div><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-3</span>)</div><div class="line">res391: <span class="type">Int</span> = <span class="number">0</span></div></pre></td></tr></table></figure></p>
-<p>不用我解释都知道 <code>indexOf</code> 的含义，当第二个参数为负数的时候，结果返回是错的，且具有不确定性，于是到 StackOverflow 上<a href="https://stackoverflow.com/questions/41395111/scala-list-indexof-has-bug" target="_blank" rel="external">提问</a>。</p>
-<p>有个回答者 <em>Tzach Zohar</em> 说这确实是一个 bug，如果我对他的回答没有理解错的话，他承诺说会在 2.12.2 版本里修复，并给了一个 <a href="https://github.com/scala/scala/pull/5621/commits" target="_blank" rel="external">commit</a> 链接，commit 的时间刚好是我提问的第二天，也是 2016 年的最后一天，看了下 commit 提交的内容，是在第二个参数 <code>from</code> 传入时，将 <code>0</code> 和 <code>from</code> 中最大的值作为起始下标，避免了负数引起的错误。</p>
-<p>自己当时还是太菜，要是当时仔细研究一下，再把修改后的代码提上去 merge，然后就可以假装自己也是 Scala 的贡献者了😆。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-07-17T14:56:13.000Z"><a href="/2018/07/17/reinstall-brew/">2018-07-17</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/07/17/reinstall-brew/">解决代理导致无法重新安装 brew 的问题</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>由于之前网络的原因，brew 安装和更新都非常慢，于是手贱把 brew 给删掉，重新安装发现一直提示这个错误：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Failed to connect to 127.0.0.1 port 59095: Connection refused</div></pre></td></tr></table></figure></p>
-<p>当时 Google 了半天也找不到原因，就一直放在那里凉凉。</p>
-<p>今天想起来又研究了一把，看了各种各样的解决方案后，在 StackOverflow 上搜到了一个<a href="https://stackoverflow.com/a/17143676/6027827" target="_blank" rel="external">答案</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">For my specific case, I use SOCKS proxy for all traffic. So my installation command is:</div><div class="line"></div><div class="line">ruby -e &quot;$(curl -fsSL --socks5 127.0.0.1:30000 https://raw.github.com/mxcl/homebrew/go)&quot;</div><div class="line"></div><div class="line">where 127.0.0.1:30000 is the SOCKS proxy.</div></pre></td></tr></table></figure></p>
-<p>凭着作为一个程序员的经验，我感觉我找到了问题的原因，然后从官网拷贝安装脚本，再找了一下自己的代理端口，将 30000 改成了 1086，执行安装脚本，回车，成了！</p>
-<p>看到可以安装，猜测是本地使用了代理，导致脚本还是使用了默认的端口，无法走正常的网络端口发起请求，改成代理的端口就可以正常发起访问了。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-03-10T02:39:16.000Z"><a href="/2018/03/10/delete-local-git-ssh-config/">2018-03-10</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2018/03/10/delete-local-git-ssh-config/">解决删除本地的 GIT 账号不生效的问题</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>因为在本地配置了两个 GIT 账号，一个用不到了打算删掉。  </p>
-<p>在 .ssh 目录删除所有和该账号相关的公钥私钥和配置，再去提交发现还是使用的是删除的账号。  </p>
-<p>So, Google it.  </p>
-<p>原来是 SSH 的缓存还没有清理掉，于是需要执行删除 SSH 缓存的命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh-add -D</div></pre></td></tr></table></figure></p>
-<p>再去提交代码就 O98K 了。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-02-19T08:40:21.000Z"><a href="/2017/02/19/scala-enumeration/">2017-02-19</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/02/19/scala-enumeration/">scala 的枚举类型</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h3 id="1、准备知识"><a href="#1、准备知识" class="headerlink" title="1、准备知识"></a>1、准备知识</h3><p>在 Scala 里，可以产生类型的关键字有 trait、class、object 之外，还有一个就是 type，用于对一个类型标记一个别名产生一个新类型。例如为 Float 定义一个别名，</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="class"><span class="keyword">type</span> <span class="title">Ft</span> </span>= <span class="type">Float</span></div><div class="line">defined <span class="class"><span class="keyword">type</span> <span class="title">alias</span> <span class="title">Ft</span></span></div></pre></td></tr></table></figure>
-<p>然后就可以在其他地方像使用 Ft 就像使用 Float 一样了。</p>
-<h3 id="2、枚举"><a href="#2、枚举" class="headerlink" title="2、枚举"></a>2、枚举</h3><p>Scala 不像 Java，是没有枚举关键字的，但是可以通过继承 Enumeration 这个抽象类来达到相同的目的。看个例子🌰</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">TrafficLight</span> <span class="keyword">extends</span> <span class="title">Enumeration</span> </span>&#123;</div><div class="line">  <span class="keyword">val</span> <span class="type">Green</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Red</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Yellow</span> = <span class="type">Value</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>定义了交通信号红绿黄灯的枚举，首先继承 Enumeration 抽象类，声明枚举变量时，要将其赋值为 Value 类型（下面介绍 Value 类）。这样在其他地方，可以通过</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> xxx.<span class="type">TrafficLight</span>._</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">judge</span></span>(light: <span class="type">Value</span>) : <span class="type">String</span> = &#123;</div><div class="line">  <span class="keyword">val</span> msg = light <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Red</span> =&gt; <span class="string">"Stop"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">Green</span> =&gt; <span class="string">"Go"</span></div><div class="line">    <span class="keyword">case</span> <span class="type">Yellow</span> =&gt; <span class="string">"Wait"</span></div><div class="line">  &#125;</div><div class="line">  msg</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>的方式，引入和使用该枚举的所有成员。注意，judge 函数的参数类型是 Value，和定义枚举时成员变量的类型一致。如果有人使用这个函数，参数类型是 Value 显然不能给调用者足够的信息这个是 TrafficLight 枚举类型，所以，一般定义枚举时，就会给 Value 类型起个别名，使用时一眼就看的出来这是什么枚举类型。另外，Value 类是 Enumeration 的内部类，如果不给 Value 类起别名，在同一个作用域内 import 了多个枚举，启动运行时会报 Value 类的语义歧义，所以一般像下面这样操作：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">TrafficLight</span> <span class="keyword">extends</span> <span class="title">Enumeration</span> </span>&#123;</div><div class="line">  <span class="class"><span class="keyword">type</span> <span class="title">TrafficLight</span> </span>= <span class="type">Value</span></div><div class="line"></div><div class="line">  <span class="keyword">val</span> <span class="type">Green</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Red</span> = <span class="type">Value</span></div><div class="line">  <span class="keyword">val</span> <span class="type">Yellow</span> = <span class="type">Value</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>前面的 judge 函数的声明就可以变成这样：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">judge</span></span>(light: <span class="type">TrafficLight</span>) : <span class="type">String</span> = &#123;</div><div class="line">	<span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>网上很多介绍 Scala 枚举直接给出要定义一个 type 却没有解释为什么，这里应该就比较清楚了。</p>
-<h3 id="3、Enumeration-类"><a href="#3、Enumeration-类" class="headerlink" title="3、Enumeration 类"></a>3、Enumeration 类</h3><p>查看 Enumeration 的源码，里面主要维护了：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// vmap 保持枚举 id 和枚举值直接的映射关系</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">val</span> vmap: mutable.<span class="type">Map</span>[<span class="type">Int</span>, <span class="type">Value</span>] = <span class="keyword">new</span> mutable.<span class="type">HashMap</span></div><div class="line"></div><div class="line"><span class="comment">// nmap 保持枚举 id 和枚举对象名称直接的关系</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">val</span> nmap: mutable.<span class="type">Map</span>[<span class="type">Int</span>, <span class="type">String</span>] = <span class="keyword">new</span> mutable.<span class="type">HashMap</span></div><div class="line"></div><div class="line"><span class="comment">// 函数 values 以 Set 形式返回枚举类型所有的枚举对象</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">values</span></span>: <span class="type">ValueSet</span> = &#123;</div><div class="line">  <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 四个初始化枚举对象的 Value 函数，所以我们初始化上面 Red、Green、Yellow 的是否，不是调用 Value 的构造函数，</span></div><div class="line"><span class="comment">// 而是调用返回 Value 类型的函数，只不过跟 Value 同名罢了</span></div><div class="line"><span class="comment">// 初始化时不填 id 和名称，id 默认从 0 开始，名称和枚举对象同名</span></div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>: <span class="type">Value</span> = <span class="type">Value</span>(nextId)</div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>(i: <span class="type">Int</span>): <span class="type">Value</span> = <span class="type">Value</span>(i, nextNameOrNull)</div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>(name: <span class="type">String</span>): <span class="type">Value</span> = <span class="type">Value</span>(nextId, name)</div><div class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">Value</span></span>(i: <span class="type">Int</span>, name: <span class="type">String</span>): <span class="type">Value</span> = <span class="keyword">new</span> <span class="type">Val</span>(i, name)</div><div class="line"></div><div class="line"><span class="comment">// 使用 TrafficLight(0) 和 TrafficLight.apply(0) 效果一致</span></div><div class="line"><span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(x: <span class="type">Int</span>): <span class="type">Value</span> = vmap(x)</div><div class="line"></div><div class="line"><span class="comment">// 还有一些其他迭代用到的成员变量</span></div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
-<h3 id="5、Value-类"><a href="#5、Value-类" class="headerlink" title="5、Value 类"></a>5、Value 类</h3><p>Value 类定义在 Enumeration.scala 里，是一个抽象类，被 Val 类实现，Val 类也定义在 Enumeration.scala 里，Val 源码的主要内容有：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义了一个主构造函数和三个辅构造函数，对应被 Enumeration 里四个 Value 函数调用</span></div><div class="line"><span class="keyword">protected</span> <span class="class"><span class="keyword">class</span> <span class="title">Val</span>(<span class="params">i: <span class="type">Int</span>, name: <span class="type">String</span></span>) <span class="keyword">extends</span> <span class="title">Value</span> <span class="keyword">with</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>(i: <span class="type">Int</span>)       = <span class="keyword">this</span>(i, nextNameOrNull)</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>(name: <span class="type">String</span>) = <span class="keyword">this</span>(nextId, name)</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>()             = <span class="keyword">this</span>(nextId)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="5、枚举的简单使用"><a href="#5、枚举的简单使用" class="headerlink" title="5、枚举的简单使用"></a>5、枚举的简单使用</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="type">TrafficLight</span>.values.foreach(println(_))</div><div class="line"><span class="comment">// Green</span></div><div class="line"><span class="comment">// Red</span></div><div class="line"><span class="comment">// Yellow</span></div><div class="line"></div><div class="line">println(<span class="type">TrafficLight</span>.<span class="type">Red</span>)               <span class="comment">// Red</span></div><div class="line">println(<span class="type">TrafficLight</span>.<span class="type">Red</span>.id) 			<span class="comment">// 1</span></div><div class="line">println(<span class="type">TrafficLight</span>.maxId) 			<span class="comment">// 3</span></div><div class="line">println(<span class="type">TrafficLight</span>.withName(<span class="string">"Red"</span>))   <span class="comment">// Red</span></div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2017-02-05T04:26:40.000Z"><a href="/2017/02/05/scala-partialfunction/">2017-02-05</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2017/02/05/scala-partialfunction/">Scala的偏函数</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <h3 id="1、偏函数的定义"><a href="#1、偏函数的定义" class="headerlink" title="1、偏函数的定义"></a>1、偏函数的定义</h3><p>简单的说：输入值集合 <em>X</em> 中，可能存在某些值 <em>Xi</em> 在输出集合 <em>Y</em> 中找不到映射的值。  </p>
-<p>所以在 Scala 中，偏函数只接收某个输入参数类型的某些特定值。例如 <code>(Int) =&gt; String</code> 只接收 <code>Int</code> 类型的某些值作为合法输入。这也是偏函数和 scala.Function1 的主要区别。  </p>
-<p>这点就和 <code>case</code> 语句关联上来有木有，<code>case</code> 语句不就是只处理某个类型下的某些值么，case 语句其实就是一个匿名的偏函数。</p>
-<p>详细可以查看 wiki 百科对<a href="https://zh.wikipedia.org/wiki/%E5%87%BD%E6%95%B0#.E5.AE.9A.E7.BE.A9" target="_blank" rel="external">函数</a>的定义，里面有对偏函数的介绍。</p>
-<h3 id="2、Scala-的偏函数"><a href="#2、Scala-的偏函数" class="headerlink" title="2、Scala 的偏函数"></a>2、Scala 的偏函数</h3><p>Scala 里有专门定义的偏函数的类型 PartialFunction：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> pf: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">    <span class="keyword">case</span> i <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> =&gt; <span class="string">"even"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>和 <code>orElse</code> 组合使用：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> tf: (<span class="type">Int</span> =&gt; <span class="type">String</span>) = pf orElse &#123; <span class="keyword">case</span> _ =&gt; <span class="string">"odd"</span>&#125;</div><div class="line"></div><div class="line">tf(<span class="number">1</span>) == <span class="string">"odd"</span></div><div class="line">tf(<span class="number">2</span>) == <span class="string">"even"</span></div></pre></td></tr></table></figure>
-<p>使用 <code>isDefinedAt</code> 来检查输入值：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pf.isDefinedAt(<span class="number">1</span>) == <span class="literal">false</span></div><div class="line">pf.isDefinedAt(<span class="number">2</span>) == <span class="literal">true</span></div></pre></td></tr></table></figure>
-<h3 id="3、应用"><a href="#3、应用" class="headerlink" title="3、应用"></a>3、应用</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> sample = <span class="number">1</span> to <span class="number">10</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> isEven: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">    <span class="keyword">case</span> x <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span> =&gt; x + <span class="string">" is even"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// method collect use isDefinedAt to select members</span></div><div class="line"><span class="keyword">val</span> evens = sample collect isEven</div><div class="line"></div><div class="line"><span class="keyword">val</span> isOdd: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">String</span>] = &#123;</div><div class="line">    <span class="keyword">case</span> x <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">1</span> =&gt; x + <span class="string">" is Odd"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用 map 方法要保证输入域的全覆盖，否则报错，collect 方法可以不用全覆盖</span></div><div class="line"><span class="keyword">val</span> result1 = sample map (isEven orElse isOdd)</div><div class="line"><span class="keyword">val</span> result2 = sample collect (isEven orElse isOdd)</div></pre></td></tr></table></figure>
-<p>如果把偏函数的返回值定义为 Boolean，输入域在 isDefinedAt 判断下全为 true，此时偏函数就退化为来和谓词函数功能一样。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> p: <span class="type">PartialFunction</span>[<span class="type">Int</span>, <span class="type">Boolean</span>] = &#123;</div><div class="line">	<span class="keyword">case</span> x <span class="keyword">if</span> x &gt; <span class="number">0</span> =&gt; <span class="literal">true</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 此时 filter 没有任何过滤功能，collect 相当于 map 函数，因为 isDefinedAt 全部都是返回 true，</span></div><div class="line">sample filter p</div><div class="line">sample collect p</div><div class="line"></div><div class="line"><span class="comment">// 这样做好像没什么用，但是当 case 语句对应的类型是 case 类时，过滤加上 case 就非常方便了</span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">name: <span class="type">String</span>, age: <span class="type">Int</span></span>)</span></div><div class="line"><span class="keyword">val</span> persons = <span class="type">List</span>(<span class="type">Person</span>(<span class="string">"steve"</span>, <span class="number">15</span>), <span class="type">Person</span>(<span class="string">"Leo"</span>, <span class="number">19</span>))</div><div class="line">persons filter &#123;</div><div class="line">	<span class="keyword">case</span> <span class="type">Person</span>(name, age) =&gt; age &gt; <span class="number">18</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Scala 的集合类很多都有方法 <code>isDefinedAt(idx: Int)</code>，用来判断在索引 idx 下是否定义了值，在适当的情况下，集合对象 Seq[A] 会被转换为偏函数 PartialFunction[Int, A]，Int 对应的就是集合元素的索引，看个例子🌰吧~~~</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> colors = <span class="type">List</span>(<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>)</div><div class="line">colors.isDefinedAt(<span class="number">1</span>) == <span class="literal">true</span></div><div class="line">colors.isDefinedAt(<span class="number">9</span>) == <span class="literal">false</span></div><div class="line"></div><div class="line">colors(<span class="number">9</span>) <span class="comment">// error</span></div><div class="line"></div><div class="line"><span class="type">Seq</span>(<span class="number">1</span>,<span class="number">9</span>) collect colors</div><div class="line"><span class="comment">// List(blue)  避免了越界下标的异常</span></div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-09-11T12:08:21.000Z"><a href="/2016/09/11/a-refactor-of-threads-calling/">2016-09-11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/09/11/a-refactor-of-threads-calling/">记一次多线程调用的重构优化</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <blockquote>
-<p>这次重构对效率上有小幅提升，但大大的简化了调用方式，对应的代码也减少了很多。</p>
-</blockquote>
-<p>&emsp;&emsp;事情是这样的，项目里数据库分了库，需要分库调用，于是老员工写了一个工具，当一个请求来了后，把请求封装成一个Task，把Task丢给线程池取执行，然后循环等待执行结果。下面大概说下各个类的代码，不一定能编译过，凭记忆写。</p>
-<p>1、Task类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> List&lt;Object&gt; results;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Task</span><span class="params">(String dbKey, Object object, String methodName, Object ... args)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        TaskIdentity.setIdentity(dbKey);</div><div class="line">        <span class="comment">// .......</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// other methods</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;上面results用来保存执行完后的结果，如果只有一个结果，也返回包含一个元素的List。构造函数有四个参数，第一个是数据库分库的路由，由调用者的参数决定。第二个是要调用的方法所在的类的实例（对，就是这么设计的），第三个是调用的方法的字符串形式（对，是这样的），最后一个是调用的方法的参数列表，有了以上信息，通过反射来确定要调用哪个方法。<br>&emsp;&emsp;设计这个类的时候，为了保证可以保持任何类型的结果，用了List<object>，为了可以调用任意类的方法，构造函数的第二个第三个参数都设计的有点违反直觉，最后也是为了接受任意参数，使用Object的可变参数。<br>&emsp;&emsp;最后，Task里还有一些其他方法，用来处理参数的匹配问题。因为参数列表可能是原生类型，也有可能是包装类型，也有可能是二者的混合，还会加上其他引用类型什么的。我曾经尝试重写里面通过方法名和参数列表确定是哪个方法的函数，最终失败了，原因就是传原生类型和包装类型时，通过反射是不能确定到底是哪一个。所以里面通过列举所有可能的参数组合，来反射对应的方法，直到反射成功为止（我觉得也只能这样的了）。<br>&emsp;&emsp;总之，功能还是实现了，反射也反射成功了，只是实现的有些丑陋，不优美，整个类有300行以上的代码。</object></p>
-<p>2、TaskIndentity类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskIdentity</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;String&gt; identity = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setIdentity</span><span class="params">(String dbKey)</span> </span>&#123;</div><div class="line">        identity.set(dbKey);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIdentity</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> identity.get();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;这个类没啥说的，就是对线程保存当前执行对应的数据库标识，在线程刚开始执行前调用setIndentity，真正访问数据库时，映射到对应的数据库连接（Spring来完成）。   </p>
-<p>3、TaskExecutor类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskExecutor</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">List&lt;T&gt; <span class="title">submitSelectTask</span><span class="params">(List&lt;Task&gt; tasks)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">submitUpdateTask</span><span class="params">(List&lt;Task&gt; tasks)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;这里定义了一个工具类。里面有一个线程池变量，用来执行任务。参数都是任务的列表（想覆盖一个任务或多个任务的情况），第一个是查询类任务，依次提交了所有任务后，在后面循环等待任务执行完成，完成后取出所有结果，再强制将Object类型结果转换为返回的T类型。其实在循环等待结果前，代码里会睡眠10毫秒（原作者这样写的）。<br>&emsp;&emsp;第二个方法类似，执行更新、删除、插入任务，返回值按理说是整形，不过设计的时候没有把这些值返回，返回的意义也不大，毕竟执行了多个任务。整个类大概有100~200行代码。   </p>
-<p>4、好了，介绍完上面的类，终于可以说怎么调用了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Task task = <span class="keyword">new</span> Task(<span class="string">"dbkey"</span>, SomeObject.instance(), <span class="string">"someMethod"</span>, <span class="string">"hello"</span>, <span class="string">"world"</span>);</div><div class="line">List&lt;Task&gt; tasks = Arrays.asList(task);</div><div class="line">List&lt;String&gt; ret = TaskExecutor.submitSelectTask(tasks);</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;整个调用过程如上。在new Task对象的时候，第二个参数是Object类型，所以传任何引用类型都不会报错，第三个参数是字符串类型，传任意的字符串都可以，第四个参数是可变长度，传任意个参数也不会编译器报错。我在使用这套代码提供的接口，偶尔就会忘了改参数，导致到运行时才报错，搞得很头痛。总的来说，就是没有利用Java的强类型特性，在编译期来预防错误的参数传入。   </p>
-<p>5、重构后的代码<br>&emsp;&emsp;上面的这套代码其实有个误区，就是想把所有的调用封装起来，统一入口和统一出口。其实根本不用封装，在不同的对外接口里，起一个线程去调用对应的接口就行了。<br>&emsp;&emsp;首先对执行任务的工具类重构，不再封装Task，直接接收一个Callable子类或Runnable子类，整个工具类也不用去强转结果的类型，也不用循环等待结果，调用是阻塞，TaskException是自定义的异常类。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaskExecutor</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ExecutorService service = Executors.newFixedThreadPool(<span class="number">8</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;V&gt; <span class="function">V <span class="title">submitTask</span><span class="params">(Callable&lt;V&gt; callable)</span> <span class="keyword">throws</span> TaskException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">return</span> service.submit(callable).get(<span class="number">10</span>, TimeUnit.SECONDS);</div><div class="line">        &#125; <span class="keyword">catch</span> (RejectedExecutionException | InterruptedException | ExecutionException | TimeoutException e) &#123;</div><div class="line">            <span class="comment">// log</span></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> TaskException(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">submitTask</span><span class="params">(Runnable runnable)</span> <span class="keyword">throws</span> TaskException </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            service.submit(runnable);</div><div class="line">        &#125; <span class="keyword">catch</span> (RejectedExecutionException e) &#123;</div><div class="line">            <span class="comment">// log</span></div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> TaskException(e.getMessage());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;最后看下怎么调用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">List&lt;String&gt; ret = TaskExecutor.submitTask(<span class="keyword">new</span> Callable&lt;List&lt;String&gt;&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        TaskIdentity.setIdentity(<span class="string">"dbkey"</span>);</div><div class="line">        <span class="keyword">return</span> SomeObject.someMethod(<span class="string">"param1"</span>, <span class="string">"param2"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;在调用时候，不再new Task对象，在call方法里设置数据库路由，调用对应的方法即可。整个过程不再有硬编码，任何类型的不匹配都会在编译期报错，不再有对结果的强制转换，和对结果的循环等待，调用方式也简单明了了许多，Task类也可以去掉了，整个功能代码量也就20来行。<br>&emsp;&emsp;还有一个不同的是重构以后，只接收一个任务。其实在我重构以前，我没有任何一次是传了多个任务给老接口，每次都要去构造一个List<task>去配合以前的接口，为此我还专门写了一个中间工具类只接收一个Task，所以传多个Task情况很少很少，不过重构后这些类都可以去掉了。<br>&emsp;&emsp;整个过程回过头来看，其实也就是原先的接口作者估计不知道有Callable这个东西，或者是为了工具化而工具化。重构后也没什么高大上的东西，不过效果是好的，功能不变，减少了代码量和复杂度。</task></p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-09-11T06:01:09.000Z"><a href="/2016/09/11/scala-pattern-match/">2016-09-11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/09/11/scala-pattern-match/">Scala的模式匹配</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><em>本文主要总结模式匹配的用法。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<p>Scala的模式匹配有点像以前接触的switch-case语句，但功能比switch-case丰富很多，是一种强大的“协议”。</p>
-<h3 id="1、简单匹配"><a href="#1、简单匹配" class="headerlink" title="1、简单匹配"></a>1、简单匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> bools = <span class="type">Seq</span>(<span class="literal">true</span>, <span class="literal">false</span>)</div><div class="line"><span class="keyword">for</span> (bool &lt;- bools) &#123;</div><div class="line">  bool <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="literal">true</span> =&gt; println(<span class="string">"hello"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="literal">false</span> =&gt; println(<span class="string">"world"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// hello</span></div><div class="line"><span class="comment">// world</span></div></pre></td></tr></table></figure>
-<p>case后面没有跟break语句。如果将上面任意一个case语句注释，编译器会抛出MatchError，因为case语句没有包含所有可能出现的情况。</p>
-<h3 id="2、match中的值、变量和类型"><a href="#2、match中的值、变量和类型" class="headerlink" title="2、match中的值、变量和类型"></a>2、match中的值、变量和类型</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  x &lt;- <span class="type">Seq</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3.7</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="symbol">'four</span>)</div><div class="line">&#125; &#123;</div><div class="line">  <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>          =&gt; <span class="string">"int 1"</span></div><div class="line">    <span class="keyword">case</span> i: <span class="type">Int</span>     =&gt; <span class="string">"other int :"</span> + i                <span class="comment">// 除1以外的所有整数</span></div><div class="line">    <span class="keyword">case</span> d: <span class="type">Double</span>  =&gt; <span class="string">"a double:"</span> + d</div><div class="line">    <span class="keyword">case</span> <span class="string">"one"</span>      =&gt; <span class="string">"String one"</span></div><div class="line">    <span class="keyword">case</span> s: <span class="type">String</span>  =&gt; <span class="string">"other string:"</span> + s</div><div class="line">    <span class="keyword">case</span> unexpected =&gt; <span class="string">"unexpected value:"</span> + unexpected <span class="comment">// 匹配其他的情况，x的值赋值给unexpected，类型为Any</span></div><div class="line">  &#125;</div><div class="line">  println(str)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>注意上面序列最后一个是Scala的Symbol对象。str的类型是所有case语句返回值类型的最近公共父类。另外，<strong>匹配具体的case语句要出现在匹配宽泛的case语句前</strong>，否则具体的case语句永远没有机会匹配上（编译器也可以识别这种错误）。在匹配Double类型时，为了避免舍入误差导致的无法匹配，可以使用下面的方式：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  x &lt;- <span class="type">Seq</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">3.7</span>, <span class="string">"one"</span>, <span class="string">"two"</span>, <span class="symbol">'four</span>)</div><div class="line">&#125; &#123;</div><div class="line">  <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="number">1</span>          =&gt; <span class="string">"int 1"</span></div><div class="line">    <span class="keyword">case</span> _: <span class="type">Int</span>     =&gt; <span class="string">"other int :"</span> + x                </div><div class="line">    <span class="keyword">case</span> _: <span class="type">Double</span>  =&gt; <span class="string">"a double:"</span> + x</div><div class="line">    <span class="keyword">case</span> <span class="string">"one"</span>      =&gt; <span class="string">"String one"</span></div><div class="line">    <span class="keyword">case</span> _: <span class="type">String</span>  =&gt; <span class="string">"other string:"</span> + x</div><div class="line">    <span class="keyword">case</span> _          =&gt; <span class="string">"unexpected value:"</span> + x</div><div class="line">  &#125;</div><div class="line">  println(str)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面使用占位符<code>_</code>替代了变量，使用x来获取匹配的值。编写case语句时有个陷阱，就是编译器会假定大写字母开头的是类型名，小写字母开头的是变量名。如果要引用在前面定义的变量时，用反引号将其括起来，如下：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkY</span></span>(y:<span class="type">Int</span>) = &#123;</div><div class="line">  <span class="keyword">for</span> &#123;</div><div class="line">    x &lt;- <span class="type">Seq</span>(<span class="number">99</span>, <span class="number">100</span>, <span class="number">101</span>)</div><div class="line">  &#125; &#123;</div><div class="line">    <span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">      <span class="keyword">case</span> `y` =&gt; <span class="string">"found y!"</span></div><div class="line">      <span class="keyword">case</span> i:<span class="type">Int</span> =&gt; <span class="string">"found other"</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>有时不同的匹配语句需要处理相同的逻辑代码，为了避免冗余，可以使用“|”符号：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> str = x <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> _:<span class="type">Int</span> | <span class="keyword">case</span> _:<span class="type">Double</span> =&gt; <span class="string">"found number:"</span> + x</div><div class="line">  <span class="keyword">case</span> _:<span class="type">Any</span> =&gt; <span class="string">"found other"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3、序列的匹配"><a href="#3、序列的匹配" class="headerlink" title="3、序列的匹配"></a>3、序列的匹配</h3><p>先看一个Scala的语法。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> x +: y = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// x: Int = 1</span></div><div class="line"><span class="comment">// y: List[Int] = List(2, 3)</span></div></pre></td></tr></table></figure>
-<p>这里的<code>+:</code>是序列的构造操作符（其实就是一个方法），Scala里以<code>:</code>结尾的方法是向右结合的，所有x只有一个头部，y包含整个尾部。类似的还有<code>++:</code>、<code>/:</code>等。对序列就可以这样匹配：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">seqToString</span></span>[<span class="type">T</span>](seq: <span class="type">Seq</span>[<span class="type">T</span>]): <span class="type">String</span> = seq <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> head +: tail =&gt; <span class="string">s"<span class="subst">$head</span> +: "</span> + seqToString(tail)</div><div class="line">  <span class="keyword">case</span> <span class="type">Nil</span> =&gt; <span class="string">"Nil"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">seqToString(<span class="type">Seq</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">1</span>))</div><div class="line"><span class="comment">// String = 2 +: 3 +: 4 +: 1 +: Nil</span></div></pre></td></tr></table></figure>
-<p>上面使用<code>+:</code>来<strong>提取</strong>序列的头部和尾部放到head和tail变量里，Seq里也有head和tail方法，和这里的是不一样概念。返回的字符串是头部加尾部的递归调用返回的结果。下面是用Nil来匹配空序列。两个case语句包含了序列可能出现的所有可以匹配的情况，怎么理解呢，序列要么包含一个以上的元素，要么为空，非空的时候可以调用<code>+:</code>，匹配第一个case，空的时候就匹配第二个case，相当于分而治之的思想。<br><code>+:</code>其实是一个单例对象，这个类型只有一个方法，即编译器在case语句中用来提取数据的unapply方法，unapply的示意（非完整）如下：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">unapply</span></span>[<span class="type">T</span>, <span class="type">Coll</span>](collection:<span class="type">Coll</span>):<span class="type">Option</span>[(<span class="type">T</span>, <span class="type">Coll</span>)]</div></pre></td></tr></table></figure>
-<p>头部类型被推断为T，剩余部分的类型和序列本身类型一致（可能为空序列）。<code>case head +: tail =&gt; …</code>是中缀表达式的写法，对应的形式是<code>case +:(head, tail)</code>，真正调用是<code>+:.unapply(collection)</code>。相对的，使用<code>:+</code>可以达到相反的效果，<code>prefix :+ end</code>前后两个变量分别提取了前N-1个元素和最后一个元素。   </p>
-<p>为什么返回的是Option呢？其实这是为了允许在自定义unapply里返回需要的属性，对外隐藏内部的细节，比如年龄、住址什么的，当然也有可能返回None。</p>
-<h3 id="4、元组的匹配"><a href="#4、元组的匹配" class="headerlink" title="4、元组的匹配"></a>4、元组的匹配</h3><p>直接举栗子把：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> langs = <span class="type">Seq</span>(</div><div class="line">  (<span class="string">"Scala"</span>, <span class="string">"Martin"</span>),</div><div class="line">  (<span class="string">"Clojure"</span>, <span class="string">"Rich"</span>),</div><div class="line">  (<span class="string">"Lisp"</span>, <span class="string">"John"</span>)</div><div class="line">)</div><div class="line"><span class="keyword">for</span> (tuple &lt;- langs) &#123;</div><div class="line">  tuple <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> (_, <span class="string">"Martin"</span>) =&gt; println(<span class="string">"found Scala"</span>)</div><div class="line">    <span class="keyword">case</span> (lang, name) =&gt; println(<span class="string">s"found other language:<span class="subst">$lang</span> (<span class="subst">$name</span>)"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>匹配元组时可以匹配一部分，lang和name都被推断为String。</p>
-<h3 id="5、case中的guard语句"><a href="#5、case中的guard语句" class="headerlink" title="5、case中的guard语句"></a>5、case中的guard语句</h3><p>和for推导式中一样，case语句也可以有guard语句。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (i &lt;- <span class="type">Seq</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)) &#123;</div><div class="line">  i <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> _ <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span> =&gt; println(<span class="string">"even"</span>)</div><div class="line">    <span class="keyword">case</span> _               =&gt; println(<span class="string">"odd"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="6、case类的匹配"><a href="#6、case类的匹配" class="headerlink" title="6、case类的匹配"></a>6、case类的匹配</h3><p>case类的成员都是val修饰的，所以类的对象和元组有点像。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span>(<span class="params">street:<span class="type">String</span>, city:<span class="type">String</span>, country:<span class="type">String</span></span>)</span></div><div class="line"><span class="keyword">case</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span>(<span class="params">name:<span class="type">String</span>, age:<span class="type">Int</span>, address:<span class="type">Address</span></span>)</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> alice = <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="type">Address</span>(<span class="string">"1 Lane"</span>, <span class="string">"Chicago"</span>, <span class="string">"USA"</span>))</div><div class="line"><span class="keyword">val</span> bob   = <span class="type">Person</span>(<span class="string">"Bob"</span>, <span class="number">33</span>, <span class="type">Address</span>(<span class="string">"2 Ave"</span>, <span class="string">"Miami"</span>, <span class="string">"USA"</span>))</div><div class="line"><span class="keyword">val</span> charlie = <span class="type">Person</span>(<span class="string">"Charlie"</span>, <span class="number">21</span>, <span class="type">Address</span>(<span class="string">"3 Ct"</span>, <span class="string">"Boston"</span>, <span class="string">"USA"</span>))</div><div class="line"></div><div class="line"><span class="keyword">for</span> (person &lt;- <span class="type">Seq</span>(alice, bob, charlie)) &#123;</div><div class="line">  person <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="type">Address</span>(_, <span class="string">"Chicago"</span>, _)) =&gt; println(<span class="string">"hi Alice"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">Person</span>(<span class="string">"Bob"</span>, <span class="number">33</span>, <span class="type">Address</span>(<span class="string">"2 Ave"</span>, <span class="string">"Miami"</span>, <span class="string">"USA"</span>)) =&gt; println(<span class="string">"hi bob"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">Person</span>(name, age, _) =&gt; println(<span class="string">s"who is <span class="subst">$name</span>, age is <span class="subst">$age</span>"</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里和匹配元组类似，也用了通配符，匹配需要的部分。最后一条匹配其余的情况。匹配case类的原理，其实是调用了case类的unapply方法，返回Option[TupleN[ ]]，N表示类里成员变量个数。</p>
-<h3 id="7、可变参数列表的匹配"><a href="#7、可变参数列表的匹配" class="headerlink" title="7、可变参数列表的匹配"></a>7、可变参数列表的匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> lists = <span class="type">Seq</span>(</div><div class="line">  <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),</div><div class="line">  <span class="type">List</span>(<span class="number">4</span>,<span class="number">5</span>)</div><div class="line">)</div><div class="line"><span class="keyword">for</span> (list &lt;- lists) &#123;</div><div class="line">  list <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">List</span>(_, _)         =&gt; println(<span class="string">"2 elements"</span>)</div><div class="line">    <span class="keyword">case</span> <span class="type">List</span>(<span class="number">1</span>, vals @ _*) =&gt; println(<span class="string">"tail:"</span> + vals)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// tail:List(2, 3)</span></div><div class="line"><span class="comment">// 2 elements</span></div></pre></td></tr></table></figure>
-<h3 id="8、正则表达式的匹配"><a href="#8、正则表达式的匹配" class="headerlink" title="8、正则表达式的匹配"></a>8、正则表达式的匹配</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> bookRE = <span class="string">""</span><span class="string">"Book: title=([^,]+),\s+issue=(.+)"</span><span class="string">""</span>.r   <span class="comment">// 创建一个正则表达式</span></div><div class="line"><span class="keyword">val</span> catalog = <span class="string">"Book: title=Programming Scala, author=Deam Wampler"</span></div><div class="line"></div><div class="line">catalog <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> bookRE(title, author) =&gt; println(<span class="string">"title is $titile,author is $author"</span>)</div><div class="line">  <span class="keyword">case</span> notmatch              =&gt; println(<span class="string">"not match"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里用title和author来在匹配的同时，提取对应的字符串。</p>
-<h3 id="9、模式匹配的漏洞"><a href="#9、模式匹配的漏洞" class="headerlink" title="9、模式匹配的漏洞"></a>9、模式匹配的漏洞</h3><p>考虑下面的匹配语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x match &#123;</div><div class="line">  case s1:Seq[Double] =&gt; println(&quot;Double&quot;)</div><div class="line">  case s2:Seq[String] =&gt; println(&quot;String&quot;)</div><div class="line">  case _              =&gt; println(&quot;unkonwn&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的匹配语句看似没什么问题，其实编译会产生告警。问题出在JVM的类型擦除机制，所以编译器认为第二个case语句不可达。有一个不太美观但有效的解决办法，先匹配头部，根据头部类型判断怎么处理，对空列表则单独处理。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">x <span class="keyword">match</span> &#123;</div><div class="line">  <span class="keyword">case</span> <span class="type">Nil</span> =&gt; <span class="string">"nothing"</span></div><div class="line">  <span class="keyword">case</span> head +: _ =&gt; head <span class="keyword">match</span> &#123;</div><div class="line">    <span class="keyword">case</span> _:<span class="type">Double</span> =&gt; <span class="string">"do with double"</span></div><div class="line">    <span class="keyword">case</span> _:<span class="type">String</span> =&gt; <span class="string">"do with string"</span></div><div class="line">    <span class="keyword">case</span> _        =&gt; <span class="string">"un-matched"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="10、其他"><a href="#10、其他" class="headerlink" title="10、其他"></a>10、其他</h3><h4 id="1、避免使用枚举来匹配"><a href="#1、避免使用枚举来匹配" class="headerlink" title="1、避免使用枚举来匹配"></a>1、避免使用枚举来匹配</h4><p>用枚举来匹配的坏处是编译器无法判定case语句是否以及全覆盖，只有到了运行时才会抛出MatchError异常。</p>
-<h4 id="2、提取想要的值"><a href="#2、提取想要的值" class="headerlink" title="2、提取想要的值"></a>2、提取想要的值</h4><p>以前面的Person和Address为例。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> <span class="type">Persion</span>(name, age, <span class="type">Address</span>(_, state, _)) = <span class="type">Person</span>(<span class="string">"Alice"</span>, <span class="number">25</span>, <span class="type">Address</span>(<span class="string">"1 Lane"</span>, <span class="string">"Chicago"</span>, <span class="string">"USA"</span>))</div></pre></td></tr></table></figure>
-<p>想要提取的值都保持在变量name、age等变量里。同样对List也可以有类似操作：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> head +: tail = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// head = 1, tail:List[Int] = List(2,3)</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> head1 +: head2 +: tail = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// head1 = 1, head2 = 2, tail = List(3)</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> <span class="type">Seq</span>(a,b,c) = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</div><div class="line"><span class="comment">// a = 1, b = 2, c = 3</span></div></pre></td></tr></table></figure>
-<p>回顾前面的用法，很多时候模式匹配都会用来提取对应的值，再进行相应的处理。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-09-11T02:27:42.000Z"><a href="/2016/09/11/scala-for-comprehension/">2016-09-11</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/09/11/scala-for-comprehension/">Scala的for推导式</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><em>本文主要总结for推导式的用法和内部原理。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<h3 id="1、for推导式的一般用法"><a href="#1、for推导式的一般用法" class="headerlink" title="1、for推导式的一般用法"></a>1、for推导式的一般用法</h3><p>1 for推导式包含一个或多个<strong>生成器</strong>表达式，外加可选的<strong>保护表达式</strong>（用于过滤诗句）。<br>2 推导式可以用于生成新的容器，也可以执行具有副作用的代码块（打印输出）。<br>3 示例，移除文本中的空行：   </p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">RemeoveBlanks</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">apply</span></span>(path:<span class="type">String</span>, compressWhiteSpace:<span class="type">Boolean</span>=<span class="literal">false</span>):<span class="type">Seq</span>[<span class="type">String</span>]=</div><div class="line">    <span class="keyword">for</span> &#123;</div><div class="line">      line &lt;- scala.io.<span class="type">Source</span>.fromFile(path).getLines.toSeq        <span class="comment">// 1</span></div><div class="line">      <span class="keyword">if</span> line.matches(<span class="string">""</span><span class="string">"^\s*$"</span><span class="string">""</span>) == <span class="literal">false</span>                        <span class="comment">// 2</span></div><div class="line">      line2 = <span class="keyword">if</span> (compressWhiteSpace) line replaceAll(<span class="string">"\\s+"</span>, <span class="string">" "</span>) <span class="comment">// 3</span></div><div class="line">              <span class="keyword">else</span> line</div><div class="line">    &#125; <span class="keyword">yield</span> line2                                                  <span class="comment">// 4</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args:<span class="type">Array</span>[<span class="type">String</span>]) = <span class="keyword">for</span> &#123;</div><div class="line">    path2 &lt;- args                                                  <span class="comment">// 5</span></div><div class="line">    (compress, path) = <span class="keyword">if</span> (path2 startWith <span class="string">"-"</span>) (<span class="literal">true</span>, path2.substring(<span class="number">1</span>))</div><div class="line">                       <span class="keyword">else</span> (<span class="literal">false</span>, path2)                         <span class="comment">// 6</span></div><div class="line">    line &lt;- apply(path, compress)</div><div class="line">  &#125; println(line)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的注释中：<br>&emsp;&emsp;1、 getLines返回的对象是scala.collection.Iterator，无法用于for推导式，故使用toSeq转换为序列。<br>&emsp;&emsp;2、 使用正则表达式过滤出非空白行。<br>&emsp;&emsp;3、 如果压缩标记为true，则将所有空白字符替换为一个空格。<br>&emsp;&emsp;4、 使用yield返回内容。<br>&emsp;&emsp;5、 对参数里的每个文件进行处理。<br>&emsp;&emsp;6、 如果文件路径以“-”开头，则标记为压缩空白字符，否则不压缩。<br>&emsp;&emsp;1、3、5、6是生成器表达式，2是保护表达式。</p>
-<p>注意，标记4用了yield，表明返回结果是惰性的，如果调用apply方法返回结果里只会计算出头部，序列的剩余部分（用?表示）只有使用到了才会计算出来。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="keyword">val</span> lines = <span class="type">RemeoveBlanks</span>.apply(<span class="string">"src/main/scala/for-comreh/test-file.txt"</span>)</div><div class="line">lines:<span class="type">Seq</span>[<span class="type">String</span>] = <span class="type">Stream</span>(test-content, ?)</div></pre></td></tr></table></figure>
-<p>这种方式处理大文件非常有用。另外，main和apply里的for推导式每次迭代都不会保存状态，所以内存里保存的数据不会多于一行。</p>
-<h3 id="2、for推导式：内部机制"><a href="#2、for推导式：内部机制" class="headerlink" title="2、for推导式：内部机制"></a>2、for推导式：内部机制</h3><p>1 for推导式的语法实际是编译器的语法糖，它会调用容器的foreach、map、flatMap、withFilter方法。也就是说，实现了这几个方法的容器都可以用于for推导式。<br>2 具体怎么调用的，看个🌰：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> states = <span class="type">List</span>(<span class="string">"Alabama"</span>, <span class="string">"Alaska"</span>, <span class="string">"Virginia"</span>, <span class="string">"Wyoming"</span>)</div><div class="line"><span class="keyword">for</span>&#123;s &lt;- states&#125; <span class="keyword">yield</span> s.toUpperCase</div><div class="line"><span class="comment">// List[String] = List(ALABAMA, ALASKA, VIRGINIA, WYOMING)</span></div><div class="line"></div><div class="line">states map (_.toUpperCase)</div><div class="line"><span class="comment">// List[String] = List(ALABAMA, ALASKA, VIRGINIA, WYOMING)</span></div></pre></td></tr></table></figure>
-<p>生成器表达式里包含了一次map操作，第一个生成器表达式决定了最终的容器类型，这里第一个生成器的类型是List[String]，返回的结果也是List[String]。</p>
-<p>3 如果有多个生成器时：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> states = <span class="type">List</span>(<span class="string">"Alabama"</span>, <span class="string">"Alaska"</span>, <span class="string">"Virginia"</span>, <span class="string">"Wyoming"</span>)</div><div class="line"><span class="keyword">for</span>&#123;</div><div class="line">  s &lt;- states</div><div class="line">  c &lt;- s</div><div class="line">&#125; <span class="keyword">yield</span> <span class="string">s"<span class="subst">$c</span>-<span class="subst">$&#123;c.toUpper&#125;</span>"</span></div><div class="line"><span class="comment">// List(A-A, l-L, a-A, ...)</span></div><div class="line"></div><div class="line">states flatMap (_.toSeq map (c =&gt; <span class="string">s"<span class="subst">$c</span>-<span class="subst">$&#123;c.toUpper&#125;</span>"</span>))</div><div class="line"><span class="comment">// List(A-A, l-L, a-A, ...)</span></div></pre></td></tr></table></figure>
-<p>第二个生成器会遍历字符串s。如果有多个生成器，除了最后一个，其他生成器会被转换为flatMap调用，最后一个生成器则对应map调用，从输出结果可以证明。</p>
-<p>4 如果再添加一个保护生成器，会在最后map调用之前插入一条withFilter语句：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> states = <span class="type">List</span>(<span class="string">"Alabama"</span>, <span class="string">"Alaska"</span>, <span class="string">"Virginia"</span>, <span class="string">"Wyoming"</span>)</div><div class="line"><span class="keyword">for</span>&#123;</div><div class="line">  s &lt;- states</div><div class="line">  c &lt;- s</div><div class="line">  <span class="keyword">if</span> c.isLower</div><div class="line">&#125; <span class="keyword">yield</span> <span class="string">s"<span class="subst">$c</span>-<span class="subst">$&#123;c.toUpper&#125;</span>"</span></div><div class="line"><span class="comment">// List(l-L, a-A, b-B, ...)</span></div><div class="line"></div><div class="line">states flatMap (_.toSeq withFilter (_.isLower) map (c =&gt; <span class="string">s"<span class="subst">$c</span>-<span class="subst">$&#123;c.toUpper&#125;</span>"</span>))</div><div class="line"><span class="comment">// List(l-L, a-A, b-B, ...)</span></div></pre></td></tr></table></figure>
-<p>5 最后看下在for推导式里添加变量的情况：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> states = <span class="type">List</span>(<span class="string">"Alabama"</span>, <span class="string">"Alaska"</span>, <span class="string">"Virginia"</span>, <span class="string">"Wyoming"</span>)</div><div class="line"><span class="keyword">for</span>&#123;</div><div class="line">  s &lt;- states</div><div class="line">  c &lt;- s</div><div class="line">  <span class="keyword">if</span> c.isLower</div><div class="line">  c2 = <span class="string">s"<span class="subst">$c</span>-<span class="subst">$&#123;c.toUpper&#125;</span>"</span></div><div class="line">&#125; <span class="keyword">yield</span> c2</div><div class="line"><span class="comment">// List(l-L, a-A, b-B, ...)</span></div><div class="line"></div><div class="line">states flatMap (_.toSeq withFilter (_.isLower) map &#123;</div><div class="line">  <span class="keyword">val</span> c2 = <span class="string">s"<span class="subst">$c</span>-<span class="subst">$&#123;c.toUpper&#125;</span>"</span>)</div><div class="line">  c2</div><div class="line">&#125;</div><div class="line"><span class="comment">// List(l-L, a-A, b-B, ...)</span></div></pre></td></tr></table></figure>
-<h3 id="3、for推导式的转化规则"><a href="#3、for推导式的转化规则" class="headerlink" title="3、for推导式的转化规则"></a>3、for推导式的转化规则</h3><p>1 通过上面这个例子大概对for推导式转化成容器方法的调用有了初步了解，下面将详细讨论转化的细节。<br>2 Scala会识别表达式里的模式表达式。像<code>pat &lt;- expr</code>这种形式，Scala会在for推导式转化时转化为：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// pat &lt;- expr</span></div><div class="line">pat &lt;- expr.withFilter &#123;<span class="keyword">case</span> pat =&gt; <span class="literal">true</span>; <span class="keyword">case</span> _ <span class="literal">false</span>&#125;</div></pre></td></tr></table></figure>
-<p>然后Scala会重复上述动作，直到所有表达式转化完成。如果for推导式包含一个生成器和yield表达式，那表达式会被转化为：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// for (pat &lt;- expr1) yield expr2</span></div><div class="line">expr map &#123;<span class="keyword">case</span> pat =&gt; expr2&#125;</div></pre></td></tr></table></figure>
-<p>包含多个表达式生成器和yield语句：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// for (pat1 &lt;- expr1; pat2 &lt;- expr2; ...) yield exprN</span></div><div class="line">expr1 flatMap &#123;<span class="keyword">case</span> pat1 =&gt; <span class="keyword">for</span> (pat2 &lt;- expr2) ... &#125; <span class="keyword">yield</span> exprN</div></pre></td></tr></table></figure>
-<p>其实看到这里就和前面有点像了，多个生成器会先flatMap调用，再做map调用（剩下的一个for生成器）。然后保护式的转化就比较清晰了：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// pat1 &lt;- expr1 if guard</span></div><div class="line">pat1 &lt;- expr1 withFilter ((arg1,arg2,...) =&gt; guard)</div></pre></td></tr></table></figure>
-<p>上面filter参数列出了多个，不过一般都只有一个参数。对多个包含多个生成器的for循环将被翻译成：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// for (pat1 &lt;- expr1; pat2 &lt;- expr2; ...) exprN</span></div><div class="line">expr1 foreach &#123;<span class="keyword">case</span> pat1 =&gt; <span class="keyword">for</span> (pat2 &lt;- expr2 ... ) <span class="keyword">yield</span> exprN&#125;</div></pre></td></tr></table></figure>
-<p>3 在看最后一种情况，生成器里包含值定义前，先看一个Scala的语法。   </p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> z @ (x, y) = (<span class="number">1</span> -&gt; <span class="number">2</span>)</div><div class="line">z:(<span class="type">Int</span>, <span class="type">Int</span>) = (<span class="number">1</span>,<span class="number">2</span>)</div><div class="line">x:<span class="type">Int</span> <span class="number">1</span></div><div class="line">y:<span class="type">Int</span> <span class="number">2</span></div></pre></td></tr></table></figure>
-<p>变量z保存元组的值，而变量x和y则对应元组各个部分的值。好了解的这个语法，看下面这个转化：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// pat &lt;- expr1; pat2 = expr2</span></div><div class="line">(pat1, pat2) &lt;- <span class="keyword">for</span> &#123;        <span class="comment">// 1</span></div><div class="line">  x1 @ pat1 &lt;- expr1         <span class="comment">// 2</span></div><div class="line">&#125; <span class="keyword">yield</span> &#123;</div><div class="line">  <span class="keyword">val</span> x2 @ pat2 = expr2      <span class="comment">// 3</span></div><div class="line">  (x1, x2)                   <span class="comment">// 4</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>&emsp;&emsp;1、for推导式将返回包含两个模式的pair对象。<br>&emsp;&emsp;2、x1 @ pat1 语句将会把整个表达式中pat1所匹配的值赋值给x1，该值也有可能是两个变量的一部分。<br>&emsp;&emsp;3、将pat2赋值给x2。<br>&emsp;&emsp;4、返回元组。<br>4 举个具体的转化例子吧。</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> map = <span class="type">Map</span>(<span class="string">"one"</span> -&gt; <span class="number">1</span>, <span class="string">"two"</span> -&gt; <span class="number">2</span>)</div><div class="line"><span class="keyword">val</span> list1 = <span class="keyword">for</span> &#123;</div><div class="line">  (key, value) &lt;- map</div><div class="line">  i10 = value + <span class="number">10</span></div><div class="line">&#125; <span class="keyword">yield</span> i10</div><div class="line"><span class="comment">// list1: scala.collection.immutable.Iterable[Int] = List(11, 12)</span></div><div class="line"></div><div class="line"><span class="comment">// 翻译后的语句</span></div><div class="line"><span class="keyword">val</span> list2 = <span class="keyword">for</span> &#123;</div><div class="line">  (i, i10) &lt;- <span class="keyword">for</span> &#123;               <span class="comment">// for推导式返回元组</span></div><div class="line">    x1 @ (key, value) &lt;- map      <span class="comment">// x1就是一个key-value的元组对象</span></div><div class="line">  &#125; <span class="keyword">yield</span> &#123;</div><div class="line">    <span class="keyword">val</span> x2 @ i10 = value + <span class="number">10</span>     <span class="comment">// x2和i10值一样</span></div><div class="line">    (x1, x2)                      <span class="comment">// 返回x1、x2，赋值给(i, i10)</span></div><div class="line">  &#125;</div><div class="line">&#125; <span class="keyword">yield</span> (i10)                     <span class="comment">// 其实最后返回的是i10，即x2的值</span></div></pre></td></tr></table></figure>
-<p>5 最后，写了这么多for推导式的工作原理，其实就是对for推导式内容的转化，转化时遵循一定规则，转化时调用容器的foreach、map、flatmap、withFilter方法，具体的规则可能不需要掌握，知道是怎么回事就好了。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-  <article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-09-04T03:11:14.000Z"><a href="/2016/09/04/scala-option-and-others/">2016-09-04</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2016/09/04/scala-option-and-others/">Scala的Option以及其他容器</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
-<h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
-<li>Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  </li>
-<li>Scala里常见的容器像List、Map等都可以使用for推导式，Scala的for推导式是一个语法糖，最终都会被展开为对foreach、map、flatMap、withFilter的调用，Option实现了这些方法，所以可以在for推导式中使用Option容器。</li>
-<li>Option的API定义：</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">sealed</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Option</span>[+<span class="type">A</span>] </span>&#123; self =&gt;</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isEmpty</span></span>: <span class="type">Boolean</span> <span class="comment">// 子类会实现这个变量</span></div><div class="line"></div><div class="line">  <span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">foreach</span></span>[<span class="type">U</span>](f:<span class="type">A</span> =&gt; <span class="type">U</span>): <span class="type">Unit</span> =</div><div class="line">    <span class="keyword">if</span> (!isEmpty) f(<span class="keyword">this</span>.get)</div><div class="line"></div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><code>sealed</code>关键字限定子类必须和父类在同一个文件里，<code>self</code>是Option的别名，<code>final</code>限制子类重写，其余方法定义和foreach类似。</p>
-<h3 id="2、Some和None"><a href="#2、Some和None" class="headerlink" title="2、Some和None"></a>2、Some和None</h3><ol>
-<li>这两个是Option的子类，分别是非空对象和空对象。</li>
-<li>上面列出的方法，只有当Option为非空时，才会使用传入的函数参数，利用这个特性，可以方便的过滤出结果里的非空结果。分布式任务收集结果也会利用了这个特性。</li>
-<li>示例：</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> results: <span class="type">Seq</span>[<span class="type">Option</span>[<span class="type">Int</span>]] = <span class="type">Vector</span>(<span class="type">Some</span>(<span class="number">10</span>), <span class="type">Some</span>(<span class="number">20</span>), <span class="type">None</span>)</div><div class="line"><span class="keyword">val</span> results2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results</div><div class="line">&#125; <span class="keyword">yield</span> (<span class="number">2</span> * i)</div><div class="line"><span class="comment">// results2:Seq[Int] = Vector(20, 40)</span></div></pre></td></tr></table></figure>
-<p><code>Some(i) &lt;- results</code>会对results里的元素进行模式匹配，移除None元素，并抽取包含的数值。利用for推导式的转化规则，可以转化为：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">val</span> result2 = <span class="keyword">for</span> &#123;</div><div class="line">  <span class="type">Some</span>(i) &lt;- results withFilter &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; <span class="literal">true</span></div><div class="line">    <span class="keyword">case</span> <span class="type">None</span> =&gt; <span class="literal">false</span></div><div class="line">  &#125; map &#123;</div><div class="line">    <span class="keyword">case</span> <span class="type">Some</span>(i) =&gt; (<span class="number">2</span> * i)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>map里的case会产生警告，不过没关系，在withFilter里已经过滤了None的情况，运行时代码不会报MatchError。<br>应用：对一组值做合法性检查：</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Option</span>[<span class="type">Int</span>] = </div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Some</span>(i) <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = Some(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>) <span class="comment">// 一旦这里返回None，后续表达式会停止执行，所以下一句可以引用i2变量</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：Option[Int] = None</span></div></pre></td></tr></table></figure>
-<h3 id="3、Either容器"><a href="#3、Either容器" class="headerlink" title="3、Either容器"></a>3、Either容器</h3><ol>
-<li>Option容器的None有个缺陷，就是不能返回为什么没有返回值。此时Either是替代Option的一种解决方案，与其字面意思一致，Option表示含有0或1个元素，Either表示含有这个或那个元素。  </li>
-<li>Either的定义：<code>sealed abstract class Either[+A, +B] extends AnyRef</code>，A、B表示Either对象可以持有的对象类型（可以不同），加号表示参数是协变的。  </li>
-<li>Either有两个子类，<code>Left[A]</code>和<code>Right[B]</code>，通过这两个子类从两个可能的元素中选一个。Either的历史早于Scala，约定用Left来表示错误，Right表示正常返回结果。  </li>
-<li>示例：用Either重写前面的🌰：</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>) : <span class="type">Either</span>[<span class="type">String</span>, <span class="type">Int</span>] =</div><div class="line">  <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Right</span>(i) <span class="keyword">else</span> <span class="type">Left</span>(<span class="string">s"non-positive number <span class="subst">$i</span>"</span>)</div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>).right</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">2</span>).right</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Right(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>).right</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>).right <span class="comment">// 失败</span></div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>).right</div><div class="line">  i4 &lt;- positive(i3 * <span class="number">-2</span>).right <span class="comment">// 失败</span></div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Either[String,Int] = Left(non-positive number -5)</span></div></pre></td></tr></table></figure>
-<p>和前面一样，一旦调用<code>.right</code>返回的是Left类型时，调用结束，后面的不再执行。至于为什么，目前来看，Left和Right都可以调用<code>left</code>和<code>right</code>方法，分别返回LeftProjection和RightProjection实例，但再对LeftProjection和RightProjection取值时，for推导式可以自己推导出来。比如：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> <span class="type">L</span> = <span class="type">Left</span>(<span class="number">33</span>)</div><div class="line"><span class="keyword">val</span> left = <span class="type">L</span>.left      <span class="comment">// left = LeftProjection(Left(33))</span></div><div class="line"><span class="keyword">val</span> lvalue = left.get  <span class="comment">// lvalue = 33</span></div><div class="line"><span class="keyword">val</span> right = <span class="type">L</span>.right    <span class="comment">// right = RightProjection(Left(33))</span></div><div class="line"><span class="keyword">val</span> rvalue = right.get <span class="comment">// NoSuchElementException</span></div></pre></td></tr></table></figure></p>
-<p>示例2，对于出现异常的情况，可以将异常列在返回值的Either左值里，不再通过抛出异常来捕获调用堆栈中某些应用的控制权，同时调用者更能明白API的含义。<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">addInts</span></span>(s1: <span class="type">String</span>, s2: <span class="type">String</span>): <span class="type">Either</span>[<span class="type">NumberFormatException</span>,<span class="type">Int</span>] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="type">Right</span>(s1.toInt + s2.toInt)</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> nfe: <span class="type">NumberFormatException</span> =&gt; <span class="type">Left</span>(nfe)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">println(addInts(<span class="string">"11"</span>, <span class="string">"22"</span>)) <span class="comment">// Right(33)</span></div><div class="line">println(addInts(<span class="string">"f"</span>, <span class="string">"33"</span>))  <span class="comment">// Left(java.lang.NumberFormatException: For input string: "f")</span></div></pre></td></tr></table></figure></p>
-<h3 id="4、Try容器"><a href="#4、Try容器" class="headerlink" title="4、Try容器"></a>4、Try容器</h3><ol>
-<li>scala.util.Try的结构和Either类似，有两个子类Success和Failure，Success与Right相似，保存正常的返回值，Failure与Left相似，但总是包含Throwable对象，所以Try的定义只有一个泛型参数：<code>sealed abstract class Try[+T] extends AnyRef</code>。</li>
-<li>示例：从一组Try值中，过滤掉Failure对象。</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scala.util.&#123;<span class="type">Try</span>, <span class="type">Success</span>, <span class="type">Failure</span>&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(i: <span class="type">Int</span>): <span class="type">Try</span>[<span class="type">Int</span>] = <span class="type">Try</span> &#123;</div><div class="line">  assert(i &gt; <span class="number">0</span>, <span class="string">s"non-positive number <span class="subst">$i</span>"</span>)</div><div class="line">  i</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">10</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i3 &lt;- positive(i3 * <span class="number">2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Try[Int] = Success(3805)</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> &#123;</div><div class="line">  i1 &lt;- positive(<span class="number">5</span>)</div><div class="line">  i2 &lt;- positive(i1 * <span class="number">-1</span>)</div><div class="line">  i3 &lt;- positive(i2 * <span class="number">25</span>)</div><div class="line">  i3 &lt;- positive(i3 * <span class="number">-2</span>)</div><div class="line">&#125; <span class="keyword">yield</span>(i1 + i2 + i3 + i4)</div><div class="line"><span class="comment">// 结果：scala.util.Try[Int] = Failure(java.lang.AssertionError: assert failed: non-positive number -5)</span></div></pre></td></tr></table></figure>
-<h3 id="5、Scalaz提供的Validation类"><a href="#5、Scalaz提供的Validation类" class="headerlink" title="5、Scalaz提供的Validation类"></a>5、Scalaz提供的Validation类</h3><ol>
-<li>以上介绍的容器，在for推到中遇到不满足情况会立即停止，如果想收集所有所有执行过程中的错误，并判断后面执行什么操作，典型的场景就是验证网页表单，这样可以一次将所有错误信息返回。Scala标准库无法提供这样的功能，第三方库Scalaz提供了Validation满足这种需求。</li>
-</ol>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scalaz._, std.<span class="type">AllInstance</span>._</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validName</span></span>(key: <span class="type">String</span>, name: <span class="type">String</span>): </div><div class="line">        <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">val</span> n = name.trim</div><div class="line">  <span class="keyword">if</span> (n.length &gt; <span class="number">0</span> &amp;&amp; n.matches(<span class="string">""</span><span class="string">"^\p&#123;Alpha&#125;$"</span><span class="string">""</span>)) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; n))</div><div class="line">  <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> &lt;<span class="subst">$n</span>&gt;"</span>))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(key: <span class="type">String</span>, n: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">val</span> i = n.toInt</div><div class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; i))</div><div class="line">    <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> <span class="subst">$i</span>"</span>))</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> _: java.lang.<span class="type">NumberFormatException</span> =&gt; <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"<span class="subst">$n</span> is not a Integer"</span>))</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validForm</span></span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>, age: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  validName(<span class="string">"first-name"</span>, firstName) </div><div class="line">  +++ validName(<span class="string">"last-name"</span>, lastName) </div><div class="line">  +++ positive(<span class="string">"age"</span>, age)</div><div class="line">&#125;</div><div class="line"></div><div class="line">validForm(<span class="string">"Dean"</span>, <span class="string">"Wampler"</span>, <span class="string">"29"</span>)</div><div class="line"><span class="comment">// Success(List((first-name,Dean),(last-name,Wampler),(age,29)))</span></div><div class="line"></div><div class="line">validForm(<span class="string">""</span>, <span class="string">"Wampler"</span>, <span class="string">"0"</span>)</div><div class="line"><span class="comment">// Failure(List(Invalid first-name &lt;&gt;, Invalid age 0))</span></div></pre></td></tr></table></figure>
-<p>这里的Success和Failure和Try的两个子类不是同一个类。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
-
-<nav id="pagination">
-  
-  
-    <a href="/page/2/" class="alignright next">Nächste Seite</a>
-  
-  <div class="clearfix"></div>
-</nav></div></div>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 Ling0fa 的博客
-  
-  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
 </div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
 
 
 
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
+  </div>
+</footer>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+
 
 </body>
 </html>

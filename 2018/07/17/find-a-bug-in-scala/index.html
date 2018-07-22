@@ -1,151 +1,167 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>给 Scala 的源码找了一个 bug | Ling0fa 的博客</title>
-  
-  
-  <meta name="description" content="时间嗨得回到 2016 年，那会儿对 Scala 很是喜欢，学习了一点皮毛，今天来看已经忘的差不多了~~~当时把 List 这个类的 API 都仔细看了一遍，发现 indexOf 有个很奇怪的现象，如下：12345scala&amp;gt; List(1,3,5,8).indexOf(8,-2)res393">
-  
-  
+<!DOCTYPE html>
+<html lang=null>
+  <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="给 Scala 的源码找了一个 bug"/>
-  <meta property="og:site_name" content="Ling0fa 的博客"/>
-
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="null">
+  <meta name="keywords" content="undefined">
   
-    <meta property="og:image" content="undefined"/>
+    <link rel="icon" href="">
   
-
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
+    
+  <title>给 Scala 的源码找了一个 bug | Ling0fa 的博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Ling0fa 的博客</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>Ling0fa 的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
 </header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2018-07-17T15:25:55.000Z"><a href="/2018/07/17/find-a-bug-in-scala/">2018-07-17</a></time>
-      
-      
-  
-    <h1 class="title">给 Scala 的源码找了一个 bug</h1>
-  
 
-    </header>
-    <div class="entry">
-      
-        <p>时间嗨得回到 2016 年，那会儿对 Scala 很是喜欢，学习了一点皮毛，今天来看已经忘的差不多了~~~当时把 List 这个类的 API 都仔细看了一遍，发现 <code>indexOf</code> 有个很奇怪的现象，如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-2</span>)</div><div class="line">res393: <span class="type">Int</span> = <span class="number">1</span></div><div class="line"></div><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-3</span>)</div><div class="line">res391: <span class="type">Int</span> = <span class="number">0</span></div></pre></td></tr></table></figure></p>
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>给 Scala 的源码找了一个 bug</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2018/07/17</time>
+            
+            
+              | 
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#List" class='tag'>List</a>
+
+  <a href="/tags/#bug" class='tag'>bug</a>
+
+
+            
+          </div>
+          <p>时间嗨得回到 2016 年，那会儿对 Scala 很是喜欢，学习了一点皮毛，今天来看已经忘的差不多了~~~当时把 List 这个类的 API 都仔细看了一遍，发现 <code>indexOf</code> 有个很奇怪的现象，如下：<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-2</span>)</div><div class="line">res393: <span class="type">Int</span> = <span class="number">1</span></div><div class="line"></div><div class="line">scala&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>).indexOf(<span class="number">8</span>,<span class="number">-3</span>)</div><div class="line">res391: <span class="type">Int</span> = <span class="number">0</span></div></pre></td></tr></table></figure></p>
 <p>不用我解释都知道 <code>indexOf</code> 的含义，当第二个参数为负数的时候，结果返回是错的，且具有不确定性，于是到 StackOverflow 上<a href="https://stackoverflow.com/questions/41395111/scala-list-indexof-has-bug" target="_blank" rel="external">提问</a>。</p>
 <p>有个回答者 <em>Tzach Zohar</em> 说这确实是一个 bug，如果我对他的回答没有理解错的话，他承诺说会在 2.12.2 版本里修复，并给了一个 <a href="https://github.com/scala/scala/pull/5621/commits" target="_blank" rel="external">commit</a> 链接，commit 的时间刚好是我提问的第二天，也是 2016 年的最后一天，看了下 commit 提交的内容，是在第二个参数 <code>from</code> 传入时，将 <code>0</code> 和 <code>from</code> 中最大的值作为起始下标，避免了负数引起的错误。</p>
 <p>自己当时还是太菜，要是当时仔细研究一下，再把修改后的代码提上去 merge，然后就可以假装自己也是 Scala 的贡献者了😆。</p>
 
-      
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
     </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/scala/">scala</a>, <a href="/tags/List/">List</a>, <a href="/tags/bug/">bug</a>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
   </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+</footer>
 
 
-<section id="comment">
-  <h1 class="title">Kommentare</h1>
-
-  
-      <div id="fb-root"></div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
 <script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
 
-<div class="fb-comments" data-href="http://yoursite.com/2018/07/17/find-a-bug-in-scala/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
       
-  
-</section>
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
 
-</div></div>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 Ling0fa 的博客
-  
-  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
 
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
 
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
 </script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
 
 </body>
 </html>

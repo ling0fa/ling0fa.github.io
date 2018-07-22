@@ -1,69 +1,78 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Scala的Option以及其他容器 | Ling0fa 的博客</title>
-  
-  
-  <meta name="description" content="本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。
-1、Option 容器
-Option容器比较常见，Java8和Java第三方库G">
-  
-  
+<!DOCTYPE html>
+<html lang=null>
+  <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="Scala的Option以及其他容器"/>
-  <meta property="og:site_name" content="Ling0fa 的博客"/>
-
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="null">
+  <meta name="keywords" content="undefined">
   
-    <meta property="og:image" content="undefined"/>
+    <link rel="icon" href="">
   
-
-  <link href="/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Ling0fa 的博客" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
+    
+  <title>Scala的Option以及其他容器 | Ling0fa 的博客</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/lib/jquery.fancybox.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Ling0fa 的博客</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
+  <header>
+  <div class="header-container">
+    <a class='logo' href="/">
+      <span>Ling0fa 的博客</span>
+    </a>
+    <ul class="right-header">
+      
+        <li class="nav-item">
+          
+            <a href="/" class="item-link">首页</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/about" class="item-link">关于</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/archives" class="item-link">归档</a>
+          
+        </li>
+      
+        <li class="nav-item">
+          
+            <a href="/tags" class="item-link">标签</a>
+          
+        </li>
+      
+    </ul>
+  </div>
 </header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2016-09-04T03:11:14.000Z"><a href="/2016/09/04/scala-option-and-others/">2016-09-04</a></time>
-      
-      
-  
-    <h1 class="title">Scala的Option以及其他容器</h1>
-  
 
-    </header>
-    <div class="entry">
-      
-        <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
+  <main id='post'>
+  <div class="content">
+    <article>
+        <section class="content markdown-body">
+          <h1>Scala的Option以及其他容器</h1>
+          <div class='post-meta'>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <time>2016/09/04</time>
+            
+            
+              | 
+                  <i class="fa fa-tags" aria-hidden="true"></i>
+                
+               
+  <a href="/tags/#scala" class='tag'>scala</a>
+
+  <a href="/tags/#Option" class='tag'>Option</a>
+
+
+            
+          </div>
+          <p><em>本文主要总结Option、Either、Try容器。最后简单介绍下Scala第三方库的Validation类。<br> 本文内容摘自《Scala程序设计》[美]Dean Wampler Alex Payne，版权归原作者所有。</em></p>
 <h3 id="1、Option-容器"><a href="#1、Option-容器" class="headerlink" title="1、Option 容器"></a>1、Option 容器</h3><ol>
 <li>Option容器比较常见，Java8和Java第三方库Guava里都有类似的实现。  </li>
 <li>Scala里常见的容器像List、Map等都可以使用for推导式，Scala的for推导式是一个语法糖，最终都会被展开为对foreach、map、flatMap、withFilter的调用，Option实现了这些方法，所以可以在for推导式中使用Option容器。</li>
@@ -100,86 +109,96 @@ Option容器比较常见，Java8和Java第三方库G">
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> scalaz._, std.<span class="type">AllInstance</span>._</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validName</span></span>(key: <span class="type">String</span>, name: <span class="type">String</span>): </div><div class="line">        <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">val</span> n = name.trim</div><div class="line">  <span class="keyword">if</span> (n.length &gt; <span class="number">0</span> &amp;&amp; n.matches(<span class="string">""</span><span class="string">"^\p&#123;Alpha&#125;$"</span><span class="string">""</span>)) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; n))</div><div class="line">  <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> &lt;<span class="subst">$n</span>&gt;"</span>))</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">positive</span></span>(key: <span class="type">String</span>, n: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">val</span> i = n.toInt</div><div class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>) <span class="type">Success</span>(<span class="type">List</span>(key -&gt; i))</div><div class="line">    <span class="keyword">else</span> <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"Invalid <span class="subst">$key</span> <span class="subst">$i</span>"</span>))</div><div class="line">  &#125; <span class="keyword">catch</span> &#123;</div><div class="line">    <span class="keyword">case</span> _: java.lang.<span class="type">NumberFormatException</span> =&gt; <span class="type">Failure</span>(<span class="type">List</span>(<span class="string">s"<span class="subst">$n</span> is not a Integer"</span>))</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">validForm</span></span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>, age: <span class="type">String</span>): </div><div class="line">      <span class="type">Validation</span>[<span class="type">List</span>[<span class="type">String</span>], <span class="type">List</span>[(<span class="type">String</span>, <span class="type">Any</span>)]] = &#123;</div><div class="line">  validName(<span class="string">"first-name"</span>, firstName) </div><div class="line">  +++ validName(<span class="string">"last-name"</span>, lastName) </div><div class="line">  +++ positive(<span class="string">"age"</span>, age)</div><div class="line">&#125;</div><div class="line"></div><div class="line">validForm(<span class="string">"Dean"</span>, <span class="string">"Wampler"</span>, <span class="string">"29"</span>)</div><div class="line"><span class="comment">// Success(List((first-name,Dean),(last-name,Wampler),(age,29)))</span></div><div class="line"></div><div class="line">validForm(<span class="string">""</span>, <span class="string">"Wampler"</span>, <span class="string">"0"</span>)</div><div class="line"><span class="comment">// Failure(List(Invalid first-name &lt;&gt;, Invalid age 0))</span></div></pre></td></tr></table></figure>
 <p>这里的Success和Failure和Try的两个子类不是同一个类。</p>
 
-      
+        </section>
+    </article>
+    
+        
+  </div>
+  <aside>
+    
+    <div class="toc-container">
+        <h1>目录</h1>
+        <div class="content">
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、Option-容器"><span class="toc-number">1.</span> <span class="toc-text">1、Option 容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Some和None"><span class="toc-number">2.</span> <span class="toc-text">2、Some和None</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、Either容器"><span class="toc-number">3.</span> <span class="toc-text">3、Either容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、Try容器"><span class="toc-number">4.</span> <span class="toc-text">4、Try容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、Scalaz提供的Validation类"><span class="toc-number">5.</span> <span class="toc-text">5、Scalaz提供的Validation类</span></a></li></ol>
+        </div>
     </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/scala/">scala</a>, <a href="/tags/Option/">Option</a>
+    
+  </aside>
+</main>
+
+
+
+  <footer>
+  <div class="copyright">
+    <div>
+      &copy; 2018 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a>&nbsp
+    </div>
+    <div>
+      Theme by <a href="https://github.com/lewis-geek/hexo-theme-Aath" target="_blank">Aath</a>
+    </div>
   </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
+</footer>
 
 
-<section id="comment">
-  <h1 class="title">Kommentare</h1>
-
-  
-      <div id="fb-root"></div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="/lib/in-view.min.js"></script>
+<script src="/lib/lodash.min.js"></script>
 <script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+  var isDown = true
+  var oldY = 0
+  inView.offset(50)
 
-<div class="fb-comments" data-href="http://yoursite.com/2016/09/04/scala-option-and-others/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+  document.body.addEventListener('touchstart', function(){});
+  
+  window.addEventListener('scroll', _.throttle(e => {
+    var currentY = window.scrollY
+    if((oldY - currentY) < 0) {
+      isDown = true
+    } else {
+      isDown = false
+    }
+    oldY = currentY
+  }, 250))
+
+  $("article img").each(function() {
+      var strA = "<a data-fancybox='gallery' href='" + this.src + "'></a>";
+      $(this).wrapAll(strA);
+  });
+
+  $('.toc-link').each(function() {
+      var href = $(this).attr("href");
       
-  
-</section>
+      inView(href).on('exit', () => {
+        if (isDown) {
+          handleActive(href)
+        }
+      })
 
-</div></div>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2018 Ling0fa 的博客
-  
-  <p>Theme by <a href="https://caisiduo.xyz" target="_blank">LightOne</a></p>
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+      inView(href).on('enter', () => {
+        if (!isDown) {
+          handleActive(href)
+        }
+      })
 
+      this.onclick = function(e) {
+        var pos = $(href).offset().top - 10;
+        $("html,body").animate({scrollTop: pos}, 300);
+        setTimeout(() => {
+          handleActive(href)
+        }, 350)
+        return false
+      }
+  })
 
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
+  function handleActive(href) {
+    document.querySelectorAll('.toc-link').forEach(elm => {
+      elm.classList.remove('active')
+    })
+    document.querySelector(".toc [href='"+ href +"']").classList.add('active')
+  }
 </script>
+<script src="/lib/jquery.fancybox.min.js"></script>
+
 
 </body>
 </html>
